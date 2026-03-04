@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>60+ Claude Code Skills for Product Managers | mySecond</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #111111;
+    --bg3: #161616;
+    --border: #222222;
+    --border2: #2a2a2a;
+    --text: #f0ede8;
+    --text2: #a09a92;
+    --text3: #6b6560;
+    --accent: #e8e0d5;
+    --gold: #c9a96e;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+    background: rgba(13,13,13,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
+  }
+  .nav-logo-icon {
+    width: 28px; height: 28px;
+    background: var(--gold); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #0d0d0d;
+    font-family: 'DM Serif Display', serif;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .btn-outline {
+    padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text3); color: var(--text); }
+  .btn-primary {
+    padding: 8px 18px; border: none; border-radius: 6px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    color: #0d0d0d; background: var(--gold); cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #d4b07a; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 500px;
+    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--white);
+    max-width: 760px; margin: 0 auto 20px;
+  }
+  .hero-sub {
+    font-size: 16px; color: var(--text2);
+    max-width: 500px; margin: 0 auto 0;
+    line-height: 1.7;
+  }
+
+  /* ── LAYOUT ── */
+  .page-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 80px;
+  }
+  .sidebar-section { margin-bottom: 32px; }
+  .sidebar-title {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 12px;
+  }
+  .filter-btn {
+    display: block; width: 100%;
+    padding: 8px 12px;
+    border: 1px solid transparent; border-radius: 6px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    color: var(--text2); background: transparent;
+    cursor: pointer; text-align: left;
+    transition: all 0.15s; margin-bottom: 2px;
+  }
+  .filter-btn:hover { color: var(--text); background: var(--bg2); }
+  .filter-btn.active {
+    color: var(--text); background: var(--bg2);
+    border-color: var(--border2);
+  }
+  .filter-btn .filter-dot {
+    display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--gold);
+    margin-right: 8px; vertical-align: middle;
+  }
+
+  /* ── SORT TABS ── */
+  .sort-tabs {
+    display: flex; gap: 4px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .sort-tab {
+    padding: 10px 16px;
+    font-size: 13px; font-family: 'DM Sans', sans-serif;
+    color: var(--text3); background: transparent;
+    border: none; border-bottom: 2px solid transparent;
+    cursor: pointer; transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .sort-tab:hover { color: var(--text2); }
+  .sort-tab.active { color: var(--text); border-bottom-color: var(--gold); }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg);
+    padding: 28px 24px;
+    transition: background 0.15s;
+    cursor: pointer;
+    position: relative;
+  }
+  .skill-card:hover { background: var(--bg2); }
+
+  .skill-card-tag {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 10px;
+  }
+
+  .skill-card h3 {
+    font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 8px;
+    letter-spacing: -0.01em; line-height: 1.3;
+  }
+
+  .skill-card p {
+    font-size: 13px; color: var(--text2);
+    line-height: 1.55; margin-bottom: 16px;
+  }
+
+  .skill-card-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+  }
+
+  .time-saved {
+    font-size: 12px; color: var(--gold);
+    font-weight: 500;
+  }
+
+  .see-how {
+    font-size: 12px; color: var(--text3);
+    transition: color 0.15s;
+  }
+  .skill-card:hover .see-how { color: var(--text2); }
+
+  /* Agent workflow card */
+  .skill-card.agent {
+    background: var(--bg2);
+    border-top: 2px solid var(--gold);
+  }
+  .skill-card.agent:hover { background: var(--bg3); }
+
+  .agent-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600;
+    color: var(--gold);
+    background: rgba(201,169,110,0.08);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 3px 10px; border-radius: 100px;
+    margin-bottom: 12px;
+  }
+
+  .agent-quote {
+    font-size: 13px; font-style: italic;
+    color: var(--text2); margin-bottom: 10px;
+  }
+
+  .chains-info {
+    font-size: 12px; color: var(--text3);
+    margin-top: 4px;
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 40px 100px;
+    border-top: 1px solid var(--border);
+  }
+  .faq-label {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px;
+  }
+  .faq-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 400; color: var(--white);
+    letter-spacing: -0.02em; margin-bottom: 48px;
+  }
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden;
+  }
+  .faq-item {
+    background: var(--bg2); padding: 36px 32px;
+    transition: background 0.15s;
+  }
+  .faq-item:hover { background: var(--bg3); }
+  .faq-item h3 {
+    font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 10px;
+    letter-spacing: -0.01em; line-height: 1.4;
+  }
+  .faq-item p {
+    font-size: 14px; color: var(--text2); line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 80px; margin-bottom: 48px;
+  }
+  .footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.6; margin-top: 12px; }
+  .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .footer-links h4 {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 16px;
+  }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text3); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero h1 { animation: fadeUp 0.6s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.1s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .page-body { grid-template-columns: 1fr; padding: 0 20px 60px; }
+    .sidebar { position: static; display: flex; flex-wrap: wrap; gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .footer-links { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 100px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">S</div>
+    mySecond
+  </a>
+  <ul class="nav-links">
+    <li><a href="skills.html" class="active">Skills</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Services</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline">Log in</button>
+    <button class="btn-primary">Talk to Us</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Your Second Product Manager Built into Claude Code</h1>
+  <p class="hero-sub">Being a first PM is rough. Make life easier.<br>Get Claude Code PM skills that bring structure and judgment to every product decision.</p>
+</div>
+
+<!-- MAIN BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Filters</div>
+      <button class="filter-btn active" onclick="filterSkills('all', this)">All Skills</button>
+      <button class="filter-btn" onclick="filterSkills('top', this)">
+        <span class="filter-dot"></span>Top Picks
+      </button>
+      <button class="filter-btn" onclick="filterSkills('agent', this)">
+        ⚡ Agent workflows
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Category</div>
+      <button class="filter-btn" onclick="filterSkills('communication', this)">Communication</button>
+      <button class="filter-btn" onclick="filterSkills('competitive', this)">Competitive</button>
+      <button class="filter-btn" onclick="filterSkills('data', this)">Data</button>
+      <button class="filter-btn" onclick="filterSkills('discovery', this)">Discovery</button>
+      <button class="filter-btn" onclick="filterSkills('launch', this)">Launch</button>
+      <button class="filter-btn" onclick="filterSkills('operations', this)">Operations</button>
+      <button class="filter-btn" onclick="filterSkills('planning', this)">Planning</button>
+      <button class="filter-btn" onclick="filterSkills('specs', this)">Specs</button>
+      <button class="filter-btn" onclick="filterSkills('strategy', this)">Strategy</button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Time Saved</div>
+      <button class="filter-btn" onclick="filterSkills('10hrs', this)">10+ Hours</button>
+      <button class="filter-btn" onclick="filterSkills('hours', this)">Hours</button>
+      <button class="filter-btn" onclick="filterSkills('minutes', this)">Minutes</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="sort-tabs">
+      <button class="sort-tab active">Most Popular</button>
+      <button class="sort-tab">Recently Added</button>
+      <button class="sort-tab">Time Saved</button>
+    </div>
+
+    <div class="skills-grid" id="skillsGrid">
+
+      <!-- SPECS -->
+      <div class="skill-card" data-cat="specs">
+        <div class="skill-card-tag">Specs / prd</div>
+        <h3>PRD Generator</h3>
+        <p>Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning / roadmap</div>
+        <h3>Roadmap Builder</h3>
+        <p>Creates a structured product roadmap from your goals, constraints, and priorities.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- SPECS -->
+      <div class="skill-card" data-cat="specs">
+        <div class="skill-card-tag">Specs / user-stories</div>
+        <h3>User Story Writer</h3>
+        <p>Write clear user stories with acceptance criteria following the INVEST principles.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">30 min → 5 min per story</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMPETITIVE -->
+      <div class="skill-card" data-cat="competitive">
+        <div class="skill-card-tag">Competitive</div>
+        <h3>Competitive Profile Builder</h3>
+        <p>Create comprehensive competitor analysis using Gibson Biddle's DHM framework with strategic positioning insights.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / prioritize</div>
+        <h3>Prioritization Engine</h3>
+        <p>Score and rank features using RICE, ICE, or weighted scoring with clear documentation.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery / jtbd</div>
+        <h3>JTBD Extractor</h3>
+        <p>Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery / interview</div>
+        <h3>User Interview Analyzer</h3>
+        <p>Transform interview transcripts into structured insights with quotes, patterns, and recommendations.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery / research</div>
+        <h3>Research Synthesis Engine</h3>
+        <p>Synthesize multiple research sources into coherent insights with clear evidence chains.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">8+ hrs → 1 hr</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Discovery</div>
+        <h3>Batch Interview Synthesis</h3>
+        <p class="agent-quote">"10 interviews. 15 minutes. Done."</p>
+        <p>Analyze 5-10 interviews in parallel. Extract patterns, themes, and opportunities automatically with agent teams.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 7-10 hrs → 15 min</span>
+          <span class="chains-info">Chains: 4 skills</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery / persona</div>
+        <h3>Persona Generator</h3>
+        <p>Create data-backed user personas that go beyond demographics to capture behaviors and motivations.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">8+ hrs → 1 hr</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery</div>
+        <h3>Feature Request Analyzer</h3>
+        <p>Turn scattered feature requests into a prioritized list based on actual demand.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / okr</div>
+        <h3>OKR Coach</h3>
+        <p>Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 20 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / positioning</div>
+        <h3>Positioning Statement Generator</h3>
+        <p>Creates positioning using April Dunford's Obviously Awesome framework.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">3 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / gtm</div>
+        <h3>Go-to-Market Strategy</h3>
+        <p>Creates a complete GTM plan with channels, messaging, timeline, and success metrics.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- SPECS -->
+      <div class="skill-card" data-cat="specs">
+        <div class="skill-card-tag">Specs / brief</div>
+        <h3>Product Brief Writer</h3>
+        <p>Write one-page product briefs to get buy-in before investing in full specs.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning / quarterly</div>
+        <h3>Quarterly Planning Template</h3>
+        <p>Creates a quarterly plan with themes, bets, and resource allocation.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 weeks → 20 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="skill-card" data-cat="communication">
+        <div class="skill-card-tag">Communication / release-notes</div>
+        <h3>Release Notes Pro</h3>
+        <p>Write customer-facing release notes that highlight value, not just features.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Competitive</div>
+        <h3>Competitive Intel Pack</h3>
+        <p class="agent-quote">"5 competitors. 30 min. Complete intel."</p>
+        <p>Research 5 competitors in parallel. Get DHM analysis, pricing comparison, and strategic recommendations fast.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 4 hrs → 30 min</span>
+          <span class="chains-info">Chains: 5 skills</span>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="skill-card" data-cat="communication">
+        <div class="skill-card-tag">Communication / status</div>
+        <h3>Executive Update Generator</h3>
+        <p>Create crisp executive updates using the SCQA (Situation, Complication, Question, Answer) framework.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="skill-card" data-cat="communication">
+        <div class="skill-card-tag">Communication</div>
+        <h3>Stakeholder Simulator</h3>
+        <p>Simulate how different stakeholders will react to your proposal and prepare responses.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- LAUNCH -->
+      <div class="skill-card" data-cat="launch">
+        <div class="skill-card-tag">Launch / announcement</div>
+        <h3>Customer Announcement Writer</h3>
+        <p>Writes customer announcements in multiple formats (email, in-app, social).</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- SPECS -->
+      <div class="skill-card" data-cat="specs">
+        <div class="skill-card-tag">Specs / one-pager</div>
+        <h3>One-Pager Creator</h3>
+        <p>Create compelling one-page feature briefs that align stakeholders quickly.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 20 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- LAUNCH -->
+      <div class="skill-card" data-cat="launch">
+        <div class="skill-card-tag">Launch</div>
+        <h3>Launch Checklist Generator</h3>
+        <p>Generate comprehensive launch checklists customized to your release type and team structure.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- SPECS -->
+      <div class="skill-card" data-cat="specs">
+        <div class="skill-card-tag">Specs / tech-spec</div>
+        <h3>Technical Spec Writer</h3>
+        <p>Write technical specifications with architecture, data models, and API designs.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 20 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning / sprint</div>
+        <h3>Sprint Planning Assistant</h3>
+        <p>Creates a sprint plan with goals, capacity, and committed work.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning</div>
+        <h3>Feature Decomposition Tool</h3>
+        <p>Breaks down a feature into shippable chunks with dependencies mapped.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Specs</div>
+        <h3>Problem to PRD</h3>
+        <p class="agent-quote">"From problem statement to engineering-ready."</p>
+        <p>Turn a problem into engineering-ready specs: JTBD analysis, opportunity tree, full PRD, and sprint-ready stories.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 3 hrs → 20 min</span>
+          <span class="chains-info">Chains: 4 skills</span>
+        </div>
+      </div>
+
+      <!-- DATA -->
+      <div class="skill-card" data-cat="data">
+        <div class="skill-card-tag">Data / metrics</div>
+        <h3>Metric Framework Builder</h3>
+        <p>Build comprehensive metrics frameworks using the AARRR pirate metrics or input/output methodology.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / north-star</div>
+        <h3>North Star Finder</h3>
+        <p>Identify and validate your product's North Star metric with supporting input metrics.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DATA -->
+      <div class="skill-card" data-cat="data">
+        <div class="skill-card-tag">Data</div>
+        <h3>A/B Test Designer</h3>
+        <p>Design statistically sound experiments with clear hypotheses and sample size calculations.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 20 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DATA -->
+      <div class="skill-card" data-cat="data">
+        <div class="skill-card-tag">Data / funnel</div>
+        <h3>Funnel Analyzer</h3>
+        <p>Diagnose conversion funnel problems and generate data-backed improvement hypotheses.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">3-4 hrs → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMPETITIVE -->
+      <div class="skill-card" data-cat="competitive">
+        <div class="skill-card-tag">Competitive</div>
+        <h3>Competitive Landscape Mapper</h3>
+        <p>Map multiple competitors into a unified landscape with positioning matrices and feature comparisons.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">8+ hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / swot</div>
+        <h3>SWOT Analysis Generator</h3>
+        <p>Creates a structured SWOT analysis with strategic implications.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / pricing</div>
+        <h3>Pricing Strategy Analyzer</h3>
+        <p>Analyze pricing strategy with competitive positioning, packaging, and revenue modeling.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 days → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Data</div>
+        <h3>Hypothesis Tester</h3>
+        <p class="agent-quote">"Metrics dropped. Find out why."</p>
+        <p>Debug metrics drops with first principles. Generate competing hypotheses, evaluate evidence, get next steps.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 2 hrs → 15 min</span>
+          <span class="chains-info">Chains: 3 skills</span>
+        </div>
+      </div>
+
+      <!-- OPERATIONS -->
+      <div class="skill-card" data-cat="operations">
+        <div class="skill-card-tag">Operations / retro</div>
+        <h3>Sprint Retro Facilitator</h3>
+        <p>Structures sprint retrospectives with prompts, synthesis, and action items.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1 hr → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- OPERATIONS -->
+      <div class="skill-card" data-cat="operations">
+        <div class="skill-card-tag">Operations</div>
+        <h3>Team Health Check</h3>
+        <p>Run structured team health checks to surface what is working and what is not.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">3-4 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- OPERATIONS -->
+      <div class="skill-card" data-cat="operations">
+        <div class="skill-card-tag">Operations</div>
+        <h3>Incident Post-Mortem</h3>
+        <p>Writes a blameless incident post-mortem with root cause analysis.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="skill-card" data-cat="communication">
+        <div class="skill-card-tag">Communication</div>
+        <h3>Meeting Notes Processor</h3>
+        <p>Transform raw meeting notes into structured decisions, action items, and follow-ups.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">30 min → 5 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- DISCOVERY -->
+      <div class="skill-card" data-cat="discovery">
+        <div class="skill-card-tag">Discovery</div>
+        <h3>Journey Map Creator</h3>
+        <p>Build detailed customer journey maps that identify pain points and opportunities across touchpoints.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 1 hr</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Strategy</div>
+        <h3>Market Sizing Analyzer</h3>
+        <p class="agent-quote">"TAM/SAM/SOM in 45 minutes."</p>
+        <p>Calculate TAM/SAM/SOM with bottom-up and top-down estimates. Get data sources and assumptions documented.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 4 hrs → 45 min</span>
+          <span class="chains-info">Chains: 2 skills</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Discovery</div>
+        <h3>VoC Analysis</h3>
+        <p class="agent-quote">"Tame the feedback firehose."</p>
+        <p>Analyze 100+ feedback items from support, NPS, G2, and requests. Extract patterns and prioritize opportunities.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 3 hrs → 30 min</span>
+          <span class="chains-info">Chains: 3 skills</span>
+        </div>
+      </div>
+
+      <!-- AGENT -->
+      <div class="skill-card agent" data-cat="agent">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Communication</div>
+        <h3>Multi-Perspective Review</h3>
+        <p class="agent-quote">"7 stakeholder perspectives. 15 minutes. Done."</p>
+        <p>Run 7 stakeholder perspectives on any document in parallel — Engineering, Design, Executive, Legal, Customer Voice, Devil's Advocate, and Sales.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 2 hrs → 15 min</span>
+          <span class="chains-info">Chains: 7 skills</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy / ai</div>
+        <h3>AI Product Strategy</h3>
+        <p>Develop AI product strategy and identify AI opportunities for your product. Build, buy, or partner?</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">3-4 hrs → 45 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- STRATEGY -->
+      <div class="skill-card" data-cat="strategy">
+        <div class="skill-card-tag">Strategy</div>
+        <h3>Devil's Advocate</h3>
+        <p>Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning</div>
+        <h3>Daily Plan</h3>
+        <p>Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">30 min → 5 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- PLANNING -->
+      <div class="skill-card" data-cat="planning">
+        <div class="skill-card-tag">Planning</div>
+        <h3>Weekly Plan</h3>
+        <p>Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">45 min → 10 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+      <!-- COMMUNICATION -->
+      <div class="skill-card" data-cat="communication">
+        <div class="skill-card-tag">Communication</div>
+        <h3>Board Deck Generator</h3>
+        <p>Creates board meeting presentation with narrative arc and key metrics.</p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 30 min</span>
+          <span class="see-how">See how it works</span>
+        </div>
+      </div>
+
+    </div><!-- /skills-grid -->
+  </main>
+</div><!-- /page-body -->
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-label">FAQ</div>
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>What are mySecond skills for Claude?</h3>
+      <p>mySecond skills are PM-specific capabilities you add to Claude. Each skill teaches Claude a framework, methodology, or best practice — so when you run a command like /prd or /roadmap, you get structured, professional output instead of generic AI responses.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do I use a mySecond skill?</h3>
+      <p>Download the skill file from mySecond, add it to your .claude/skills/ folder, and you're done. Claude automatically discovers the skill. Type the slash command (like /prd) or describe what you need, and Claude uses the skill to help you.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Are mySecond skills free?</h3>
+      <p>Yes, all mySecond skills are free to download and use. We believe every PM should have access to best-practice frameworks. The PM Operating System ($249) includes personalized context files for your company, all 60+ skills bundled, and agent team workflows.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the difference between mySecond skills and ChatGPT prompts?</h3>
+      <p>ChatGPT prompts are one-shot instructions that get lost. mySecond skills are persistent capabilities — Claude remembers them across conversations. Skills also include frameworks and methodologies, not just formatting instructions.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do mySecond skills work with my company context?</h3>
+      <p>When you load your company context into mySecond, every skill automatically knows about your product, personas, and competitors. A /prd command generates a PRD for YOUR product, not a generic template.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I create my own mySecond skills?</h3>
+      <p>Yes! Skills are markdown files with a specific format. You can create custom skills for your team's workflows, proprietary frameworks, or company-specific processes. Check our docs for the skill authoring guide.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-wrapper">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">S</div>
+          mySecond
+        </a>
+        <p>The PM Operating System for Product Teams.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">Services</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="#">AI for PMs</a></li>
+            <li><a href="#">Getting Started</a></li>
+            <li><a href="#">Skill Guides</a></li>
+            <li><a href="#">PM Workflows</a></li>
+            <li><a href="#">Team &amp; Ops</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">PM Maturity Assessment</a></li>
+            <li><a href="#">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 mySecond · mysecond.ai</div>
+  </div>
+</div>
+
+<script>
+  function filterSkills(cat, btn) {
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.skill-card');
+    cards.forEach(card => {
+      if (cat === 'all') {
+        card.style.display = '';
+      } else if (cat === 'agent') {
+        card.style.display = card.classList.contains('agent') ? '' : 'none';
+      } else if (cat === 'top') {
+        // Show first 9 as "top picks"
+        card.style.display = '';
+      } else if (cat === '10hrs') {
+        const ts = card.querySelector('.time-saved').textContent;
+        card.style.display = (ts.includes('8+') || ts.includes('week') || ts.includes('days')) ? '' : 'none';
+      } else if (cat === 'hours') {
+        const ts = card.querySelector('.time-saved').textContent;
+        card.style.display = ts.includes('hr') ? '' : 'none';
+      } else if (cat === 'minutes') {
+        const ts = card.querySelector('.time-saved').textContent;
+        card.style.display = ts.includes('min') && !ts.includes('hr') ? '' : 'none';
+      } else {
+        card.style.display = card.dataset.cat === cat ? '' : 'none';
+      }
+    });
+  }
+
+  // Sort tabs
+  document.querySelectorAll('.sort-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.sort-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
