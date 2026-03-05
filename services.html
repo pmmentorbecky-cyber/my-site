@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Resiligen PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0a0810;
+    --bg2:      #0e0c18;
+    --bg3:      #131020;
+    --border:   #1e1a30;
+    --border2:  #2a2545;
+    --text:     #f0eeff;
+    --text2:    #a090cc;
+    --text3:    #6050a0;
+    --blue:     #4887FE;
+    --purple:   #887DFD;
+    --teal:     #67E9E9;
+    --navy:     #004097;
+    --gradient: linear-gradient(135deg, #887DFD 0%, #887DFD 30%, #4887FE 70%, #67E9E9 100%);
+    --white:    #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; display: inline-block; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px,3.5vw,44px); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; color: var(--white); max-width: 720px; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.7; }
+  .btn-gradient { display: inline-block; padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--gradient); cursor: pointer; box-shadow: 0 0 28px rgba(72,135,254,0.3); transition: all 0.2s; text-decoration: none; }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(72,135,254,0.5); }
+  .btn-ghost-lg { display: inline-block; padding: 13px 28px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .btn-ghost-lg:hover { color: var(--text); border-color: var(--purple); }
+  .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 200px 1fr; gap: 80px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.6; margin-top: 12px; }
+  .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .footer-links h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+  .footer-copy { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text3); }
+  @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .footer-top { grid-template-columns: 1fr; gap: 40px; } .footer-links { grid-template-columns: repeat(2,1fr); } }
+
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
+  .nav-logo-icon { width: 28px; height: 28px; background: var(--gradient); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff; font-family: 'DM Serif Display', serif; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links li { position: relative; }
+  .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
+  .nav-dropdown-btn::after { content: '⌃'; font-size: 10px; transition: transform 0.2s; display: inline-block; }
+  .nav-dropdown-btn.open::after { transform: rotate(180deg); }
+  .nav-dropdown { display: none; position: absolute; top: calc(100% + 20px); left: 50%; transform: translateX(-50%); background: #13102a; border: 1px solid var(--border2); border-radius: 12px; padding: 8px; min-width: 260px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 200; }
+  .nav-dropdown.open { display: block; animation: dropIn 0.18s ease; }
+  @keyframes dropIn { from { opacity:0; transform: translateX(-50%) translateY(-8px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+  .nav-dropdown a { display: block; padding: 12px 14px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .nav-dropdown a:hover { background: rgba(136,125,253,0.1); }
+  .nav-dropdown a .dd-title { font-size: 14px; font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
+  .nav-dropdown a .dd-desc { font-size: 12px; color: var(--text3); display: block; }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--purple); color: var(--text); }
+  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
+  .btn-primary:hover { background: #5e97ff; }
+
+
+  #aurora-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+
+
+  .services-hero { padding: 140px 40px 90px; max-width: 1100px; margin: 0 auto; }
+  .services-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(40px,5.5vw,68px); font-weight: 400; letter-spacing: -0.02em; color: var(--white); max-width: 800px; margin-bottom: 20px; line-height: 1.08; }
+  .services-hero p { font-size: 17px; color: var(--text2); max-width: 540px; line-height: 1.7; margin-bottom: 36px; }
+  .hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-footnote { margin-top: 14px; font-size: 13px; color: var(--text3); }
+  .hero-footnote a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Problems */
+  .problems-section { border-top: 1px solid var(--border); padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .problems-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .problem-card { background: var(--bg2); padding: 40px 32px; transition: background 0.2s; }
+  .problem-card:hover { background: var(--bg3); }
+  .problem-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(72,135,254,0.08); border: 1px solid rgba(72,135,254,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 16px; }
+  .problem-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .problem-card p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Workflow */
+  .workflow-section { border-top: 1px solid var(--border); padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .workflow-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .workflow-card { background: var(--bg2); padding: 28px 24px; }
+  .workflow-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; display: block; }
+  .workflow-card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .workflow-card p { font-size: 12px; color: var(--text3); }
+
+  /* Steps */
+  .steps-section { border-top: 1px solid var(--border); padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
+  .step { padding-top: 28px; border-top: 2px solid var(--border); }
+  .step.active { border-image: linear-gradient(90deg,#887DFD,#4887FE,#67E9E9) 1; border-top: 2px solid; }
+  .step-num { font-family: 'DM Serif Display', serif; font-size: 13px; font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 14px; display: block; }
+  .step h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .step p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Packages */
+  .packages-section { border-top: 1px solid var(--border); padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+  .packages-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .pkg-card { background: var(--bg2); padding: 48px 44px; }
+  .pkg-card.featured { background: var(--bg3); }
+  .pkg-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; border: 1px solid rgba(136,125,253,0.25); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+  .pkg-card h3 { font-family: 'DM Serif Display', serif; font-size: 26px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
+  .pkg-card > p { font-size: 14px; color: var(--text2); line-height: 1.65; margin-bottom: 28px; }
+  .pkg-features { list-style: none; margin-bottom: 32px; }
+  .pkg-features li { display: flex; gap: 10px; font-size: 14px; color: var(--text2); padding: 10px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+  .pkg-features li:last-child { border-bottom: none; }
+  .pkg-features strong { color: var(--text); }
+  .check { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; }
+  .pkg-note { font-size: 13px; color: var(--text3); text-align: center; margin-top: 12px; }
+  .pkg-note a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Founder */
+  .founder-section { border-top: 1px solid var(--border); padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
+  .founder-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px; padding: 48px; display: flex; gap: 48px; align-items: flex-start; }
+  .founder-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 28px; color: #fff; flex-shrink: 0; }
+  .founder-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .founder-role { font-size: 13px; color: var(--text3); margin-bottom: 16px; }
+  .founder-card p { font-size: 15px; color: var(--text2); line-height: 1.7; }
+
+  /* FAQ */
+  .faq-section { border-top: 1px solid var(--border); padding: 80px 40px 60px; max-width: 1100px; margin: 0 auto; }
+  .faq-list { margin-top: 48px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; font-size: 16px; font-weight: 600; color: var(--text); font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; }
+  .faq-q:hover { color: var(--purple); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--text3); transition: transform 0.2s; }
+  .faq-q.open::after { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 0 22px; font-size: 15px; color: var(--text2); line-height: 1.7; max-width: 720px; }
+  .faq-a.open { display: block; }
+
+  /* CTA Bottom */
+  .cta-bottom { border-top: 1px solid var(--border); text-align: center; padding: 100px 40px; position: relative; overflow: hidden; }
+  .cta-bottom::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 350px; background: radial-gradient(ellipse, rgba(136,125,253,0.08) 0%, rgba(72,135,254,0.06) 40%, transparent 75%); pointer-events: none; }
+  .cta-bottom h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,3.5vw,44px); color: var(--white); max-width: 600px; margin: 0 auto 16px; letter-spacing: -0.02em; position: relative; }
+  .cta-bottom p { font-size: 16px; color: var(--text2); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+  .cta-bottom-note { font-size: 13px; color: var(--text3); margin-top: 14px; position: relative; }
+  .cta-bottom-note a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    .problems-grid, .steps-grid, .packages-grid { grid-template-columns: 1fr; }
+    .workflow-grid { grid-template-columns: repeat(2,1fr); }
+    .founder-card { flex-direction: column; gap: 24px; }
+  }
+
+</style>
+</head>
+<body>
+<canvas id="aurora-canvas"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
+  <ul class="nav-links">
+    <li><a href="skills.html">Skills</a></li>
+    <li>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <div class="nav-dropdown">
+        <a href="learn.html"><span class="dd-title">Learn</span><span class="dd-desc">Articles and guides for PMs</span></a>
+        <a href="playbook.html"><span class="dd-title">Playbook</span><span class="dd-desc">Free PM OS guide (PDF)</span></a>
+        <a href="docs.html"><span class="dd-title">Docs</span><span class="dd-desc">PM OS setup and reference</span></a>
+      </div>
+    </li>
+    <li><a href="pricing.html" >Pricing</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline">Log in</button>
+    <button class="btn-primary">Talk to Us</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="services-hero">
+  <div class="section-label">For PM Teams</div>
+  <h1>Your PMs use AI. We make it productive.</h1>
+  <p>Context loaded. Frameworks built in. Skills for every workflow. That's the difference between chatting with AI and having infrastructure.</p>
+  <div class="hero-ctas">
+    <button class="btn-gradient">Talk to Us</button>
+    <a href="#how" class="btn-ghost-lg">See How It Works</a>
+  </div>
+  <div class="hero-footnote"><a href="#">Not sure where to start? Take our free PM maturity assessment →</a></div>
+</div>
+
+<!-- PROBLEMS -->
+<section class="problems-section">
+  <div class="section-label">The real cost of PM without infrastructure</div>
+  <h2 class="section-title">You hired great PMs. But without shared systems, every one of them starts from scratch.</h2>
+  <div class="problems-grid" style="margin-top:48px;">
+    <div class="problem-card"><div class="problem-icon">⚠</div><h3>AI without infrastructure</h3><p>Your PMs re-explain the product every session. They edit generic outputs that miss the mark. They're chatting — not leveraging AI.</p></div>
+    <div class="problem-card"><div class="problem-icon">⊘</div><h3>No PM operations layer</h3><p>No shared templates, no competitive context, no tribal knowledge captured. Every PM re-invents the wheel on every task.</p></div>
+    <div class="problem-card"><div class="problem-icon">↗</div><h3>Headcount without leverage</h3><p>Each new PM adds cost but not compounding value. New hires take 3–6 months to ramp because product knowledge lives in someone's head.</p></div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="workflow-section">
+  <div class="section-label">Built for your entire PM workflow</div>
+  <h2 class="section-title">We map how your team works across the full product lifecycle.</h2>
+  <div class="workflow-grid" style="margin-top:48px;">
+    <div class="workflow-card"><span class="workflow-tag">Discovery</span><h3>Discovery</h3><p>User research, interviews, JTBD</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Strategy</span><h3>Strategy</h3><p>Positioning, competitive, market sizing</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Planning</span><h3>Planning</h3><p>OKRs, quarterly plans, priorities</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Specs</span><h3>Specs</h3><p>PRDs, user stories, tech specs</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Data</span><h3>Data</h3><p>Metrics, experiments, funnels</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Communication</span><h3>Communication</h3><p>Updates, decks, announcements</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Launch</span><h3>Launch</h3><p>Go-to-market, checklists, rollout</p></div>
+    <div class="workflow-card"><span class="workflow-tag">Operations</span><h3>Operations</h3><p>Retros, process docs, team health</p></div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="steps-section" id="how">
+  <div class="section-label">How we build your PM OS</div>
+  <h2 class="section-title">We never build before we map.</h2>
+  <div class="steps-grid" style="margin-top:48px;">
+    <div class="step active"><span class="step-num">1. Discover</span><h3>Discover</h3><p>We interview your team, map every PM workflow, identify bottlenecks, and design the architecture for your PM OS. You get the blueprint and ROI case.</p></div>
+    <div class="step"><span class="step-num">2. Build & Train</span><h3>Build &amp; Train</h3><p>We build your PM OS — custom context, skills, MCP integrations — then train every PM hands-on.</p></div>
+    <div class="step"><span class="step-num">3. Operate</span><h3>Operate</h3><p>Context maintenance, skill building, competitive intelligence — we keep the PM OS running and evolving as your team grows.</p></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section">
+  <div class="section-label">Two ways to work with us</div>
+  <h2 class="section-title">Build the system. Keep it running.</h2>
+  <div class="packages-grid" style="margin-top:48px;">
+    <div class="pkg-card featured">
+      <div class="pkg-badge">Start here</div>
+      <h3>PM OS Implementation</h3>
+      <p>Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom PM OS, and get every PM productive.</p>
+      <ul class="pkg-features">
+        <li><span class="check">✓</span><div><strong>Discovery & workflow mapping</strong> — every process, bottleneck, and ROI quantified</div></li>
+        <li><span class="check">✓</span><div><strong>Custom context files</strong> — written from interviews, not a wizard</div></li>
+        <li><span class="check">✓</span><div><strong>Custom skills</strong> — built around your actual processes</div></li>
+        <li><span class="check">✓</span><div><strong>MCP integrations</strong> — Jira, Linear, Notion, PostHog, your tools</div></li>
+        <li><span class="check">✓</span><div><strong>Hands-on training</strong> — every PM runs their first skill live</div></li>
+        <li><span class="check">✓</span><div><strong>30-day support</strong> — iteration, questions, skill tweaks</div></li>
+      </ul>
+      <button class="btn-gradient" style="width:100%;text-align:center;">Talk to Us</button>
+      <p class="pkg-note"><a href="#">Or take our free PM maturity assessment →</a></p>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-badge">Ongoing</div>
+      <h3>Managed Services</h3>
+      <p>Monthly engagement scoped to your team's needs. We keep your PM OS running and evolving.</p>
+      <ul class="pkg-features">
+        <li><span class="check">✓</span><div><strong>Context maintenance</strong> — competitors, personas, product always current</div></li>
+        <li><span class="check">✓</span><div><strong>Custom skill development</strong> — new skills as processes evolve</div></li>
+        <li><span class="check">✓</span><div><strong>New PM onboarding</strong> — full setup in days, not weeks</div></li>
+        <li><span class="check">✓</span><div><strong>Competitive intelligence</strong> — monthly reports with recommendations</div></li>
+        <li><span class="check">✓</span><div><strong>Strategic advisory</strong> — monthly calls, roadmap reviews</div></li>
+      </ul>
+      <button class="btn-gradient" style="width:100%;text-align:center;">Talk to Us</button>
+      <p class="pkg-note"><a href="#">Or take our free PM maturity assessment →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section">
+  <div class="founder-card">
+    <div class="founder-avatar">R</div>
+    <div>
+      <h3>Ron Yang</h3>
+      <div class="founder-role">Founder, Resiligen PM</div>
+      <p>First PM at five companies. Built product functions from scratch each time. First PM at Aha!, where I helped scale from $2M to $100M+ ARR. The 60+ skills that thousands of PMs use? I built those on proven frameworks from Teresa Torres, Marty Cagan, and Gibson Biddle. This is that same expertise — applied directly to your team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-label">Common Questions</div>
+  <h2 class="section-title">Everything you need to know.</h2>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does the full process take?</button><div class="faq-a">Discovery takes 2 weeks. Implementation takes 4–6 weeks after that. From first call to a fully running PM OS, expect 6–8 weeks total.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What determines the final price?</button><div class="faq-a">Three things: the number of PMs we implement and train, custom MCP integrations (Jira, Linear, Notion), and additional custom skills for your workflows. We scope everything during discovery — no surprises.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What do we need before we start?</button><div class="faq-a">Each PM needs a Claude Pro subscription ($20/mo from Anthropic) and Claude Code installed. That's it. Discovery extracts everything else through conversation.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if we already use Notion or Confluence?</button><div class="faq-a">We integrate with them. The PM OS doesn't replace your tools — it connects them. Your docs become active context that Claude can reason about, not passive storage.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do we own everything you build?</button><div class="faq-a">Yes. Context files, skills, architecture — it's all yours. If you stop working with us, everything keeps running. There's no lock-in.</div></div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<div class="cta-bottom">
+  <h2>Find out what PM chaos is costing your team.</h2>
+  <p>Tell us about your team — we'll come back with a clear picture of where AI saves you the most time.</p>
+  <button class="btn-gradient">Talk to Us</button>
+  <div class="cta-bottom-note"><a href="#">Not sure yet? Take our free PM maturity assessment →</a></div>
+</div>
+
+<script>
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  a.classList.toggle('open');
+}
+</script>
+
+<div class="footer-wrapper">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
+        <p>The PM Operating System for Product Teams.</p>
+      </div>
+      <div class="footer-links">
+        <div><h4>Product</h4><ul><li><a href="services.html">Services</a></li><li><a href="skills.html">Skills</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+        <div><h4>Learn</h4><ul><li><a href="learn.html">Learn</a></li><li><a href="playbook.html">Playbook</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="#">PM Maturity Assessment</a></li><li><a href="#">ROI Calculator</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Resiligen PM Academy · resiligen.pm</div>
+  </div>
+</div>
+<script>
+function toggleDropdown(btn) {
+  const dd = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+  document.addEventListener('click', function close(e) {
+    if (!btn.parentElement.contains(e.target)) {
+      btn.classList.remove('open'); dd.classList.remove('open');
+      document.removeEventListener('click', close);
+    }
+  });
+}
+</script>
+
+<script>
+(function() {
+  const canvas = document.getElementById('aurora-canvas');
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vert = `
+    attribute vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos,0.0,1.0); }
+  `;
+
+  // Crepuscular / light-ray shader with directional streaks
+  const frag = `
+    precision highp float;
+    uniform vec2  u_res;
+    uniform float u_time;
+
+    float hash21(vec2 p) {
+      p = fract(p * vec2(234.34, 435.345));
+      p += dot(p, p + 34.23);
+      return fract(p.x * p.y);
+    }
+
+    // Smooth value noise
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f*f*(3.0-2.0*f);
+      return mix(
+        mix(hash21(i), hash21(i+vec2(1,0)), f.x),
+        mix(hash21(i+vec2(0,1)), hash21(i+vec2(1,1)), f.x),
+        f.y
+      );
+    }
+
+    // FBM
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i=0; i<5; i++) {
+        v += a * noise(p);
+        p  = p * 2.0 + vec2(1.7, 9.2);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Directional light beam
+    float beam(vec2 uv, vec2 origin, vec2 dir, float spread, float t) {
+      vec2 d = uv - origin;
+      float proj  = dot(d, normalize(dir));
+      float perp  = length(d - proj * normalize(dir));
+      float falloff = 1.0 / (1.0 + proj * 1.2);
+      float width = spread + 0.05 * sin(t * 0.8 + proj * 3.0);
+      float ray = smoothstep(width, 0.0, perp) * smoothstep(-0.05, 0.15, proj);
+      // add noise to break up uniformity
+      float n = fbm(uv * 4.0 + t * 0.15) * 0.4 + 0.6;
+      return ray * falloff * n;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      // correct aspect
+      uv.x *= u_res.x / u_res.y;
+      float aspect = u_res.x / u_res.y;
+      float t = u_time * 0.00035;
+
+      // ── BEAM 1: purple from top-left ──
+      vec2 o1 = vec2(-0.1 + sin(t*0.6)*0.08, 1.05 + cos(t*0.4)*0.05);
+      vec2 d1 = vec2(0.6, -0.9);
+      float ray1 = beam(uv * vec2(1.0, 1.0), o1 * vec2(aspect,1.0), d1, 0.22, t);
+
+      // ── BEAM 2: blue from top-right ──
+      vec2 o2 = vec2(aspect + 0.1 + cos(t*0.5)*0.10, 1.08 + sin(t*0.7)*0.05);
+      vec2 d2 = vec2(-0.8, -0.85);
+      float ray2 = beam(uv * vec2(1.0,1.0), o2, d2, 0.25, t + 1.5);
+
+      // ── BEAM 3: teal from right-center ──
+      vec2 o3 = vec2(aspect + 0.05 + sin(t*0.9)*0.08, 0.50 + cos(t*0.6)*0.10);
+      vec2 d3 = vec2(-1.0, -0.15);
+      float ray3 = beam(uv * vec2(1.0,1.0), o3, d3, 0.18, t + 3.0);
+
+      // ── BEAM 4: purple from top-center ──
+      vec2 o4 = vec2(aspect*0.5 + sin(t*0.7)*0.15, 1.10);
+      vec2 d4 = vec2(0.05, -1.0);
+      float ray4 = beam(uv * vec2(1.0,1.0), o4, d4, 0.30, t + 0.8);
+
+      // Brand colors (bright, saturated)
+      vec3 purple = vec3(0.533, 0.490, 0.992); // #887DFD
+      vec3 blue   = vec3(0.282, 0.529, 0.996); // #4887FE
+      vec3 teal   = vec3(0.404, 0.914, 0.914); // #67E9E9
+
+      vec3 col = vec3(0.0);
+      col += purple * ray1 * 0.85;
+      col += blue   * ray2 * 0.75;
+      col += teal   * ray3 * 0.60;
+      col += purple * ray4 * 0.50;
+
+      // Soft ambient glow in bg
+      float ambient_purple = smoothstep(1.0, 0.0, length(uv - vec2(aspect*0.35, 0.85))) * 0.12;
+      float ambient_blue   = smoothstep(0.9, 0.0, length(uv - vec2(aspect*0.70, 0.90))) * 0.10;
+      col += purple * ambient_purple;
+      col += blue   * ambient_blue;
+
+      // Keep it dark — powerful cap
+      col = pow(col, vec3(0.9));
+      col = clamp(col * 0.75, 0.0, 0.55);
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function mkShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vert));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, ts - start);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

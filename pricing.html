@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | Resiligen PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0a0810;
+    --bg2:      #0e0c18;
+    --bg3:      #131020;
+    --border:   #1e1a30;
+    --border2:  #2a2545;
+    --text:     #f0eeff;
+    --text2:    #a090cc;
+    --text3:    #6050a0;
+    --blue:     #4887FE;
+    --purple:   #887DFD;
+    --teal:     #67E9E9;
+    --navy:     #004097;
+    --gradient: linear-gradient(135deg, #887DFD 0%, #887DFD 30%, #4887FE 70%, #67E9E9 100%);
+    --white:    #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; display: inline-block; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px,3.5vw,44px); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; color: var(--white); max-width: 720px; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.7; }
+  .btn-gradient { display: inline-block; padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--gradient); cursor: pointer; box-shadow: 0 0 28px rgba(72,135,254,0.3); transition: all 0.2s; text-decoration: none; }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(72,135,254,0.5); }
+  .btn-ghost-lg { display: inline-block; padding: 13px 28px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .btn-ghost-lg:hover { color: var(--text); border-color: var(--purple); }
+  .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 200px 1fr; gap: 80px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.6; margin-top: 12px; }
+  .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .footer-links h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+  .footer-copy { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text3); }
+  @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .footer-top { grid-template-columns: 1fr; gap: 40px; } .footer-links { grid-template-columns: repeat(2,1fr); } }
+
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
+  .nav-logo-icon { width: 28px; height: 28px; background: var(--gradient); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff; font-family: 'DM Serif Display', serif; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links li { position: relative; }
+  .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
+  .nav-dropdown-btn::after { content: '⌃'; font-size: 10px; transition: transform 0.2s; display: inline-block; }
+  .nav-dropdown-btn.open::after { transform: rotate(180deg); }
+  .nav-dropdown { display: none; position: absolute; top: calc(100% + 20px); left: 50%; transform: translateX(-50%); background: #13102a; border: 1px solid var(--border2); border-radius: 12px; padding: 8px; min-width: 260px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 200; }
+  .nav-dropdown.open { display: block; animation: dropIn 0.18s ease; }
+  @keyframes dropIn { from { opacity:0; transform: translateX(-50%) translateY(-8px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+  .nav-dropdown a { display: block; padding: 12px 14px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .nav-dropdown a:hover { background: rgba(136,125,253,0.1); }
+  .nav-dropdown a .dd-title { font-size: 14px; font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
+  .nav-dropdown a .dd-desc { font-size: 12px; color: var(--text3); display: block; }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--purple); color: var(--text); }
+  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
+  .btn-primary:hover { background: #5e97ff; }
+
+
+  #aurora-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+
+
+  .pricing-hero { padding: 140px 40px 80px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .pricing-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(40px,5vw,64px); font-weight: 400; letter-spacing: -0.02em; color: var(--white); margin-bottom: 16px; }
+  .pricing-hero p { font-size: 17px; color: var(--text2); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+  .pricing-body { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
+
+  /* Individual */
+  .pricing-group-label { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 24px; letter-spacing: -0.01em; }
+  .individual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 60px; }
+  .plan-card { background: var(--bg2); padding: 44px 40px; }
+  .plan-card.featured { background: var(--bg3); position: relative; overflow: hidden; }
+  .plan-card.featured::before { content: ''; position: absolute; top: -80px; right: -80px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(136,125,253,0.10) 0%, transparent 70%); pointer-events: none; }
+  .plan-price-free { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+  .plan-price-row { margin-bottom: 4px; }
+  .plan-price-orig { font-size: 16px; color: var(--text3); text-decoration: line-through; margin-right: 6px; }
+  .plan-price-curr { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--white); letter-spacing: -0.02em; }
+  .plan-price-period { font-size: 14px; color: var(--text3); }
+  .plan-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; border: 1px solid rgba(136,125,253,0.3); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+  .plan-name { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .plan-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 28px; }
+  .plan-features { list-style: none; margin-bottom: 32px; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); padding: 8px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+  .plan-features li:last-child { border-bottom: none; }
+  .check { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; margin-top: 1px; }
+  .plan-cta { display: block; width: 100%; text-align: center; padding: 13px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .plan-cta:hover { border-color: var(--purple); color: var(--text); }
+  .plan-cta.primary { background: var(--gradient); color: #fff; border: none; box-shadow: 0 0 24px rgba(72,135,254,0.3); }
+  .plan-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 36px rgba(72,135,254,0.45); }
+
+  /* Teams */
+  .team-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px; padding: 52px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 60px; position: relative; overflow: hidden; }
+  .team-card::before { content: ''; position: absolute; top: -100px; right: -100px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(72,135,254,0.07) 0%, transparent 70%); pointer-events: none; }
+  .team-card h3 { font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400; color: var(--white); margin-bottom: 12px; letter-spacing: -0.01em; }
+  .team-card > div > p { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 28px; }
+  .team-features { list-style: none; }
+  .team-features li { display: flex; gap: 10px; font-size: 14px; color: var(--text2); padding: 10px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+  .team-features li:last-child { border-bottom: none; }
+  .team-features strong { color: var(--text); }
+  .team-ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .team-note { font-size: 13px; color: var(--text3); text-align: center; margin-top: 8px; }
+  .team-note a { color: var(--text2); text-decoration: underline; text-underline-offset: 3px; }
+  .team-link { font-size: 14px; color: var(--text2); text-align: center; text-decoration: underline; text-underline-offset: 3px; }
+  .team-link:hover { color: var(--blue); }
+
+  /* FAQ */
+  .faq-section { border-top: 1px solid var(--border); padding: 80px 40px 100px; max-width: 1100px; margin: 0 auto; }
+  .faq-list { margin-top: 48px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; font-size: 16px; font-weight: 600; color: var(--text); font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; }
+  .faq-q:hover { color: var(--purple); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--text3); transition: transform 0.2s; flex-shrink: 0; }
+  .faq-q.open::after { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 0 22px; font-size: 15px; color: var(--text2); line-height: 1.7; max-width: 720px; }
+  .faq-a.open { display: block; }
+  .faq-a a { color: var(--purple); text-decoration: underline; text-underline-offset: 3px; }
+
+</style>
+</head>
+<body>
+<canvas id="aurora-canvas"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
+  <ul class="nav-links">
+    <li><a href="skills.html">Skills</a></li>
+    <li>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <div class="nav-dropdown">
+        <a href="learn.html"><span class="dd-title">Learn</span><span class="dd-desc">Articles and guides for PMs</span></a>
+        <a href="playbook.html"><span class="dd-title">Playbook</span><span class="dd-desc">Free PM OS guide (PDF)</span></a>
+        <a href="docs.html"><span class="dd-title">Docs</span><span class="dd-desc">PM OS setup and reference</span></a>
+      </div>
+    </li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="services.html" >Services</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline">Log in</button>
+    <button class="btn-primary">Talk to Us</button>
+  </div>
+</nav>
+
+<div class="pricing-hero">
+  <div class="section-label">Pricing</div>
+  <h1>Choose your starting point.</h1>
+</div>
+
+<div class="pricing-body">
+
+  <!-- Individual PMs -->
+  <div class="pricing-group-label">For Individual PMs</div>
+  <div class="individual-grid">
+    <div class="plan-card">
+      <div class="plan-badge">Free</div>
+      <div class="plan-name">Free Skills</div>
+      <div class="plan-price-free">$0</div>
+      <div class="plan-desc">60+ PM skills for Claude Code. Browse, download, use.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> PRD generator, competitive analysis, roadmap builder</li>
+        <li><span class="check">✓</span> Built on proven PM frameworks</li>
+        <li><span class="check">✓</span> Download individually, use in Claude Code</li>
+      </ul>
+      <a href="skills.html" class="plan-cta">Browse Skills</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">PM Operating System</div>
+      <div class="plan-price-row">
+        <span class="plan-price-orig">$499</span>
+        <span class="plan-price-curr">$249</span>
+        <span class="plan-price-period"> one-time</span>
+      </div>
+      <div class="plan-desc">The complete system — personalized and ready in 5 minutes.</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> All 60+ skills in one download</li>
+        <li><span class="check">✓</span> Personalized context — company, product, personas, competitors</li>
+        <li><span class="check">✓</span> 6 sub-agents + 5 team workflows</li>
+        <li><span class="check">✓</span> One-time purchase. Lifetime access</li>
+      </ul>
+      <button class="plan-cta primary">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- PM Teams -->
+  <div class="pricing-group-label">For PM Teams</div>
+  <div class="team-card">
+    <div>
+      <div class="plan-badge">We build it for you</div>
+      <h3>Custom PM OS</h3>
+      <p>Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom system, and get every PM productive.</p>
+      <ul class="team-features">
+        <li><span class="check">✓</span><div><strong>Discovery & workflow mapping</strong> — bottlenecks and ROI quantified</div></li>
+        <li><span class="check">✓</span><div><strong>Full implementation</strong> — custom context, skills, integrations, training</div></li>
+        <li><span class="check">✓</span><div><strong>Hands-on training</strong> — every PM runs their first skill live</div></li>
+        <li><span class="check">✓</span><div><strong>Optional managed services</strong> — we keep it running and evolving</div></li>
+        <li><span class="check">✓</span><div>You own everything we build</div></li>
+      </ul>
+    </div>
+    <div>
+      <div class="team-ctas">
+        <button class="btn-gradient" style="text-align:center;">Talk to Us</button>
+        <a href="services.html" class="btn-ghost-lg" style="text-align:center;">See how it works</a>
+      </div>
+      <p class="team-note" style="margin-top:16px;"><a href="#">Or take our free PM maturity assessment →</a></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-label">Common Questions</div>
+  <h2 class="section-title">Everything you need to know.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button>
+      <div class="faq-a">ChatGPT forgets your context every session. Resiligen PM loads your company, product, personas, and competitors once — and every skill uses that context automatically. No more re-explaining your business to AI.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do I need Claude Pro?</button>
+      <div class="faq-a">Yes. Resiligen PM runs on Claude Code, which requires a Claude Pro subscription ($20/mo) from Anthropic. Claude Code is included with Pro.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does setup take?</button>
+      <div class="faq-a">5 minutes. Download the ZIP, open it in Claude Code, run /welcome. Answer a few questions. Done.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I use this with my team?</button>
+      <div class="faq-a">The $249 PM OS is single-user. For teams, we build a shared system with custom context, skills, and onboarding for every PM. <a href="services.html">See services</a>.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I expense this through my L&D budget?</button>
+      <div class="faq-a">Often, yes. Every skill teaches a proven PM framework (JTBD, Teresa Torres, Gibson Biddle) while applying it to your work. Many PMs expense this as professional development.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  a.classList.toggle('open');
+}
+</script>
+
+<div class="footer-wrapper">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
+        <p>The PM Operating System for Product Teams.</p>
+      </div>
+      <div class="footer-links">
+        <div><h4>Product</h4><ul><li><a href="services.html">Services</a></li><li><a href="skills.html">Skills</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
+        <div><h4>Learn</h4><ul><li><a href="learn.html">Learn</a></li><li><a href="playbook.html">Playbook</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="#">PM Maturity Assessment</a></li><li><a href="#">ROI Calculator</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Resiligen PM Academy · resiligen.pm</div>
+  </div>
+</div>
+<script>
+function toggleDropdown(btn) {
+  const dd = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+  document.addEventListener('click', function close(e) {
+    if (!btn.parentElement.contains(e.target)) {
+      btn.classList.remove('open'); dd.classList.remove('open');
+      document.removeEventListener('click', close);
+    }
+  });
+}
+</script>
+
+<script>
+(function() {
+  const canvas = document.getElementById('aurora-canvas');
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vert = `
+    attribute vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos,0.0,1.0); }
+  `;
+
+  // Crepuscular / light-ray shader with directional streaks
+  const frag = `
+    precision highp float;
+    uniform vec2  u_res;
+    uniform float u_time;
+
+    float hash21(vec2 p) {
+      p = fract(p * vec2(234.34, 435.345));
+      p += dot(p, p + 34.23);
+      return fract(p.x * p.y);
+    }
+
+    // Smooth value noise
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f*f*(3.0-2.0*f);
+      return mix(
+        mix(hash21(i), hash21(i+vec2(1,0)), f.x),
+        mix(hash21(i+vec2(0,1)), hash21(i+vec2(1,1)), f.x),
+        f.y
+      );
+    }
+
+    // FBM
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i=0; i<5; i++) {
+        v += a * noise(p);
+        p  = p * 2.0 + vec2(1.7, 9.2);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Directional light beam
+    float beam(vec2 uv, vec2 origin, vec2 dir, float spread, float t) {
+      vec2 d = uv - origin;
+      float proj  = dot(d, normalize(dir));
+      float perp  = length(d - proj * normalize(dir));
+      float falloff = 1.0 / (1.0 + proj * 1.2);
+      float width = spread + 0.05 * sin(t * 0.8 + proj * 3.0);
+      float ray = smoothstep(width, 0.0, perp) * smoothstep(-0.05, 0.15, proj);
+      // add noise to break up uniformity
+      float n = fbm(uv * 4.0 + t * 0.15) * 0.4 + 0.6;
+      return ray * falloff * n;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      // correct aspect
+      uv.x *= u_res.x / u_res.y;
+      float aspect = u_res.x / u_res.y;
+      float t = u_time * 0.00035;
+
+      // ── BEAM 1: purple from top-left ──
+      vec2 o1 = vec2(-0.1 + sin(t*0.6)*0.08, 1.05 + cos(t*0.4)*0.05);
+      vec2 d1 = vec2(0.6, -0.9);
+      float ray1 = beam(uv * vec2(1.0, 1.0), o1 * vec2(aspect,1.0), d1, 0.22, t);
+
+      // ── BEAM 2: blue from top-right ──
+      vec2 o2 = vec2(aspect + 0.1 + cos(t*0.5)*0.10, 1.08 + sin(t*0.7)*0.05);
+      vec2 d2 = vec2(-0.8, -0.85);
+      float ray2 = beam(uv * vec2(1.0,1.0), o2, d2, 0.25, t + 1.5);
+
+      // ── BEAM 3: teal from right-center ──
+      vec2 o3 = vec2(aspect + 0.05 + sin(t*0.9)*0.08, 0.50 + cos(t*0.6)*0.10);
+      vec2 d3 = vec2(-1.0, -0.15);
+      float ray3 = beam(uv * vec2(1.0,1.0), o3, d3, 0.18, t + 3.0);
+
+      // ── BEAM 4: purple from top-center ──
+      vec2 o4 = vec2(aspect*0.5 + sin(t*0.7)*0.15, 1.10);
+      vec2 d4 = vec2(0.05, -1.0);
+      float ray4 = beam(uv * vec2(1.0,1.0), o4, d4, 0.30, t + 0.8);
+
+      // Brand colors (bright, saturated)
+      vec3 purple = vec3(0.533, 0.490, 0.992); // #887DFD
+      vec3 blue   = vec3(0.282, 0.529, 0.996); // #4887FE
+      vec3 teal   = vec3(0.404, 0.914, 0.914); // #67E9E9
+
+      vec3 col = vec3(0.0);
+      col += purple * ray1 * 0.85;
+      col += blue   * ray2 * 0.75;
+      col += teal   * ray3 * 0.60;
+      col += purple * ray4 * 0.50;
+
+      // Soft ambient glow in bg
+      float ambient_purple = smoothstep(1.0, 0.0, length(uv - vec2(aspect*0.35, 0.85))) * 0.12;
+      float ambient_blue   = smoothstep(0.9, 0.0, length(uv - vec2(aspect*0.70, 0.90))) * 0.10;
+      col += purple * ambient_purple;
+      col += blue   * ambient_blue;
+
+      // Keep it dark — powerful cap
+      col = pow(col, vec3(0.9));
+      col = clamp(col * 0.75, 0.0, 0.55);
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function mkShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vert));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, ts - start);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
