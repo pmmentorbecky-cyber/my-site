@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn | mySecond</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0a0810;
+    --bg2:      #0e0c18;
+    --bg3:      #131020;
+    --border:   #1e1a30;
+    --border2:  #2a2545;
+    --text:     #f0eeff;
+    --text2:    #a090cc;
+    --text3:    #6050a0;
+    --blue:     #4887FE;
+    --purple:   #887DFD;
+    --teal:     #67E9E9;
+    --navy:     #004097;
+    --gradient: linear-gradient(135deg, #887DFD 0%, #887DFD 30%, #4887FE 70%, #67E9E9 100%);
+    --white:    #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 20px; display: inline-block;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 400;
+    line-height: 1.15; letter-spacing: -0.02em; color: var(--white);
+    max-width: 720px; margin-bottom: 16px;
+  }
+  .section-sub { font-size: 16px; color: var(--text2); max-width: 580px; line-height: 1.7; }
+  .btn-gradient {
+    display: inline-block; padding: 13px 28px; border: none; border-radius: 8px;
+    font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    color: #fff; background: var(--gradient); cursor: pointer;
+    box-shadow: 0 0 28px rgba(72,135,254,0.3); transition: all 0.2s; text-decoration: none;
+  }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(72,135,254,0.5); }
+  .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 200px 1fr; gap: 80px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.6; margin-top: 12px; }
+  .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .footer-links h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
+  .footer-links ul { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+  .footer-copy { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text3); }
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .footer-links { grid-template-columns: repeat(2, 1fr); }
+  }
+
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    background: rgba(10,8,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text);
+  }
+  .nav-logo-icon {
+    width: 28px; height: 28px;
+    background: var(--gradient); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #fff;
+    font-family: 'DM Serif Display', serif;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; position: relative; }
+  .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links li { position: relative; }
+
+  /* Dropdown */
+  .nav-dropdown-btn {
+    font-size: 14px; color: var(--text2); background: none; border: none;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 5px; padding: 0;
+    transition: color 0.2s;
+  }
+  .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
+  .nav-dropdown-btn::after {
+    content: '\2303';
+    font-size: 10px; transition: transform 0.2s; display: inline-block;
+  }
+  .nav-dropdown-btn.open::after { transform: rotate(180deg); }
+
+  .nav-dropdown {
+    display: none;
+    position: absolute; top: calc(100% + 20px); left: 50%; transform: translateX(-50%);
+    background: #13102a; border: 1px solid var(--border2);
+    border-radius: 12px; padding: 8px; min-width: 260px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .nav-dropdown.open { display: block; animation: dropIn 0.18s ease; }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .nav-dropdown a {
+    display: block; padding: 12px 14px; border-radius: 8px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .nav-dropdown a:hover { background: rgba(136,125,253,0.1); }
+  .nav-dropdown a .dd-title {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    display: block; margin-bottom: 2px;
+  }
+  .nav-dropdown a .dd-desc {
+    font-size: 12px; color: var(--text3); display: block;
+  }
+
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .btn-outline {
+    padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--purple); color: var(--text); }
+  .btn-primary {
+    padding: 8px 18px; border: none; border-radius: 6px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #5e97ff; }
+
+
+  #aurora-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+
+
+  .learn-hero {
+    padding: 140px 40px 60px; max-width: 1100px; margin: 0 auto;
+  }
+  .learn-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 64px); font-weight: 400;
+    letter-spacing: -0.02em; color: var(--white); margin-bottom: 16px;
+  }
+  .learn-hero p { font-size: 17px; color: var(--text2); max-width: 520px; line-height: 1.7; }
+
+  .learn-body { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
+
+  .featured-card {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 48px; margin-bottom: 48px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 40px; align-items: center;
+    transition: background 0.2s; cursor: pointer;
+    text-decoration: none; color: inherit;
+  }
+  .featured-card:hover { background: var(--bg3); border-color: var(--purple); }
+  .featured-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text;
+    border: 1px solid rgba(136,125,253,0.3); padding: 4px 12px;
+    border-radius: 100px; margin-bottom: 16px;
+  }
+  .featured-card h2 {
+    font-family: 'DM Serif Display', serif; font-size: 28px; font-weight: 400;
+    color: var(--white); letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 12px;
+  }
+  .featured-card p { font-size: 15px; color: var(--text2); line-height: 1.65; }
+  .featured-read { font-size: 13px; color: var(--text3); margin-top: 16px; }
+  .featured-arrow {
+    font-size: 32px; color: var(--purple); opacity: 0.5;
+    transition: opacity 0.2s; flex-shrink: 0;
+  }
+  .featured-card:hover .featured-arrow { opacity: 1; }
+
+  .categories { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+  .cat-btn {
+    padding: 7px 16px; border-radius: 100px; font-size: 13px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s;
+    border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  }
+  .cat-btn.active, .cat-btn:hover {
+    background: rgba(136,125,253,0.12); border-color: var(--purple); color: var(--text);
+  }
+
+  .articles-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  }
+  .article-card {
+    background: var(--bg2); padding: 32px 28px;
+    transition: background 0.15s; cursor: pointer; text-decoration: none; color: inherit;
+    display: block;
+  }
+  .article-card:hover { background: var(--bg3); }
+  .article-cat {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; display: block;
+  }
+  .article-card h3 {
+    font-size: 16px; font-weight: 600; color: var(--text);
+    margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.35;
+  }
+  .article-card p { font-size: 13px; color: var(--text2); line-height: 1.55; margin-bottom: 16px; }
+  .article-meta { font-size: 12px; color: var(--text3); }
+
+  .cta-card {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 40px 48px; margin-top: 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .cta-card h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); margin-bottom: 8px; }
+  .cta-card p { font-size: 14px; color: var(--text2); }
+
+</style>
+</head>
+<body>
+<canvas id="aurora-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">S</div>
+    mySecond
+  </a>
+  <ul class="nav-links">
+    <li><a href="skills.html">Skills</a></li>
+    <li>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <div class="nav-dropdown">
+        <a href="learn.html" class="active">
+          <span class="dd-title">Learn</span>
+          <span class="dd-desc">Articles and guides for PMs</span>
+        </a>
+        <a href="playbook.html">
+          <span class="dd-title">Playbook</span>
+          <span class="dd-desc">Free PM OS guide (PDF)</span>
+        </a>
+        <a href="docs.html">
+          <span class="dd-title">Docs</span>
+          <span class="dd-desc">PM OS setup and reference</span>
+        </a>
+      </div>
+    </li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Services</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline">Log in</button>
+    <button class="btn-primary">Talk to Us</button>
+  </div>
+</nav>
+
+
+<div class="learn-hero">
+  <div class="section-label">Learn</div>
+  <h1>Learn</h1>
+  <p>Practical guides for product managers building with AI. From getting started to advanced workflows.</p>
+</div>
+
+<div class="learn-body">
+  <!-- Featured -->
+  <a href="#" class="featured-card">
+    <div>
+      <div class="featured-badge">Featured · 11 min read</div>
+      <h2>How to Use Claude as a Product Manager: The Complete Guide</h2>
+      <p>Learn how to use Claude as a product manager — from setup and context files to running PM skills for discovery, specs, roadmaps, and stakeholder communication.</p>
+      <div class="featured-read">Read article →</div>
+    </div>
+    <div class="featured-arrow">→</div>
+  </a>
+
+  <!-- Category filters -->
+  <div class="categories">
+    <button class="cat-btn active">All</button>
+    <button class="cat-btn">AI for PMs</button>
+    <button class="cat-btn">Getting Started</button>
+    <button class="cat-btn">Skill Guides</button>
+    <button class="cat-btn">PM Workflows</button>
+    <button class="cat-btn">Team & Ops</button>
+  </div>
+
+  <!-- Articles Grid -->
+  <div class="articles-grid">
+    <a href="#" class="article-card">
+      <span class="article-cat">Getting Started</span>
+      <h3>Setting Up Claude Code for Product Management</h3>
+      <p>Install Claude Code Desktop, add your first skills, and run your first PM command in under 10 minutes.</p>
+      <div class="article-meta">5 min read</div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-cat">AI for PMs</span>
+      <h3>Why Context Files Change Everything</h3>
+      <p>Generic AI outputs are useless. Learn how context files make every skill output specific to your product.</p>
+      <div class="article-meta">7 min read</div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-cat">Skill Guides</span>
+      <h3>Writing PRDs with the PRD Generator</h3>
+      <p>A step-by-step walkthrough of turning a messy feature idea into a complete, stakeholder-ready PRD.</p>
+      <div class="article-meta">8 min read</div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-cat">PM Workflows</span>
+      <h3>The Discovery Sprint Workflow</h3>
+      <p>Chain 4 skills together to go from raw research to actionable insights in under an hour.</p>
+      <div class="article-meta">6 min read</div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-cat">AI for PMs</span>
+      <h3>Running Parallel Agent Workflows</h3>
+      <p>Use agent teams to analyze 10 interviews simultaneously. How the Batch Interview Synthesis workflow actually works.</p>
+      <div class="article-meta">9 min read</div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-cat">Team & Ops</span>
+      <h3>Building a Shared PM OS for Your Team</h3>
+      <p>How to standardize context files, skills, and workflows across a PM team of any size.</p>
+      <div class="article-meta">10 min read</div>
+    </a>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <div>
+      <h3>PM Team Maturity Assessment</h3>
+      <p>Score your PM operation across 9 dimensions. See where your team runs on systems vs. individual heroics. Takes 3 minutes.</p>
+    </div>
+    <a href="#" class="btn-gradient">Take the assessment</a>
+  </div>
+</div>
+
+
+<div class="footer-wrapper">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">S</div>
+          mySecond
+        </a>
+        <p>The PM Operating System for Product Teams.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">Services</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="playbook.html">Playbook</a></li>
+            <li><a href="docs.html">Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">PM Maturity Assessment</a></li>
+            <li><a href="#">ROI Calculator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 mySecond · mysecond.ai</div>
+  </div>
+</div>
+
+<script>
+function toggleDropdown(btn) {
+  const dd = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+  document.addEventListener('click', function close(e) {
+    if (!btn.parentElement.contains(e.target)) {
+      btn.classList.remove('open');
+      dd.classList.remove('open');
+      document.removeEventListener('click', close);
+    }
+  });
+}
+</script>
+
+<script>
+(function() {
+  const canvas = document.getElementById('aurora-canvas');
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vert = `
+    attribute vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos,0.0,1.0); }
+  `;
+
+  // Crepuscular / light-ray shader with directional streaks
+  const frag = `
+    precision highp float;
+    uniform vec2  u_res;
+    uniform float u_time;
+
+    float hash21(vec2 p) {
+      p = fract(p * vec2(234.34, 435.345));
+      p += dot(p, p + 34.23);
+      return fract(p.x * p.y);
+    }
+
+    // Smooth value noise
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f*f*(3.0-2.0*f);
+      return mix(
+        mix(hash21(i), hash21(i+vec2(1,0)), f.x),
+        mix(hash21(i+vec2(0,1)), hash21(i+vec2(1,1)), f.x),
+        f.y
+      );
+    }
+
+    // FBM
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i=0; i<5; i++) {
+        v += a * noise(p);
+        p  = p * 2.0 + vec2(1.7, 9.2);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Directional light beam
+    float beam(vec2 uv, vec2 origin, vec2 dir, float spread, float t) {
+      vec2 d = uv - origin;
+      float proj  = dot(d, normalize(dir));
+      float perp  = length(d - proj * normalize(dir));
+      float falloff = 1.0 / (1.0 + proj * 1.2);
+      float width = spread + 0.05 * sin(t * 0.8 + proj * 3.0);
+      float ray = smoothstep(width, 0.0, perp) * smoothstep(-0.05, 0.15, proj);
+      // add noise to break up uniformity
+      float n = fbm(uv * 4.0 + t * 0.15) * 0.4 + 0.6;
+      return ray * falloff * n;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      // correct aspect
+      uv.x *= u_res.x / u_res.y;
+      float aspect = u_res.x / u_res.y;
+      float t = u_time * 0.00035;
+
+      // ── BEAM 1: purple from top-left ──
+      vec2 o1 = vec2(-0.1 + sin(t*0.6)*0.08, 1.05 + cos(t*0.4)*0.05);
+      vec2 d1 = vec2(0.6, -0.9);
+      float ray1 = beam(uv * vec2(1.0, 1.0), o1 * vec2(aspect,1.0), d1, 0.22, t);
+
+      // ── BEAM 2: blue from top-right ──
+      vec2 o2 = vec2(aspect + 0.1 + cos(t*0.5)*0.10, 1.08 + sin(t*0.7)*0.05);
+      vec2 d2 = vec2(-0.8, -0.85);
+      float ray2 = beam(uv * vec2(1.0,1.0), o2, d2, 0.25, t + 1.5);
+
+      // ── BEAM 3: teal from right-center ──
+      vec2 o3 = vec2(aspect + 0.05 + sin(t*0.9)*0.08, 0.50 + cos(t*0.6)*0.10);
+      vec2 d3 = vec2(-1.0, -0.15);
+      float ray3 = beam(uv * vec2(1.0,1.0), o3, d3, 0.18, t + 3.0);
+
+      // ── BEAM 4: purple from top-center ──
+      vec2 o4 = vec2(aspect*0.5 + sin(t*0.7)*0.15, 1.10);
+      vec2 d4 = vec2(0.05, -1.0);
+      float ray4 = beam(uv * vec2(1.0,1.0), o4, d4, 0.30, t + 0.8);
+
+      // Brand colors (bright, saturated)
+      vec3 purple = vec3(0.533, 0.490, 0.992); // #887DFD
+      vec3 blue   = vec3(0.282, 0.529, 0.996); // #4887FE
+      vec3 teal   = vec3(0.404, 0.914, 0.914); // #67E9E9
+
+      vec3 col = vec3(0.0);
+      col += purple * ray1 * 0.85;
+      col += blue   * ray2 * 0.75;
+      col += teal   * ray3 * 0.60;
+      col += purple * ray4 * 0.50;
+
+      // Soft ambient glow in bg
+      float ambient_purple = smoothstep(1.0, 0.0, length(uv - vec2(aspect*0.35, 0.85))) * 0.12;
+      float ambient_blue   = smoothstep(0.9, 0.0, length(uv - vec2(aspect*0.70, 0.90))) * 0.10;
+      col += purple * ambient_purple;
+      col += blue   * ambient_blue;
+
+      // Keep it dark — powerful cap
+      col = pow(col, vec3(0.9));
+      col = clamp(col * 0.75, 0.0, 0.55);
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function mkShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vert));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, ts - start);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
