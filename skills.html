@@ -1,364 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>60+ Claude Code Skills for Product Managers | Resiligen PM</title>
+<title>技能庫 | Resiligen PM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d0d0d;
-    --bg2: #111111;
-    --bg3: #161616;
-    --border: #222222;
-    --border2: #2a2a2a;
-    --text: #f0ede8;
-    --text2: #a09a92;
-    --text3: #6b6560;
-    --accent: #e8e0d5;
-    --gold: #c9a96e;
-    --white: #ffffff;
+    --bg:#0a0810; --bg2:#0e0c18; --bg3:#131020;
+    --border:#1e1a30; --border2:#2a2545;
+    --text:#f0eeff; --text2:#a090cc; --text3:#6050a0;
+    --blue:#4887FE; --purple:#887DFD; --teal:#67E9E9;
+    --gradient:linear-gradient(135deg,#887DFD 0%,#887DFD 30%,#4887FE 70%,#67E9E9 100%);
+    --white:#ffffff;
   }
-
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
+         font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  #aurora-canvas { position:fixed; top:0; left:0; width:100%; height:100%;
+                   pointer-events:none; z-index:0; }
 
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:1000;
+        display:flex; align-items:center; justify-content:space-between;
+        padding:0 40px; height:60px;
+        background:rgba(10,8,16,0.85); backdrop-filter:blur(16px);
+        border-bottom:1px solid var(--border); }
+  .nav-logo { display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; color:var(--text); }
+  .nav-logo-icon { width:28px; height:28px; background:var(--gradient); border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:13px; color:#fff; font-family:'DM Serif Display',serif; }
+  .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+  .nav-links li { position:relative; }
+  .nav-links a { font-size:14px; color:var(--text2); transition:color .2s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--text); }
+  .nav-dropdown-btn { font-size:14px; color:var(--text2); background:none; border:none;
+    cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center;
+    gap:5px; padding:0; transition:color .2s; }
+  .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color:var(--text); }
+  .nav-dropdown-btn::after { content:'⌃'; font-size:10px; transition:transform .2s; display:inline-block; }
+  .nav-dropdown-btn.open::after { transform:rotate(180deg); }
+  .nav-dropdown { display:none; position:absolute; top:calc(100% + 20px); left:50%;
+    transform:translateX(-50%); background:#13102a; border:1px solid var(--border2);
+    border-radius:12px; padding:8px; min-width:260px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5); z-index:1100; }
+  .nav-dropdown.open { display:block; animation:dropIn .18s ease; }
+  @keyframes dropIn { from{opacity:0;transform:translateX(-50%) translateY(-8px)}
+                       to{opacity:1;transform:translateX(-50%) translateY(0)} }
+  .nav-dropdown a { display:block; padding:12px 14px; border-radius:8px; transition:background .15s; }
+  .nav-dropdown a:hover { background:rgba(136,125,253,.1); }
+  .nav-dropdown a .dd-title { font-size:14px; font-weight:600; color:var(--text); display:block; margin-bottom:2px; }
+  .nav-dropdown a .dd-desc  { font-size:12px; color:var(--text3); display:block; }
+  .nav-cta { display:flex; align-items:center; gap:12px; }
+  .btn-outline { padding:8px 18px; border:1px solid var(--border2); border-radius:6px;
+    font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text2);
+    background:transparent; cursor:pointer; transition:all .2s; }
+  .btn-outline:hover { border-color:var(--purple); color:var(--text); }
+  .btn-primary { padding:8px 18px; border:none; border-radius:6px; font-size:14px;
+    font-family:'DM Sans',sans-serif; font-weight:500; color:#fff;
+    background:var(--blue); cursor:pointer; transition:all .2s; }
+  .btn-primary:hover { background:#5e97ff; }
+  .lang-switcher { display:flex; align-items:center; background:var(--bg3);
+    border:1px solid var(--border2); border-radius:100px; padding:3px; gap:2px; flex-shrink:0; }
+  .lang-btn { padding:4px 12px; border-radius:100px; border:none; font-size:12px;
+    font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;
+    transition:all .18s; color:var(--text3); background:transparent; letter-spacing:.04em; }
+  .lang-btn.active { background:var(--gradient); color:#fff; box-shadow:0 2px 8px rgba(136,125,253,.35); }
+  .lang-btn:hover:not(.active) { color:var(--text2); }
 
-  /* ── AURORA ── */
-  .hero-skills::before, .hero-skills::after { display: none; }
+  /* HERO */
+  .hero { padding:140px 40px 60px; position:relative; z-index:1; text-align:center; }
+  .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(28px,3.5vw,44px);
+             font-weight:400; color:var(--white); margin-bottom:12px; letter-spacing:-.02em; }
+  .hero-sub { font-size:16px; color:var(--text2); }
 
-  #aurora-canvas {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* PAGE BODY */
+  .page-body { max-width:1200px; margin:0 auto; padding:0 40px 40px;
+    display:grid; grid-template-columns:220px 1fr; gap:48px;
+    align-items:start; position:relative; z-index:1; }
 
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* SIDEBAR */
+  .sidebar { position:sticky; top:80px; align-self:start;
+    max-height:calc(100vh - 100px); overflow-y:auto; scrollbar-width:none; }
+  .sidebar::-webkit-scrollbar { display:none; }
+  .sidebar-section { margin-bottom:32px; }
+  .sidebar-title { font-size:11px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--text3); margin-bottom:12px; }
+  .filter-btn { display:flex; align-items:center; width:100%;
+    padding:8px 12px; border:1px solid transparent; border-radius:6px;
+    font-size:14px; font-family:'DM Sans',sans-serif;
+    color:var(--text2); background:transparent;
+    cursor:pointer; text-align:left; transition:all .15s; margin-bottom:2px; }
+  .filter-btn:hover { color:var(--text); background:var(--bg2); }
+  .filter-btn.active { color:var(--text); background:var(--bg2); border-color:var(--border2); }
+  .filter-dot { display:inline-block; width:8px; height:8px;
+    border-radius:50%; margin-right:8px; flex-shrink:0; }
+  .stage-dot { display:inline-block; width:8px; height:8px;
+    border-radius:50%; margin-right:8px; flex-shrink:0; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    height: 60px;
-    background: rgba(13,13,13,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    font-weight: 600; font-size: 15px; letter-spacing: -0.01em;
-  }
-  .nav-logo-icon {
-    width: 28px; height: 28px;
-    background: var(--gold); border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 13px; color: #0d0d0d;
-    font-family: 'DM Serif Display', serif;
-  }
-  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-  .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--text); }
-  .nav-cta { display: flex; align-items: center; gap: 12px; }
-  .btn-outline {
-    padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px;
-    font-size: 14px; font-family: 'DM Sans', sans-serif;
-    color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--text3); color: var(--text); }
-  .btn-primary {
-    padding: 8px 18px; border: none; border-radius: 6px;
-    font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500;
-    color: #0d0d0d; background: var(--gold); cursor: pointer; transition: all 0.2s;
-  }
-  .btn-primary:hover { background: #d4b07a; }
+  /* SORT TABS */
+  .sort-tabs { display:flex; gap:4px; margin-bottom:28px;
+    border-bottom:1px solid var(--border); }
+  .sort-tab { padding:10px 16px; font-size:13px; font-family:'DM Sans',sans-serif;
+    color:var(--text3); background:transparent; border:none;
+    border-bottom:2px solid transparent; cursor:pointer; transition:all .15s;
+    margin-bottom:-1px; }
+  .sort-tab:hover { color:var(--text2); }
+  .sort-tab.active { color:var(--text); border-bottom-color:var(--purple); }
 
-  /* ── HERO ── */
-  .hero {
-    padding: 140px 40px 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 500px;
-    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(36px, 5vw, 60px);
-    font-weight: 400; line-height: 1.1;
-    letter-spacing: -0.02em; color: var(--white);
-    max-width: 760px; margin: 0 auto 20px;
-  }
-  .hero-sub {
-    font-size: 16px; color: var(--text2);
-    max-width: 500px; margin: 0 auto 0;
-    line-height: 1.7;
-  }
+  /* SKILLS GRID */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
 
-  /* ── LAYOUT ── */
-  .page-body {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px 100px;
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
+  /* SKILL CARD */
+  .skill-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+    padding:20px; cursor:pointer; display:flex; flex-direction:column; gap:6px;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease; }
+  .skill-card:hover { transform:translateY(-4px);
+    box-shadow:0 8px 32px rgba(136,125,253,.18), 0 0 0 1px rgba(136,125,253,.35);
+    background:var(--bg3); }
+  .skill-card.agent { border-color:rgba(136,125,253,.2);
+    background:linear-gradient(135deg,rgba(136,125,253,.07) 0%,var(--bg2) 70%); }
+  .skill-card.agent:hover { border-color:rgba(136,125,253,.5); }
+  .skill-card-tag { font-size:10px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--text3); }
+  .agent-badge { font-size:10px; font-weight:700; letter-spacing:.06em;
+    background:var(--gradient); -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent; background-clip:text; }
+  .skill-card h3 { font-size:14px; font-weight:600; color:var(--text); line-height:1.3; }
+  .skill-card p  { font-size:12px; color:var(--text2); line-height:1.55; flex:1; }
+  .agent-quote { font-size:12px; font-style:italic; line-height:1.4;
+    background:var(--gradient); -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent; background-clip:text; }
+  .skill-card-footer { display:flex; align-items:center; justify-content:space-between;
+    padding-top:10px; border-top:1px solid var(--border); margin-top:auto; }
+  .time-saved { font-size:11px; font-weight:600;
+    color: #67E9E9; }
+  .see-how { font-size:11px; color:var(--text3); transition:color .15s; }
+  .skill-card:hover .see-how { color:var(--text2); }
+  .chains-info { font-size:11px; color:var(--text3); }
+  .skill-tag { font-size:10px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--text3); display:block; }
+  .skill-header { margin-bottom:0; }
+  .skill-desc { font-size:12px; color:var(--text2); line-height:1.55; flex:1; }
+  .skill-meta { padding-top:10px; border-top:1px solid var(--border); margin-top:auto; }
+  .skill-time { font-size:11px; font-weight:600;
+    color: #67E9E9; }
+  .skill-btn { display:none; }
 
-  /* ── SIDEBAR ── */
-  .sidebar {
-    position: sticky;
-    top: 80px;
-  }
-  .sidebar-section { margin-bottom: 32px; }
-  .sidebar-title {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text3); margin-bottom: 12px;
-  }
-  .filter-btn {
-    display: block; width: 100%;
-    padding: 8px 12px;
-    border: 1px solid transparent; border-radius: 6px;
-    font-size: 14px; font-family: 'DM Sans', sans-serif;
-    color: var(--text2); background: transparent;
-    cursor: pointer; text-align: left;
-    transition: all 0.15s; margin-bottom: 2px;
-  }
-  .filter-btn:hover { color: var(--text); background: var(--bg2); }
-  .filter-btn.active {
-    color: var(--text); background: var(--bg2);
-    border-color: var(--border2);
-  }
-  .filter-btn .filter-dot {
-    display: inline-block; width: 6px; height: 6px;
-    border-radius: 50%; background: var(--gold);
-    margin-right: 8px; vertical-align: middle;
-  }
+  /* FAQ */
+  .faq-section { max-width:1200px; margin:0 auto; padding:60px 40px 48px;
+    border-top:1px solid var(--border); position:relative; z-index:1; }
+  .faq-label { font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:12px; display:inline-block; }
+  .faq-title { font-family:'DM Serif Display',serif; font-size:clamp(24px,3vw,36px);
+    font-weight:400; color:var(--white); margin-bottom:40px; letter-spacing:-.02em; }
+  .faq-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .faq-item { background:var(--bg2); padding:28px 32px; transition:background .2s; }
+  .faq-item:hover { background:var(--bg3); }
+  .faq-item h3 { font-size:14px; font-weight:600; color:var(--text); margin-bottom:10px; }
+  .faq-item p  { font-size:13px; color:var(--text2); line-height:1.65; }
 
-  /* ── SORT TABS ── */
-  .sort-tabs {
-    display: flex; gap: 4px;
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0;
-  }
-  .sort-tab {
-    padding: 10px 16px;
-    font-size: 13px; font-family: 'DM Sans', sans-serif;
-    color: var(--text3); background: transparent;
-    border: none; border-bottom: 2px solid transparent;
-    cursor: pointer; transition: all 0.15s;
-    margin-bottom: -1px;
-  }
-  .sort-tab:hover { color: var(--text2); }
-  .sort-tab.active { color: var(--text); border-bottom-color: var(--gold); }
+  /* FOOTER */
+  .footer-wrapper { border-top:1px solid var(--border); padding:60px 40px;
+    position:relative; z-index:1; }
+  .footer-inner { max-width:1200px; margin:0 auto; }
+  .footer-top { display:grid; grid-template-columns:200px 1fr; gap:80px; margin-bottom:48px; }
+  .footer-brand p { font-size:13px; color:var(--text3); margin-top:12px; line-height:1.6; }
+  .footer-links { display:grid; grid-template-columns:repeat(4,1fr); gap:40px; }
+  .footer-links h4 { font-size:11px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--text3); margin-bottom:16px; }
+  .footer-links ul { list-style:none; }
+  .footer-links li { margin-bottom:10px; }
+  .footer-links a { font-size:14px; color:var(--text2); transition:color .2s; }
+  .footer-links a:hover { color:var(--blue); }
+  .footer-copy { border-top:1px solid var(--border); padding-top:24px; font-size:13px; color:var(--text3); }
 
-  /* ── SKILLS GRID ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
+  @media (max-width:900px) {
+    nav { padding:0 20px; }
+    .nav-links { display:none; }
+    .hero { padding:100px 20px 40px; }
+    .page-body { grid-template-columns:1fr; padding:0 20px 40px; gap:24px; }
+    .sidebar { position:static; max-height:none; display:flex; flex-wrap:wrap; gap:6px; }
+    .sidebar-section { margin-bottom:0; }
+    .sidebar-title { display:none; }
+    .filter-btn { width:auto; padding:6px 12px; }
+    .faq-grid { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; gap:40px; }
+    .footer-links { grid-template-columns:repeat(2,1fr); }
+    .faq-section, .footer-wrapper { padding-left:20px; padding-right:20px; }
   }
-
-  .skill-card {
-    background: var(--bg);
-    padding: 28px 24px;
-    transition: background 0.15s;
-    cursor: pointer;
-    position: relative;
-  }
-  .skill-card:hover { background: var(--bg2); }
-
-  .skill-card-tag {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--text3); margin-bottom: 10px;
-  }
-
-  .skill-card h3 {
-    font-size: 15px; font-weight: 600;
-    color: var(--text); margin-bottom: 8px;
-    letter-spacing: -0.01em; line-height: 1.3;
-  }
-
-  .skill-card p {
-    font-size: 13px; color: var(--text2);
-    line-height: 1.55; margin-bottom: 16px;
-  }
-
-  .skill-card-footer {
-    display: flex; align-items: center;
-    justify-content: space-between;
-  }
-
-  .time-saved {
-    font-size: 12px; color: var(--gold);
-    font-weight: 500;
-  }
-
-  .see-how {
-    font-size: 12px; color: var(--text3);
-    transition: color 0.15s;
-  }
-  .skill-card:hover .see-how { color: var(--text2); }
-
-  /* Agent workflow card */
-  .skill-card.agent {
-    background: var(--bg2);
-    border-top: 2px solid var(--gold);
-  }
-  .skill-card.agent:hover { background: var(--bg3); }
-
-  .agent-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11px; font-weight: 600;
-    color: var(--gold);
-    background: rgba(201,169,110,0.08);
-    border: 1px solid rgba(201,169,110,0.2);
-    padding: 3px 10px; border-radius: 100px;
-    margin-bottom: 12px;
-  }
-
-  .agent-quote {
-    font-size: 13px; font-style: italic;
-    color: var(--text2); margin-bottom: 10px;
-  }
-
-  .chains-info {
-    font-size: 12px; color: var(--text3);
-    margin-top: 4px;
-  }
-
-  /* ── FAQ ── */
-  .faq-section {
-    max-width: 1200px; margin: 0 auto;
-    padding: 80px 40px 100px;
-    border-top: 1px solid var(--border);
-  }
-  .faq-label {
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 20px;
-  }
-  .faq-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 3vw, 40px);
-    font-weight: 400; color: var(--white);
-    letter-spacing: -0.02em; margin-bottom: 48px;
-  }
-  .faq-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--border);
-    border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden;
-  }
-  .faq-item {
-    background: var(--bg2); padding: 36px 32px;
-    transition: background 0.15s;
-  }
-  .faq-item:hover { background: var(--bg3); }
-  .faq-item h3 {
-    font-size: 15px; font-weight: 600;
-    color: var(--text); margin-bottom: 10px;
-    letter-spacing: -0.01em; line-height: 1.4;
-  }
-  .faq-item p {
-    font-size: 14px; color: var(--text2); line-height: 1.65;
-  }
-
-  /* ── FOOTER ── */
-  .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
-  .footer-inner { max-width: 1200px; margin: 0 auto; }
-  .footer-top {
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 80px; margin-bottom: 48px;
-  }
-  .footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.6; margin-top: 12px; }
-  .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
-  .footer-links h4 {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text3); margin-bottom: 16px;
-  }
-  .footer-links ul { list-style: none; }
-  .footer-links li { margin-bottom: 10px; }
-  .footer-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
-  .footer-links a:hover { color: var(--text); }
-  .footer-copy { border-top: 1px solid var(--border); padding-top: 24px; font-size: 13px; color: var(--text3); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero h1 { animation: fadeUp 0.6s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.1s ease both; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .page-body { grid-template-columns: 1fr; padding: 0 20px 60px; }
-    .sidebar { position: static; display: flex; flex-wrap: wrap; gap: 8px; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .faq-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; gap: 40px; }
-    .footer-links { grid-template-columns: repeat(2, 1fr); }
-    .hero { padding: 100px 20px 60px; }
-  }
-
-  /* Dropdown */
-  .nav-links li { position: relative; }
-  .nav-dropdown-btn {
-    font-size: 14px; color: var(--text2); background: none; border: none;
-    cursor: pointer; font-family: 'DM Sans', sans-serif;
-    display: flex; align-items: center; gap: 5px; padding: 0;
-    transition: color 0.2s;
-  }
-  .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
-  .nav-dropdown-btn::after { content: '⌃'; font-size: 10px; transition: transform 0.2s; display: inline-block; }
-  .nav-dropdown-btn.open::after { transform: rotate(180deg); }
-  .nav-dropdown {
-    display: none; position: absolute; top: calc(100% + 20px); left: 50%; transform: translateX(-50%);
-    background: #13102a; border: 1px solid var(--border2);
-    border-radius: 12px; padding: 8px; min-width: 260px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 200;
-  }
-  .nav-dropdown.open { display: block; animation: dropIn 0.18s ease; }
-  @keyframes dropIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
-  .nav-dropdown a { display: block; padding: 12px 14px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
-  .nav-dropdown a:hover { background: rgba(136,125,253,0.1); }
-  .nav-dropdown a .dd-title { font-size: 14px; font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
-  .nav-dropdown a .dd-desc { font-size: 12px; color: var(--text3); display: block; }
-
 </style>
 </head>
 <body>
@@ -371,37 +207,41 @@
     Resiligen PM
   </a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
         <a href="learn.html">
-          <span class="dd-title">Learn</span>
-          <span class="dd-desc">Articles and guides for PMs</span>
+          <span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span>
+          <span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span>
         </a>
         <a href="playbook.html">
-          <span class="dd-title">Playbook</span>
-          <span class="dd-desc">Free PM OS guide (PDF)</span>
+          <span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span>
+          <span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span>
         </a>
         <a href="docs.html">
-          <span class="dd-title">Docs</span>
-          <span class="dd-desc">PM OS setup and reference</span>
+          <span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span>
+          <span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span>
         </a>
       </div>
     </li>
-    <li><a href="#">Pricing</a></li>
-    <li><a href="#">Services</a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Your Second Product Manager Built into Claude Code</h1>
-  <p class="hero-sub">Being a first PM is rough. Make life easier.<br>Get Claude Code PM skills that bring structure and judgment to every product decision.</p>
+  <h1 data-en="Your Second Product Manager Built into Claude" data-zh="60+ 個 PM 技能，直接內建在 Claude 裡">60+ 個 PM 技能，直接內建在 Claude 裡</h1>
+  <p class="hero-sub" data-en="Being a first PM is rough. Make life easier." data-zh="每個技能都已載入框架與脈絡，選一個階段，找到你現在需要的。">每個技能都已載入框架與脈絡，選一個階段，找到你現在需要的。</p>
 </div>
 
 <!-- MAIN BODY -->
@@ -410,586 +250,607 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-section">
-      <div class="sidebar-title">Filters</div>
-      <button class="filter-btn active" onclick="filterSkills('all', this)">All Skills</button>
+      <div class="sidebar-title" data-en="Filters" data-zh="篩選">篩選</div>
+      <button class="filter-btn active" onclick="filterSkills('all', this)">
+        <span data-en="All Skills" data-zh="全部">全部</span>
+      </button>
       <button class="filter-btn" onclick="filterSkills('top', this)">
-        <span class="filter-dot"></span>Top Picks
+        <span data-en="Top Picks" data-zh="精選">精選</span>
       </button>
       <button class="filter-btn" onclick="filterSkills('agent', this)">
-        ⚡ Agent workflows
+        ⚡ <span data-en="Agent workflows" data-zh="Agent 工作流程">Agent 工作流程</span>
       </button>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-title">Category</div>
-      <button class="filter-btn" onclick="filterSkills('communication', this)">Communication</button>
-      <button class="filter-btn" onclick="filterSkills('competitive', this)">Competitive</button>
-      <button class="filter-btn" onclick="filterSkills('data', this)">Data</button>
-      <button class="filter-btn" onclick="filterSkills('discovery', this)">Discovery</button>
-      <button class="filter-btn" onclick="filterSkills('launch', this)">Launch</button>
-      <button class="filter-btn" onclick="filterSkills('operations', this)">Operations</button>
-      <button class="filter-btn" onclick="filterSkills('planning', this)">Planning</button>
-      <button class="filter-btn" onclick="filterSkills('specs', this)">Specs</button>
-      <button class="filter-btn" onclick="filterSkills('strategy', this)">Strategy</button>
+      <div class="sidebar-title" data-en="Stage" data-zh="階段">階段</div>
+      <button class="filter-btn" onclick="filterSkills('research', this)">
+        <span class="stage-dot" style="background:#887DFD"></span>
+        <span data-en="Research" data-zh="研究 Research">研究 Research</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('kickoff', this)">
+        <span class="stage-dot" style="background:#4887FE"></span>
+        <span data-en="Kick Off" data-zh="啟動 Kick Off">啟動 Kick Off</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('design', this)">
+        <span class="stage-dot" style="background:#67a4fe"></span>
+        <span data-en="Design" data-zh="設計 Design">設計 Design</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('develop', this)">
+        <span class="stage-dot" style="background:#67E9E9"></span>
+        <span data-en="Develop" data-zh="開發 Develop">開發 Develop</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('test', this)">
+        <span class="stage-dot" style="background:#a0f0b0"></span>
+        <span data-en="Test" data-zh="測試 Test">測試 Test</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('release', this)">
+        <span class="stage-dot" style="background:#f0c070"></span>
+        <span data-en="Release" data-zh="發布 Release">發布 Release</span>
+      </button>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-title">Time Saved</div>
-      <button class="filter-btn" onclick="filterSkills('10hrs', this)">10+ Hours</button>
-      <button class="filter-btn" onclick="filterSkills('hours', this)">Hours</button>
-      <button class="filter-btn" onclick="filterSkills('minutes', this)">Minutes</button>
+      <div class="sidebar-title" data-en="Time Saved" data-zh="節省時間">節省時間</div>
+      <button class="filter-btn" onclick="filterSkills('10hrs', this)">
+        <span data-en="10+ Hours" data-zh="10小時以上">10小時以上</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('hours', this)">
+        <span data-en="Hours" data-zh="數小時">數小時</span>
+      </button>
+      <button class="filter-btn" onclick="filterSkills('minutes', this)">
+        <span data-en="Minutes" data-zh="數分鐘">數分鐘</span>
+      </button>
     </div>
   </aside>
 
   <!-- MAIN CONTENT -->
   <main>
     <div class="sort-tabs">
-      <button class="sort-tab active">Most Popular</button>
-      <button class="sort-tab">Recently Added</button>
-      <button class="sort-tab">Time Saved</button>
+      <button class="sort-tab active">
+        <span data-en="Most Popular" data-zh="熱門精選">熱門精選</span>
+      </button>
+      <button class="sort-tab">
+        <span data-en="Recently Added" data-zh="最新上架">最新上架</span>
+      </button>
+      <button class="sort-tab">
+        <span data-en="Time Saved" data-zh="節省時間">節省時間</span>
+      </button>
     </div>
 
     <div class="skills-grid" id="skillsGrid">
 
-      <!-- SPECS -->
-      <div class="skill-card" data-cat="specs">
-        <div class="skill-card-tag">Specs / prd</div>
-        <h3>PRD Generator</h3>
-        <p>Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">4-6 hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
-        <div class="skill-card-tag">Planning / roadmap</div>
-        <h3>Roadmap Builder</h3>
-        <p>Creates a structured product roadmap from your goals, constraints, and priorities.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">4-6 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- SPECS -->
-      <div class="skill-card" data-cat="specs">
-        <div class="skill-card-tag">Specs / user-stories</div>
-        <h3>User Story Writer</h3>
-        <p>Write clear user stories with acceptance criteria following the INVEST principles.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">30 min → 5 min per story</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- COMPETITIVE -->
-      <div class="skill-card" data-cat="competitive">
+      <!-- RESEARCH -->
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#competitive-profile-builder'">
         <div class="skill-card-tag">Competitive</div>
-        <h3>Competitive Profile Builder</h3>
-        <p>Create comprehensive competitor analysis using Gibson Biddle's DHM framework with strategic positioning insights.</p>
+        <h3><span data-en="Competitive Profile Builder" data-zh="競品分析">Competitive Profile Builder</span></h3>
+        <p><span data-en="Create comprehensive competitor analysis using Gibson Biddle's DHM framework." data-zh="用 Gibson Biddle 的 DHM 框架建立完整競品分析，找出策略定位。">Create comprehensive competitor analysis using Gibson Biddle's DHM framework.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">4-6 hrs → 30 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy / prioritize</div>
-        <h3>Prioritization Engine</h3>
-        <p>Score and rank features using RICE, ICE, or weighted scoring with clear documentation.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">4-6 hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#jtbd-extractor'">
         <div class="skill-card-tag">Discovery / jtbd</div>
-        <h3>JTBD Extractor</h3>
-        <p>Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities.</p>
+        <h3><span data-en="JTBD Extractor" data-zh="JTBD 洞察">JTBD Extractor</span></h3>
+        <p><span data-en="Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities." data-zh="從研究資料萃取 JTBD 陳述句，找出真正的創新機會點。">Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">4-6 hrs → 30 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#user-interview-analyzer'">
         <div class="skill-card-tag">Discovery / interview</div>
-        <h3>User Interview Analyzer</h3>
-        <p>Transform interview transcripts into structured insights with quotes, patterns, and recommendations.</p>
+        <h3><span data-en="User Interview Analyzer" data-zh="訪談分析">User Interview Analyzer</span></h3>
+        <p><span data-en="Transform interview transcripts into structured insights with quotes, patterns, and recommendations." data-zh="把訪談逐字稿轉成結構化洞察，附引述、模式與建議。">Transform interview transcripts into structured insights with quotes, patterns, and recommendations.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">1-2 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#research-synthesis-engine'">
         <div class="skill-card-tag">Discovery / research</div>
-        <h3>Research Synthesis Engine</h3>
-        <p>Synthesize multiple research sources into coherent insights with clear evidence chains.</p>
+        <h3><span data-en="Research Synthesis Engine" data-zh="研究整合">Research Synthesis Engine</span></h3>
+        <p><span data-en="Synthesize multiple research sources into coherent insights with clear evidence chains." data-zh="整合多份研究資料，產出有清楚論據脈絡的完整洞察報告。">Synthesize multiple research sources into coherent insights with clear evidence chains.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">8+ hrs → 1 hr</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#persona-generator'">
+        <div class="skill-card-tag">Discovery / persona</div>
+        <h3><span data-en="Persona Generator" data-zh="Persona 建立">Persona Generator</span></h3>
+        <p><span data-en="Create data-backed user personas that go beyond demographics to capture behaviors and motivations." data-zh="建立有數據支撐的 Persona，超越人口統計、深入行為與動機。">Create data-backed user personas that go beyond demographics to capture behaviors and motivations.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">8+ hrs → 1 hr</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#feature-request-analyzer'">
+        <div class="skill-card-tag">Discovery</div>
+        <h3><span data-en="Feature Request Analyzer" data-zh="功能需求整理">Feature Request Analyzer</span></h3>
+        <p><span data-en="Turn scattered feature requests into a prioritized list based on actual demand." data-zh="把散落各處的功能需求彙整成有優先順序的清單。">Turn scattered feature requests into a prioritized list based on actual demand.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#competitive-landscape-mapper'">
+        <div class="skill-card-tag">Competitive</div>
+        <h3><span data-en="Competitive Landscape Mapper" data-zh="競品格局地圖">Competitive Landscape Mapper</span></h3>
+        <p><span data-en="Map multiple competitors into a unified landscape with positioning matrices and feature comparisons." data-zh="將多家競品整合成一張格局地圖，含定位矩陣與功能比較。">Map multiple competitors into a unified landscape with positioning matrices and feature comparisons.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">8+ hrs → 45 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <!-- AGENT: research -->
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#batch-interview-synthesis'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Discovery</div>
-        <h3>Batch Interview Synthesis</h3>
-        <p class="agent-quote">"10 interviews. 15 minutes. Done."</p>
-        <p>Analyze 5-10 interviews in parallel. Extract patterns, themes, and opportunities automatically with agent teams.</p>
+        <h3><span data-en="Batch Interview Synthesis" data-zh="批次訪談分析">Batch Interview Synthesis</span></h3>
+        <p class="agent-quote"><span data-en='"10 interviews. 15 minutes. Done."' data-zh='"10 份訪談，15 分鐘搞定。"'>"10 interviews. 15 minutes. Done."</span></p>
+        <p><span data-en="Analyze 5-10 interviews in parallel. Extract patterns, themes, and opportunities automatically." data-zh="平行分析 5–10 份訪談，自動萃取模式、主題與機會點。">Analyze 5-10 interviews in parallel. Extract patterns, themes, and opportunities automatically.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 7-10 hrs → 15 min</span>
           <span class="chains-info">Chains: 4 skills</span>
         </div>
       </div>
 
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
-        <div class="skill-card-tag">Discovery / persona</div>
-        <h3>Persona Generator</h3>
-        <p>Create data-backed user personas that go beyond demographics to capture behaviors and motivations.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">8+ hrs → 1 hr</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
-        <div class="skill-card-tag">Discovery</div>
-        <h3>Feature Request Analyzer</h3>
-        <p>Turn scattered feature requests into a prioritized list based on actual demand.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">4-6 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
+      <!-- KICKOFF -->
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#okr-coach'">
         <div class="skill-card-tag">Strategy / okr</div>
-        <h3>OKR Coach</h3>
-        <p>Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls.</p>
+        <h3><span data-en="OKR Coach" data-zh="OKR 教練">OKR Coach</span></h3>
+        <p><span data-en="Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls." data-zh="用《OKR 做最重要的事》方法論撰寫並優化 OKR，並指出常見陷阱。">Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">2-3 hrs → 20 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#positioning-statement-generator'">
         <div class="skill-card-tag">Strategy / positioning</div>
-        <h3>Positioning Statement Generator</h3>
-        <p>Creates positioning using April Dunford's Obviously Awesome framework.</p>
+        <h3><span data-en="Positioning Statement Generator" data-zh="產品定位">Positioning Statement Generator</span></h3>
+        <p><span data-en="Creates positioning using April Dunford's Obviously Awesome framework." data-zh="使用 April Dunford《Obviously Awesome》框架產出精準的產品定位陳述。">Creates positioning using April Dunford's Obviously Awesome framework.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">3 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#go-to-market-strategy'">
         <div class="skill-card-tag">Strategy / gtm</div>
-        <h3>Go-to-Market Strategy</h3>
-        <p>Creates a complete GTM plan with channels, messaging, timeline, and success metrics.</p>
+        <h3><span data-en="Go-to-Market Strategy" data-zh="GTM 策略">Go-to-Market Strategy</span></h3>
+        <p><span data-en="Creates a complete GTM plan with channels, messaging, timeline, and success metrics." data-zh="產出完整 GTM 計畫，涵蓋通路、訊息、時程與成功指標。">Creates a complete GTM plan with channels, messaging, timeline, and success metrics.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">6-8 hrs → 30 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- SPECS -->
-      <div class="skill-card" data-cat="specs">
-        <div class="skill-card-tag">Specs / brief</div>
-        <h3>Product Brief Writer</h3>
-        <p>Write one-page product briefs to get buy-in before investing in full specs.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">1-2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#quarterly-planning-template'">
         <div class="skill-card-tag">Planning / quarterly</div>
-        <h3>Quarterly Planning Template</h3>
-        <p>Creates a quarterly plan with themes, bets, and resource allocation.</p>
+        <h3><span data-en="Quarterly Planning Template" data-zh="季度規劃">Quarterly Planning Template</span></h3>
+        <p><span data-en="Creates a quarterly plan with themes, bets, and resource allocation." data-zh="產出季度計畫，含主題、賭注與資源分配。">Creates a quarterly plan with themes, bets, and resource allocation.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">1-2 weeks → 20 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- COMMUNICATION -->
-      <div class="skill-card" data-cat="communication">
-        <div class="skill-card-tag">Communication / release-notes</div>
-        <h3>Release Notes Pro</h3>
-        <p>Write customer-facing release notes that highlight value, not just features.</p>
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#prioritization-engine'">
+        <div class="skill-card-tag">Strategy / prioritize</div>
+        <h3><span data-en="Prioritization Engine" data-zh="功能優先排序">Prioritization Engine</span></h3>
+        <p><span data-en="Score and rank features using RICE, ICE, or weighted scoring with clear documentation." data-zh="用 RICE、ICE 或加權評分排列功能優先順序，並產出清楚文件。">Score and rank features using RICE, ICE, or weighted scoring with clear documentation.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">1-2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
-        <div class="agent-badge">⚡ Agent workflow</div>
-        <div class="skill-card-tag">Competitive</div>
-        <h3>Competitive Intel Pack</h3>
-        <p class="agent-quote">"5 competitors. 30 min. Complete intel."</p>
-        <p>Research 5 competitors in parallel. Get DHM analysis, pricing comparison, and strategic recommendations fast.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">⚡ 4 hrs → 30 min</span>
-          <span class="chains-info">Chains: 5 skills</span>
-        </div>
-      </div>
-
-      <!-- COMMUNICATION -->
-      <div class="skill-card" data-cat="communication">
-        <div class="skill-card-tag">Communication / status</div>
-        <h3>Executive Update Generator</h3>
-        <p>Create crisp executive updates using the SCQA (Situation, Complication, Question, Answer) framework.</p>
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#swot-analysis-generator'">
+        <div class="skill-card-tag">Strategy / swot</div>
+        <h3><span data-en="SWOT Analysis Generator" data-zh="SWOT 分析">SWOT Analysis Generator</span></h3>
+        <p><span data-en="Creates a structured SWOT analysis with strategic implications." data-zh="產出結構化 SWOT 分析，含策略意涵。">Creates a structured SWOT analysis with strategic implications.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- COMMUNICATION -->
-      <div class="skill-card" data-cat="communication">
-        <div class="skill-card-tag">Communication</div>
-        <h3>Stakeholder Simulator</h3>
-        <p>Simulate how different stakeholders will react to your proposal and prepare responses.</p>
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#pricing-strategy-analyzer'">
+        <div class="skill-card-tag">Strategy / pricing</div>
+        <h3><span data-en="Pricing Strategy Analyzer" data-zh="定價策略">Pricing Strategy Analyzer</span></h3>
+        <p><span data-en="Analyze pricing strategy with competitive positioning, packaging, and revenue modeling." data-zh="分析定價策略，含競品定位、套裝組合與收益模型。">Analyze pricing strategy with competitive positioning, packaging, and revenue modeling.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">2-3 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">2-3 days → 30 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- LAUNCH -->
-      <div class="skill-card" data-cat="launch">
-        <div class="skill-card-tag">Launch / announcement</div>
-        <h3>Customer Announcement Writer</h3>
-        <p>Writes customer announcements in multiple formats (email, in-app, social).</p>
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#north-star-finder'">
+        <div class="skill-card-tag">Strategy / north-star</div>
+        <h3><span data-en="North Star Finder" data-zh="North Star 指標">North Star Finder</span></h3>
+        <p><span data-en="Identify and validate your product's North Star metric with supporting input metrics." data-zh="找出並驗證你的 North Star 指標，搭配輸入指標體系。">Identify and validate your product's North Star metric with supporting input metrics.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- SPECS -->
-      <div class="skill-card" data-cat="specs">
-        <div class="skill-card-tag">Specs / one-pager</div>
-        <h3>One-Pager Creator</h3>
-        <p>Create compelling one-page feature briefs that align stakeholders quickly.</p>
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#ai-product-strategy'">
+        <div class="skill-card-tag">Strategy / ai</div>
+        <h3><span data-en="AI Product Strategy" data-zh="AI 產品策略">AI Product Strategy</span></h3>
+        <p><span data-en="Develop AI product strategy and identify AI opportunities. Build, buy, or partner?" data-zh="制定 AI 產品策略，找出 AI 應用機會。自建、購買還是合作？">Develop AI product strategy and identify AI opportunities. Build, buy, or partner?</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">2-3 hrs → 20 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">3-4 hrs → 45 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- LAUNCH -->
-      <div class="skill-card" data-cat="launch">
-        <div class="skill-card-tag">Launch</div>
-        <h3>Launch Checklist Generator</h3>
-        <p>Generate comprehensive launch checklists customized to your release type and team structure.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">2-3 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- SPECS -->
-      <div class="skill-card" data-cat="specs">
-        <div class="skill-card-tag">Specs / tech-spec</div>
-        <h3>Technical Spec Writer</h3>
-        <p>Write technical specifications with architecture, data models, and API designs.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">6-8 hrs → 20 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#sprint-planning-assistant'">
         <div class="skill-card-tag">Planning / sprint</div>
-        <h3>Sprint Planning Assistant</h3>
-        <p>Creates a sprint plan with goals, capacity, and committed work.</p>
+        <h3><span data-en="Sprint Planning Assistant" data-zh="Sprint 規劃">Sprint Planning Assistant</span></h3>
+        <p><span data-en="Creates a sprint plan with goals, capacity, and committed work." data-zh="產出 Sprint 計畫，含目標、產能與承諾工作項。">Creates a sprint plan with goals, capacity, and committed work.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#feature-decomposition-tool'">
         <div class="skill-card-tag">Planning</div>
-        <h3>Feature Decomposition Tool</h3>
-        <p>Breaks down a feature into shippable chunks with dependencies mapped.</p>
+        <h3><span data-en="Feature Decomposition Tool" data-zh="功能拆解">Feature Decomposition Tool</span></h3>
+        <p><span data-en="Breaks down a feature into shippable chunks with dependencies mapped." data-zh="把一個功能拆解成可交付的小塊，並標出依賴關係。">Breaks down a feature into shippable chunks with dependencies mapped.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">4-6 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#devil-s-advocate'">
+        <div class="skill-card-tag">Strategy</div>
+        <h3><span data-en="Devil's Advocate" data-zh="魔鬼辯護人">Devil's Advocate</span></h3>
+        <p><span data-en="Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios." data-zh="挑戰你的 PRD 與規格，找出盲點、隱藏假設與潛在失敗情境。">Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#daily-plan'">
+        <div class="skill-card-tag">Planning</div>
+        <h3><span data-en="Daily Plan" data-zh="每日計畫">Daily Plan</span></h3>
+        <p><span data-en="Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on." data-zh="產出與目標對齊的每日計畫，每天清楚知道最重要的事。">Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">30 min → 5 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#weekly-plan'">
+        <div class="skill-card-tag">Planning</div>
+        <h3><span data-en="Weekly Plan" data-zh="每週計畫">Weekly Plan</span></h3>
+        <p><span data-en="Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait." data-zh="產出與季度目標對齊的本週優先事項，清楚分辨輕重緩急。">Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">45 min → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <!-- DESIGN -->
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#prd-writer'">
+        <div class="skill-card-tag">Specs / prd</div>
+        <h3><span data-en="PRD Writer" data-zh="PRD 撰寫">PRD Writer</span></h3>
+        <p><span data-en="Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building." data-zh="將混亂的想法轉化為結構化的 PRD，在工程團隊開始建置前取得利害關係人共識。">Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 45 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#user-story-writer'">
+        <div class="skill-card-tag">Specs / user-stories</div>
+        <h3><span data-en="User Story Writer" data-zh="User Story">User Story Writer</span></h3>
+        <p><span data-en="Write clear user stories with acceptance criteria following the INVEST principles." data-zh="依照 INVEST 原則撰寫清楚的 User Story，含驗收條件。">Write clear user stories with acceptance criteria following the INVEST principles.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">30 min → 5 min per story</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#product-brief-writer'">
+        <div class="skill-card-tag">Specs / brief</div>
+        <h3><span data-en="Product Brief Writer" data-zh="Product Brief">Product Brief Writer</span></h3>
+        <p><span data-en="Write one-page product briefs to get buy-in before investing in full specs." data-zh="撰寫一頁式 Product Brief，在投入完整規格前取得支持。">Write one-page product briefs to get buy-in before investing in full specs.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#one-pager-creator'">
+        <div class="skill-card-tag">Specs / one-pager</div>
+        <h3><span data-en="One-Pager Creator" data-zh="One-Pager">One-Pager Creator</span></h3>
+        <p><span data-en="Create compelling one-page feature briefs that align stakeholders quickly." data-zh="製作吸引人的一頁式功能簡報，快速讓利害關係人達成共識。">Create compelling one-page feature briefs that align stakeholders quickly.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 20 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#technical-spec-writer'">
+        <div class="skill-card-tag">Specs / tech-spec</div>
+        <h3><span data-en="Technical Spec Writer" data-zh="技術規格">Technical Spec Writer</span></h3>
+        <p><span data-en="Write technical specifications with architecture, data models, and API designs." data-zh="撰寫技術規格，含架構、資料模型與 API 設計。">Write technical specifications with architecture, data models, and API designs.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 20 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#journey-map-creator'">
+        <div class="skill-card-tag">Discovery</div>
+        <h3><span data-en="Journey Map Creator" data-zh="使用者旅程地圖">Journey Map Creator</span></h3>
+        <p><span data-en="Build detailed customer journey maps that identify pain points and opportunities across touchpoints." data-zh="建立詳細的顧客旅程地圖，找出各觸點的痛點與機會。">Build detailed customer journey maps that identify pain points and opportunities across touchpoints.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">6-8 hrs → 1 hr</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <!-- AGENT: design -->
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#problem-to-prd'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Specs</div>
-        <h3>Problem to PRD</h3>
-        <p class="agent-quote">"From problem statement to engineering-ready."</p>
-        <p>Turn a problem into engineering-ready specs: JTBD analysis, opportunity tree, full PRD, and sprint-ready stories.</p>
+        <h3><span data-en="Problem to PRD" data-zh="問題→PRD">Problem to PRD</span></h3>
+        <p class="agent-quote"><span data-en='"From problem statement to engineering-ready."' data-zh='"從問題陳述到工程可執行規格。"'>"From problem statement to engineering-ready."</span></p>
+        <p><span data-en="Turn a problem into engineering-ready specs: JTBD analysis, opportunity tree, full PRD, and sprint-ready stories." data-zh="把問題轉化為工程可執行規格：JTBD 分析、機會樹、完整 PRD 與 Sprint 故事。">Turn a problem into engineering-ready specs: JTBD analysis, opportunity tree, full PRD, and sprint-ready stories.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 3 hrs → 20 min</span>
           <span class="chains-info">Chains: 4 skills</span>
         </div>
       </div>
 
-      <!-- DATA -->
-      <div class="skill-card" data-cat="data">
+      <!-- DEVELOP -->
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#roadmap-builder'">
+        <div class="skill-card-tag">Roadmap / planning</div>
+        <h3><span data-en="Roadmap Builder" data-zh="Roadmap 規劃">Roadmap Builder</span></h3>
+        <p><span data-en="Creates a structured product roadmap from your goals, constraints, and priorities." data-zh="從目標、限制與優先順序產出結構化產品 Roadmap。">Creates a structured product roadmap from your goals, constraints, and priorities.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">4-6 hrs → 15 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#sprint-retro-facilitator'">
+        <div class="skill-card-tag">Operations / retro</div>
+        <h3><span data-en="Sprint Retro Facilitator" data-zh="Sprint Retro">Sprint Retro Facilitator</span></h3>
+        <p><span data-en="Structures sprint retrospectives with prompts, synthesis, and action items." data-zh="以提示、綜合整理與行動項目規劃 Sprint 回顧。">Structures sprint retrospectives with prompts, synthesis, and action items.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">1 hr → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#team-health-check'">
+        <div class="skill-card-tag">Operations</div>
+        <h3><span data-en="Team Health Check" data-zh="團隊健康檢測">Team Health Check</span></h3>
+        <p><span data-en="Run structured team health checks to surface what is working and what is not." data-zh="執行結構化的團隊健康檢查，找出運作良好與需要改善的地方。">Run structured team health checks to surface what is working and what is not.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">3-4 hrs → 15 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#incident-post-mortem'">
+        <div class="skill-card-tag">Operations</div>
+        <h3><span data-en="Incident Post-Mortem" data-zh="事故 Post-Mortem">Incident Post-Mortem</span></h3>
+        <p><span data-en="Writes a blameless incident post-mortem with root cause analysis." data-zh="撰寫無指責的事故 Post-Mortem，含根本原因分析。">Writes a blameless incident post-mortem with root cause analysis.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <!-- TEST -->
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#metric-framework-builder'">
         <div class="skill-card-tag">Data / metrics</div>
-        <h3>Metric Framework Builder</h3>
-        <p>Build comprehensive metrics frameworks using the AARRR pirate metrics or input/output methodology.</p>
+        <h3><span data-en="Metric Framework Builder" data-zh="指標框架">Metric Framework Builder</span></h3>
+        <p><span data-en="Build comprehensive metrics frameworks using AARRR pirate metrics or input/output methodology." data-zh="用 AARRR 或輸入/輸出方法論建立完整指標框架。">Build comprehensive metrics frameworks using AARRR pirate metrics or input/output methodology.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">4-6 hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy / north-star</div>
-        <h3>North Star Finder</h3>
-        <p>Identify and validate your product's North Star metric with supporting input metrics.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">4-6 hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- DATA -->
-      <div class="skill-card" data-cat="data">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#a-b-test-designer'">
         <div class="skill-card-tag">Data</div>
-        <h3>A/B Test Designer</h3>
-        <p>Design statistically sound experiments with clear hypotheses and sample size calculations.</p>
+        <h3><span data-en="A/B Test Designer" data-zh="A/B 測試設計">A/B Test Designer</span></h3>
+        <p><span data-en="Design statistically sound experiments with clear hypotheses and sample size calculations." data-zh="設計統計嚴謹的實驗，含清楚的假設與樣本數計算。">Design statistically sound experiments with clear hypotheses and sample size calculations.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">2 hrs → 20 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- DATA -->
-      <div class="skill-card" data-cat="data">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#funnel-analyzer'">
         <div class="skill-card-tag">Data / funnel</div>
-        <h3>Funnel Analyzer</h3>
-        <p>Diagnose conversion funnel problems and generate data-backed improvement hypotheses.</p>
+        <h3><span data-en="Funnel Analyzer" data-zh="轉換漏斗診斷">Funnel Analyzer</span></h3>
+        <p><span data-en="Diagnose conversion funnel problems and generate data-backed improvement hypotheses." data-zh="診斷轉換漏斗問題，產出有數據支撐的改善假設。">Diagnose conversion funnel problems and generate data-backed improvement hypotheses.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">3-4 hrs → 30 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- COMPETITIVE -->
-      <div class="skill-card" data-cat="competitive">
-        <div class="skill-card-tag">Competitive</div>
-        <h3>Competitive Landscape Mapper</h3>
-        <p>Map multiple competitors into a unified landscape with positioning matrices and feature comparisons.</p>
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#experiment-designer'">
+        <div class="skill-card-tag">Data</div>
+        <h3><span data-en="Experiment Designer" data-zh="實驗設計">Experiment Designer</span></h3>
+        <p><span data-en="Design A/B tests with proper methodology, sample sizes, and statistical significance thresholds." data-zh="設計 A/B 測試，含正確方法論、樣本數與統計顯著門檻。">Design A/B tests with proper methodology, sample sizes, and statistical significance thresholds.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">8+ hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy / swot</div>
-        <h3>SWOT Analysis Generator</h3>
-        <p>Creates a structured SWOT analysis with strategic implications.</p>
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#a-b-test-analyzer'">
+        <div class="skill-card-tag">Data</div>
+        <h3><span data-en="A/B Test Analyzer" data-zh="A/B 結果解讀">A/B Test Analyzer</span></h3>
+        <p><span data-en="Interpret experiment results with statistical rigor and clear ship/no-ship recommendations." data-zh="以統計嚴謹度解讀實驗結果，給出明確的上線/不上線建議。">Interpret experiment results with statistical rigor and clear ship/no-ship recommendations.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">2-3 hrs → 20 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy / pricing</div>
-        <h3>Pricing Strategy Analyzer</h3>
-        <p>Analyze pricing strategy with competitive positioning, packaging, and revenue modeling.</p>
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#hypothesis-validator'">
+        <div class="skill-card-tag">Strategy</div>
+        <h3><span data-en="Hypothesis Validator" data-zh="假設驗證">Hypothesis Validator</span></h3>
+        <p><span data-en="Structure and validate product hypotheses before committing engineering resources." data-zh="在投入工程資源前，結構化地驗證產品假設。">Structure and validate product hypotheses before committing engineering resources.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">2-3 days → 30 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">2 hrs → 15 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <!-- AGENT: test -->
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#hypothesis-tester'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Data</div>
-        <h3>Hypothesis Tester</h3>
-        <p class="agent-quote">"Metrics dropped. Find out why."</p>
-        <p>Debug metrics drops with first principles. Generate competing hypotheses, evaluate evidence, get next steps.</p>
+        <h3><span data-en="Hypothesis Tester" data-zh="假設驗證">Hypothesis Tester</span></h3>
+        <p class="agent-quote"><span data-en='"Metrics dropped. Find out why."' data-zh='"指標下降了，找出原因。"'>"Metrics dropped. Find out why."</span></p>
+        <p><span data-en="Debug metrics drops with first principles. Generate competing hypotheses, evaluate evidence, get next steps." data-zh="用第一原理除錯指標下降。產出競爭假設、評估證據、取得後續步驟。">Debug metrics drops with first principles. Generate competing hypotheses, evaluate evidence, get next steps.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 2 hrs → 15 min</span>
           <span class="chains-info">Chains: 3 skills</span>
         </div>
       </div>
 
-      <!-- OPERATIONS -->
-      <div class="skill-card" data-cat="operations">
-        <div class="skill-card-tag">Operations / retro</div>
-        <h3>Sprint Retro Facilitator</h3>
-        <p>Structures sprint retrospectives with prompts, synthesis, and action items.</p>
+      <!-- RELEASE -->
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#release-notes-pro'">
+        <div class="skill-card-tag">Communication / release-notes</div>
+        <h3><span data-en="Release Notes Pro" data-zh="Release Notes">Release Notes Pro</span></h3>
+        <p><span data-en="Write customer-facing release notes that highlight value, not just features." data-zh="撰寫以顧客為導向的 Release Notes，強調價值而非只列功能。">Write customer-facing release notes that highlight value, not just features.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">1 hr → 10 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">1-2 hrs → 10 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- OPERATIONS -->
-      <div class="skill-card" data-cat="operations">
-        <div class="skill-card-tag">Operations</div>
-        <h3>Team Health Check</h3>
-        <p>Run structured team health checks to surface what is working and what is not.</p>
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#executive-update-generator'">
+        <div class="skill-card-tag">Communication / status</div>
+        <h3><span data-en="Executive Update Generator" data-zh="主管進度更新">Executive Update Generator</span></h3>
+        <p><span data-en="Create crisp executive updates using the SCQA (Situation, Complication, Question, Answer) framework." data-zh="用 SCQA 框架（情境、複雜性、問題、答案）撰寫簡潔的主管更新。">Create crisp executive updates using the SCQA framework.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">3-4 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- OPERATIONS -->
-      <div class="skill-card" data-cat="operations">
-        <div class="skill-card-tag">Operations</div>
-        <h3>Incident Post-Mortem</h3>
-        <p>Writes a blameless incident post-mortem with root cause analysis.</p>
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#stakeholder-simulator'">
+        <div class="skill-card-tag">Communication</div>
+        <h3><span data-en="Stakeholder Simulator" data-zh="關係人反應模擬">Stakeholder Simulator</span></h3>
+        <p><span data-en="Simulate how different stakeholders will react to your proposal and prepare responses." data-zh="模擬不同利害關係人對你的提案的反應，並預先準備回應。">Simulate how different stakeholders will react to your proposal and prepare responses.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">2-3 hrs → 15 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- COMMUNICATION -->
-      <div class="skill-card" data-cat="communication">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#customer-announcement-writer'">
+        <div class="skill-card-tag">Launch / announcement</div>
+        <h3><span data-en="Customer Announcement Writer" data-zh="客戶公告">Customer Announcement Writer</span></h3>
+        <p><span data-en="Writes customer announcements in multiple formats (email, in-app, social)." data-zh="以多種格式（Email、App 內、社群）撰寫顧客公告。">Writes customer announcements in multiple formats (email, in-app, social).</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2 hrs → 10 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#launch-checklist-generator'">
+        <div class="skill-card-tag">Launch</div>
+        <h3><span data-en="Launch Checklist Generator" data-zh="上線 Checklist">Launch Checklist Generator</span></h3>
+        <p><span data-en="Generate comprehensive launch checklists customized to your release type and team structure." data-zh="依上線類型與團隊結構產出客製化的完整上線清單。">Generate comprehensive launch checklists customized to your release type and team structure.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">2-3 hrs → 15 min</span>
+          <span class="see-how">→</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#meeting-notes-processor'">
         <div class="skill-card-tag">Communication</div>
-        <h3>Meeting Notes Processor</h3>
-        <p>Transform raw meeting notes into structured decisions, action items, and follow-ups.</p>
+        <h3><span data-en="Meeting Notes Processor" data-zh="會議記錄整理">Meeting Notes Processor</span></h3>
+        <p><span data-en="Transform raw meeting notes into structured decisions, action items, and follow-ups." data-zh="將原始會議記錄轉化為結構化的決議、行動項目與後續追蹤。">Transform raw meeting notes into structured decisions, action items, and follow-ups.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">30 min → 5 min</span>
-          <span class="see-how">See how it works</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- DISCOVERY -->
-      <div class="skill-card" data-cat="discovery">
-        <div class="skill-card-tag">Discovery</div>
-        <h3>Journey Map Creator</h3>
-        <p>Build detailed customer journey maps that identify pain points and opportunities across touchpoints.</p>
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#board-deck-generator'">
+        <div class="skill-card-tag">Communication</div>
+        <h3><span data-en="Board Deck Generator" data-zh="董事會簡報">Board Deck Generator</span></h3>
+        <p><span data-en="Creates board meeting presentation with narrative arc and key metrics." data-zh="建立具有敘事弧線與關鍵指標的董事會報告簡報。">Creates board meeting presentation with narrative arc and key metrics.</span></p>
         <div class="skill-card-footer">
-          <span class="time-saved">6-8 hrs → 1 hr</span>
-          <span class="see-how">See how it works</span>
+          <span class="time-saved">6-8 hrs → 30 min</span>
+          <span class="see-how">→</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <!-- AGENT: release -->
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#competitive-intel-pack'">
+        <div class="agent-badge">⚡ Agent workflow</div>
+        <div class="skill-card-tag">Competitive</div>
+        <h3><span data-en="Competitive Intel Pack" data-zh="競品搜集">Competitive Intel Pack</span></h3>
+        <p class="agent-quote"><span data-en='"5 competitors. 30 min. Complete intel."' data-zh='"5 家競品，30 分鐘，完整情報。"'>"5 competitors. 30 min. Complete intel."</span></p>
+        <p><span data-en="Research 5 competitors in parallel. Get DHM analysis, pricing comparison, and strategic recommendations fast." data-zh="平行研究 5 家競品，快速取得 DHM 分析、定價比較與策略建議。">Research 5 competitors in parallel. Get DHM analysis, pricing comparison, and strategic recommendations fast.</span></p>
+        <div class="skill-card-footer">
+          <span class="time-saved">⚡ 4 hrs → 30 min</span>
+          <span class="chains-info">Chains: 5 skills</span>
+        </div>
+      </div>
+
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#market-sizing-analyzer'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Strategy</div>
-        <h3>Market Sizing Analyzer</h3>
-        <p class="agent-quote">"TAM/SAM/SOM in 45 minutes."</p>
-        <p>Calculate TAM/SAM/SOM with bottom-up and top-down estimates. Get data sources and assumptions documented.</p>
+        <h3><span data-en="Market Sizing Analyzer" data-zh="市場規模估算">Market Sizing Analyzer</span></h3>
+        <p class="agent-quote"><span data-en='"TAM/SAM/SOM in 45 minutes."' data-zh='"45 分鐘完成 TAM/SAM/SOM。"'>"TAM/SAM/SOM in 45 minutes."</span></p>
+        <p><span data-en="Calculate TAM/SAM/SOM with bottom-up and top-down estimates. Get data sources and assumptions documented." data-zh="用由下而上與由上而下方法計算 TAM/SAM/SOM，並記錄資料來源與假設。">Calculate TAM/SAM/SOM with bottom-up and top-down estimates. Get data sources and assumptions documented.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 4 hrs → 45 min</span>
           <span class="chains-info">Chains: 2 skills</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#voc-analysis'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Discovery</div>
-        <h3>VoC Analysis</h3>
-        <p class="agent-quote">"Tame the feedback firehose."</p>
-        <p>Analyze 100+ feedback items from support, NPS, G2, and requests. Extract patterns and prioritize opportunities.</p>
+        <h3><span data-en="VoC Analysis" data-zh="客戶回饋分析">VoC Analysis</span></h3>
+        <p class="agent-quote"><span data-en='"Tame the feedback firehose."' data-zh='"馴服回饋洪流。"'>"Tame the feedback firehose."</span></p>
+        <p><span data-en="Analyze 100+ feedback items from support, NPS, G2, and requests. Extract patterns and prioritize opportunities." data-zh="分析 100+ 條來自客服、NPS、G2 與需求的回饋，萃取模式並優先排序機會。">Analyze 100+ feedback items from support, NPS, G2, and requests. Extract patterns and prioritize opportunities.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 3 hrs → 30 min</span>
           <span class="chains-info">Chains: 3 skills</span>
         </div>
       </div>
 
-      <!-- AGENT -->
-      <div class="skill-card agent" data-cat="agent">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#multi-perspective-review'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Communication</div>
-        <h3>Multi-Perspective Review</h3>
-        <p class="agent-quote">"7 stakeholder perspectives. 15 minutes. Done."</p>
-        <p>Run 7 stakeholder perspectives on any document in parallel — Engineering, Design, Executive, Legal, Customer Voice, Devil's Advocate, and Sales.</p>
+        <h3><span data-en="Multi-Perspective Review" data-zh="多方視角審查">Multi-Perspective Review</span></h3>
+        <p class="agent-quote"><span data-en='"7 stakeholder perspectives. 15 minutes."' data-zh='"7 種利害關係人視角，15 分鐘。"'>"7 stakeholder perspectives. 15 minutes."</span></p>
+        <p><span data-en="Run 7 stakeholder perspectives on any document — Engineering, Design, Executive, Legal, Customer, Devil's Advocate, and Sales." data-zh="對任何文件執行 7 種利害關係人視角審查：工程、設計、主管、法務、顧客、魔鬼代言人、業務。">Run 7 stakeholder perspectives on any document in parallel.</span></p>
         <div class="skill-card-footer">
           <span class="time-saved">⚡ 2 hrs → 15 min</span>
           <span class="chains-info">Chains: 7 skills</span>
-        </div>
-      </div>
-
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy / ai</div>
-        <h3>AI Product Strategy</h3>
-        <p>Develop AI product strategy and identify AI opportunities for your product. Build, buy, or partner?</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">3-4 hrs → 45 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- STRATEGY -->
-      <div class="skill-card" data-cat="strategy">
-        <div class="skill-card-tag">Strategy</div>
-        <h3>Devil's Advocate</h3>
-        <p>Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">1-2 hrs → 10 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
-        <div class="skill-card-tag">Planning</div>
-        <h3>Daily Plan</h3>
-        <p>Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">30 min → 5 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="skill-card" data-cat="planning">
-        <div class="skill-card-tag">Planning</div>
-        <h3>Weekly Plan</h3>
-        <p>Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">45 min → 10 min</span>
-          <span class="see-how">See how it works</span>
-        </div>
-      </div>
-
-      <!-- COMMUNICATION -->
-      <div class="skill-card" data-cat="communication">
-        <div class="skill-card-tag">Communication</div>
-        <h3>Board Deck Generator</h3>
-        <p>Creates board meeting presentation with narrative arc and key metrics.</p>
-        <div class="skill-card-footer">
-          <span class="time-saved">6-8 hrs → 30 min</span>
-          <span class="see-how">See how it works</span>
         </div>
       </div>
 
@@ -1000,31 +861,31 @@
 <!-- FAQ -->
 <div class="faq-section">
   <div class="faq-label">FAQ</div>
-  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <h2 class="faq-title"><span data-en="Frequently Asked Questions" data-zh="常見問題">Frequently Asked Questions</span></h2>
   <div class="faq-grid">
     <div class="faq-item">
-      <h3>What are Resiligen PM skills for Claude?</h3>
-      <p>Resiligen PM skills are PM-specific capabilities you add to Claude. Each skill teaches Claude a framework, methodology, or best practice — so when you run a command like /prd or /roadmap, you get structured, professional output instead of generic AI responses.</p>
+      <h3><span data-en="What are Resiligen PM skills for Claude?" data-zh="什麼是 Resiligen PM 技能？">What are Resiligen PM skills for Claude?</span></h3>
+      <p><span data-en="Resiligen PM skills are PM-specific capabilities you add to Claude. Each skill teaches Claude a framework, methodology, or best practice — so when you run a command like /prd or /roadmap, you get structured, professional output instead of generic AI responses." data-zh="Resiligen PM 技能是你加進 Claude 的 PM 專屬能力。每個技能都把一套框架或最佳實踐直接內建進去——輸入 /prd 或 /roadmap，拿到的是有架構的專業輸出，不是那種放諸四海皆準的 AI 廢話。">Resiligen PM skills are PM-specific capabilities you add to Claude. Each skill teaches Claude a framework, methodology, or best practice — so when you run a command like /prd or /roadmap, you get structured, professional output instead of generic AI responses.</span></p>
     </div>
     <div class="faq-item">
-      <h3>How do I use a Resiligen PM skill?</h3>
-      <p>Download the skill file from Resiligen PM, add it to your .claude/skills/ folder, and you're done. Claude automatically discovers the skill. Type the slash command (like /prd) or describe what you need, and Claude uses the skill to help you.</p>
+      <h3><span data-en="How do I use a Resiligen PM skill?" data-zh="要怎麼用這些技能？">How do I use a Resiligen PM skill?</span></h3>
+      <p><span data-en="Download the skill file from Resiligen PM, add it to your .claude/skills/ folder, and you're done. Claude automatically discovers the skill. Type the slash command (like /prd) or describe what you need, and Claude uses the skill to help you." data-zh="下載技能檔案，放進 .claude/skills/ 資料夾，就完成了。Claude 會自動抓到。輸入斜線指令（例如 /prd）或直接描述你要做什麼，Claude 就會套用對應的技能幫你完成。">Download the skill file from Resiligen PM, add it to your .claude/skills/ folder, and you're done. Claude automatically discovers the skill. Type the slash command (like /prd) or describe what you need, and Claude uses the skill to help you.</span></p>
     </div>
     <div class="faq-item">
-      <h3>Are Resiligen PM skills free?</h3>
-      <p>Yes, all Resiligen PM skills are free to download and use. We believe every PM should have access to best-practice frameworks. The PM Operating System ($249) includes personalized context files for your company, all 60+ skills bundled, and agent team workflows.</p>
+      <h3><span data-en="Are Resiligen PM skills free?" data-zh="這些技能要收費嗎？">Are Resiligen PM skills free?</span></h3>
+      <p><span data-en="Yes, all Resiligen PM skills are free to download and use. We believe every PM should have access to best-practice frameworks. The PM Operating System ($249) includes personalized context files for your company, all 60+ skills bundled, and agent team workflows." data-zh="技能本身全部免費。我們相信每個 PM 都應該能用到好工具。如果你想要完整的個人化體驗，PM 作業系統（$249）包含你的公司脈絡檔案、全部 60+ 個技能包和 Agent 工作流程。">Yes, all Resiligen PM skills are free to download and use. We believe every PM should have access to best-practice frameworks. The PM Operating System ($249) includes personalized context files for your company, all 60+ skills bundled, and agent team workflows.</span></p>
     </div>
     <div class="faq-item">
-      <h3>What's the difference between Resiligen PM skills and ChatGPT prompts?</h3>
-      <p>ChatGPT prompts are one-shot instructions that get lost. Resiligen PM skills are persistent capabilities — Claude remembers them across conversations. Skills also include frameworks and methodologies, not just formatting instructions.</p>
+      <h3><span data-en="What's the difference between Resiligen PM skills and ChatGPT prompts?" data-zh="跟直接用 ChatGPT 有什麼不同？">What's the difference between Resiligen PM skills and ChatGPT prompts?</span></h3>
+      <p><span data-en="ChatGPT prompts are one-shot instructions that get lost. Resiligen PM skills are persistent capabilities — Claude remembers them across conversations. Skills also include frameworks and methodologies, not just formatting instructions." data-zh="ChatGPT 每次都要重新貼提示詞，還要重新介紹你的產品。Resiligen PM 技能是持久的能力，Claude 會記住它們。而且技能內建了完整的框架和方法論，不是只有格式指令。">ChatGPT prompts are one-shot instructions that get lost. Resiligen PM skills are persistent capabilities — Claude remembers them across conversations. Skills also include frameworks and methodologies, not just formatting instructions.</span></p>
     </div>
     <div class="faq-item">
-      <h3>How do Resiligen PM skills work with my company context?</h3>
-      <p>When you load your company context into Resiligen PM, every skill automatically knows about your product, personas, and competitors. A /prd command generates a PRD for YOUR product, not a generic template.</p>
+      <h3><span data-en="How do Resiligen PM skills work with my company context?" data-zh="技能怎麼跟我的公司資訊結合？">How do Resiligen PM skills work with my company context?</span></h3>
+      <p><span data-en="When you load your company context into Resiligen PM, every skill automatically knows about your product, personas, and competitors. A /prd command generates a PRD for YOUR product, not a generic template." data-zh="把你的公司資訊載入一次，之後每個技能都會自動知道你的產品、目標用戶和競爭對手是誰。輸入 /prd，拿到的就是為你的產品量身打造的 PRD，不是通用模板。">When you load your company context into Resiligen PM, every skill automatically knows about your product, personas, and competitors. A /prd command generates a PRD for YOUR product, not a generic template.</span></p>
     </div>
     <div class="faq-item">
-      <h3>Can I create my own Resiligen PM skills?</h3>
-      <p>Yes! Skills are markdown files with a specific format. You can create custom skills for your team's workflows, proprietary frameworks, or company-specific processes. Check our docs for the skill authoring guide.</p>
+      <h3><span data-en="Can I create my own Resiligen PM skills?" data-zh="我可以自己做技能嗎？">Can I create my own Resiligen PM skills?</span></h3>
+      <p><span data-en="Yes! Skills are markdown files with a specific format. You can create custom skills for your team's workflows, proprietary frameworks, or company-specific processes. Check our docs for the skill authoring guide." data-zh="可以！技能就是有特定格式的 Markdown 檔案。你可以為自己團隊的工作流程、內部框架或公司特有的流程自己做一個。詳細格式說明請看文件。">Yes! Skills are markdown files with a specific format. You can create custom skills for your team's workflows, proprietary frameworks, or company-specific processes. Check our docs for the skill authoring guide.</span></p>
     </div>
   </div>
 </div>
@@ -1038,46 +899,46 @@
           <div class="nav-logo-icon">S</div>
           Resiligen PM
         </a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
         <div>
-          <h4>Product</h4>
+          <h4><span data-en="Product" data-zh="產品">Product</span></h4>
           <ul>
-            <li><a href="#">Services</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="#">Pricing</a></li>
+            <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Learn</h4>
+          <h4><span data-en="Learn" data-zh="學習">Learn</span></h4>
           <ul>
-            <li><a href="#">AI for PMs</a></li>
-            <li><a href="#">Getting Started</a></li>
-            <li><a href="#">Skill Guides</a></li>
-            <li><a href="#">PM Workflows</a></li>
-            <li><a href="#">Team &amp; Ops</a></li>
+            <li><a href="#"><span data-en="AI for PMs" data-zh="PM 的 AI 應用">AI for PMs</span></a></li>
+            <li><a href="#"><span data-en="Getting Started" data-zh="入門">Getting Started</span></a></li>
+            <li><a href="#"><span data-en="Skill Guides" data-zh="技能指南">Skill Guides</span></a></li>
+            <li><a href="#"><span data-en="PM Workflows" data-zh="PM 工作流程">PM Workflows</span></a></li>
+            <li><a href="#"><span data-en="Team &amp; Ops" data-zh="團隊與運營">Team &amp; Ops</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Resources</h4>
+          <h4><span data-en="Resources" data-zh="資源">Resources</span></h4>
           <ul>
-            <li><a href="#">Docs</a></li>
-            <li><a href="#">PM Maturity Assessment</a></li>
-            <li><a href="#">ROI Calculator</a></li>
+            <li><a href="#"><span data-en="Docs" data-zh="文件">Docs</span></a></li>
+            <li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li>
+            <li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <h4><span data-en="Company" data-zh="公司">Company</span></h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
+            <li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li>
+            <li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li>
+            <li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="footer-copy">© 2026 Resiligen PM Academy · resiligen.pm</div>
+    <div class="footer-copy">© 2026 Resiligen PM Academy · v1.1 · resiligen.pm</div>
   </div>
 </div>
 
@@ -1086,6 +947,13 @@
     // Update active button
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
+    // Scroll to top of skills grid so user doesn't see blank space
+    const grid = document.getElementById('skillsGrid');
+    if (grid) {
+      const offset = grid.getBoundingClientRect().top + window.scrollY - 80; // 80px for sticky nav
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
 
     const cards = document.querySelectorAll('.skill-card');
     cards.forEach(card => {
@@ -1119,8 +987,6 @@
     });
   });
 </script>
-
-
 <script>
 (function() {
   const canvas = document.getElementById('aurora-canvas');
@@ -1287,5 +1153,267 @@ function toggleDropdown(btn) {
   });
 }
 </script>
+<script>
+// ── Resiligen PM · i18n engine ──────────────────────────────────────────────
+function setLang(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  localStorage.setItem('resi-lang', lang);
+  document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.toggle('active', lang === 'en'));
+  document.querySelectorAll('.lang-btn-zh').forEach(b => b.classList.toggle('active', lang === 'zh'));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+  });
+}
+
+(function () {
+  // 1. If user has already manually chosen a language, honour it — no API call needed
+  const saved = localStorage.getItem('resi-lang');
+  if (saved) {
+    const init = () => setLang(saved);
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+    return;
+  }
+
+  // 2. Asian timezone codes → default Chinese
+  //    This is instant (no network) and covers 99% of cases correctly.
+  const ASIAN_TZ = [
+    'Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Chongqing',
+    'Asia/Urumqi','Asia/Harbin','Asia/Macao','Asia/Singapore',
+    'Asia/Kuala_Lumpur','Asia/Bangkok','Asia/Jakarta','Asia/Ho_Chi_Minh',
+    'Asia/Seoul','Asia/Tokyo','Asia/Manila','Asia/Makassar',
+    'Asia/Brunei','Asia/Phnom_Penh','Asia/Vientiane','Asia/Rangoon',
+    'Asia/Yangon','Asia/Dhaka','Asia/Kolkata','Asia/Colombo',
+    'Asia/Kathmandu','Asia/Karachi','Asia/Tashkent','Asia/Almaty',
+    'Asia/Ulaanbaatar','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat',
+    'Asia/Kabul','Asia/Tehran','Asia/Baghdad','Asia/Kuwait',
+    'Asia/Riyadh','Asia/Dubai','Asia/Muscat','Asia/Beirut',
+    'Asia/Amman','Asia/Jerusalem','Asia/Nicosia','Asia/Baku',
+    'Asia/Yerevan','Asia/Tbilisi','Asia/Novosibirsk','Asia/Krasnoyarsk',
+    'Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Magadan',
+    'Asia/Sakhalin','Asia/Kamchatka','Asia/Anadyr',
+    'Pacific/Auckland','Pacific/Fiji','Pacific/Guam','Pacific/Honolulu',
+    'Australia/Sydney','Australia/Melbourne','Australia/Brisbane',
+    'Australia/Perth','Australia/Adelaide','Australia/Darwin',
+  ];
+
+  let detectedLang = 'zh';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ASIAN_TZ.some(z => tz.startsWith(z) || z === tz)) {
+      detectedLang = 'zh';
+    }
+  } catch (e) {}
+
+  // 3. Apply immediately (timezone is sync)
+  const init = () => setLang(detectedLang);
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  // 4. Also verify via IP geolocation in the background (silent, no flash)
+  //    Uses ip-api.com free tier — no key needed, rate limit 45 req/min
+  fetch('https://ip-api.com/json/?fields=continentCode,countryCode,timezone', {
+    cache: 'force-cache'  // browser caches response for subsequent pages
+  })
+  .then(r => r.json())
+  .then(data => {
+    const ASIAN_CONTINENTS = ['AS', 'OC'];  // Asia + Oceania
+    const ASIAN_COUNTRIES  = ['TW','HK','MO','CN','SG','MY','JP','KR',
+                               'VN','TH','PH','ID','MM','KH','LA','BN',
+                               'AU','NZ','IN','PK','BD','LK'];
+    const isAsian =
+      ASIAN_CONTINENTS.includes(data.continentCode) ||
+      ASIAN_COUNTRIES.includes(data.countryCode);
+
+    const ipLang = isAsian ? 'zh' : 'en'; // zh is global default; EN only for explicit non-Asia
+
+    // Only override if user hasn't manually chosen AND timezone guess was wrong
+    if (!localStorage.getItem('resi-lang') && ipLang !== detectedLang) {
+      setLang(ipLang);
+      // Still don't save to localStorage — only manual clicks get saved
+    }
+  })
+  .catch(() => { /* silent fail — timezone detection already applied */ });
+})();
+</script>
+
+<script>
+function filterSkills(cat, btn) {
+  document.querySelectorAll('.stage-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('skillsGrid');
+  const offset = grid.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: offset, behavior: 'smooth' });
+
+  const cards = document.querySelectorAll('.skill-card');
+  let visible = 0;
+  cards.forEach(card => {
+    let show = false;
+    if (cat === 'all') {
+      show = true;
+    } else if (cat === 'agent') {
+      show = card.classList.contains('agent');
+    } else {
+      show = card.dataset.cat === cat;
+    }
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  const lang = document.documentElement.lang === 'zh-TW' ? 'zh' : 'en';
+  const countEl = document.getElementById('skillsCount');
+  if (countEl) countEl.innerHTML = lang === 'zh'
+    ? '<strong>' + visible + '</strong> 個技能'
+    : '<strong>' + visible + '</strong> skills';
+}
+
+// init count
+document.addEventListener('DOMContentLoaded', () => {
+  const total = document.querySelectorAll('.skill-card').length;
+  const countEl = document.getElementById('skillsCount');
+  const lang = localStorage.getItem('resi-lang') || 'zh';
+  if (countEl) countEl.innerHTML = lang === 'zh'
+    ? '<strong>' + total + '</strong> 個技能'
+    : '<strong>' + total + '</strong> skills';
+});
+</script>
+
+
+
+
+
+<script>
+// Assign magazine card sizes based on position within visible cards
+function assignMagSizes() {
+  const cards = [...document.querySelectorAll('.skill-card:not([style*="display: none"])')];
+  cards.forEach((card, i) => {
+    card.classList.remove('mag-hero-card','mag-mid-card','mag-small-card');
+    if (i < 2) {
+      card.classList.add('mag-hero-card');
+    } else if (i < 6) {
+      card.classList.add('mag-mid-card');
+    } else {
+      card.classList.add('mag-small-card');
+    }
+  });
+}
+
+function filterSkills(cat, btn) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('skillsGrid');
+  const offset = grid.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: offset, behavior: 'smooth' });
+
+  const cards = document.querySelectorAll('.skill-card');
+  cards.forEach(card => {
+    let show = false;
+    if (cat === 'all') show = true;
+    else if (cat === 'agent') show = card.classList.contains('agent');
+    else show = card.dataset.cat === cat;
+    card.style.display = show ? '' : 'none';
+  });
+
+  assignMagSizes();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  assignMagSizes();
+});
+</script>
+
+
+
+
+
+
+
+
+<script>
+function toggleStage(cat, headerEl) {
+  const stage = document.getElementById('stage-' + cat);
+  const isOpen = stage.classList.contains('open');
+  stage.classList.toggle('open', !isOpen);
+}
+
+// Open first stage by default
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.pipeline-stage');
+  if (first) first.classList.add('open');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+function filterSkills(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('skillsGrid');
+  const offset = grid.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top: offset, behavior: 'smooth' });
+
+  const cards = document.querySelectorAll('.skill-card');
+  cards.forEach(card => {
+    let show = false;
+    if (cat === 'all') {
+      show = true;
+    } else if (cat === 'agent') {
+      show = card.classList.contains('agent');
+    } else if (cat === 'top') {
+      show = true;
+    } else if (cat === '10hrs') {
+      const ts = card.querySelector('.time-saved, .skill-time');
+      show = ts && (ts.textContent.includes('8+') || ts.textContent.includes('week') || ts.textContent.includes('days'));
+    } else if (cat === 'hours') {
+      const ts = card.querySelector('.time-saved, .skill-time');
+      show = ts && ts.textContent.includes('hr');
+    } else if (cat === 'minutes') {
+      const ts = card.querySelector('.time-saved, .skill-time');
+      show = ts && ts.textContent.includes('min') && !ts.textContent.includes('hr');
+    } else {
+      show = card.dataset.cat === cat;
+    }
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

@@ -74,7 +74,7 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px; height: 60px;
     background: rgba(10,8,16,0.85);
@@ -155,7 +155,7 @@
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; z-index: 0;
   }
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* aurora sits behind everything via z-index: 0 on canvas */
 
 
   .docs-layout {
@@ -214,6 +214,77 @@
   .docs-note strong { color: var(--text); }
   .docs-note a { color: var(--purple); text-decoration: underline; text-underline-offset: 3px; }
 
+
+  /* ── UNIVERSAL CARD HOVER — lift + glow border ── */
+  .problem-card,
+  .skill-card,
+  .pricing-card,
+  .plan-card,
+  .pkg-card,
+  .article-card,
+  .featured-card,
+  .docs-card,
+  .chapter-card,
+  .workflow-card,
+  .step,
+  .founder-card,
+  .team-card,
+  .skill-card-main {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  }
+
+  .problem-card:hover,
+  .skill-card:hover,
+  .pricing-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .article-card:hover,
+  .featured-card:hover,
+  .docs-card:hover,
+  .chapter-card:hover,
+  .workflow-card:hover,
+  .step:hover,
+  .skill-card-main:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(136,125,253,0.18), 0 0 0 1px rgba(136,125,253,0.35) !important;
+    background: var(--bg3) !important;
+    z-index: 2;
+  }
+
+  /* Cards that already have their own border (not gap-based grids) */
+  .featured-card:hover,
+  .docs-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .team-card:hover,
+  .founder-card:hover {
+    border-color: rgba(136,125,253,0.5) !important;
+  }
+
+
+  
+
+
+  /* ── LANG SWITCHER ──────────────────────────────── */
+  .lang-switcher {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 100px; border: none;
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.18s;
+    color: var(--text3); background: transparent;
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .lang-btn.active {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 2px 8px rgba(136,125,253,0.35);
+  }
+  .lang-btn:hover:not(.active) { color: var(--text2); }
+
 </style>
 </head>
 <body>
@@ -225,30 +296,34 @@
     Resiligen PM
   </a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
         <a href="learn.html">
-          <span class="dd-title">Learn</span>
-          <span class="dd-desc">Articles and guides for PMs</span>
+          <span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span>
+          <span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span>
         </a>
         <a href="playbook.html">
-          <span class="dd-title">Playbook</span>
-          <span class="dd-desc">Free PM OS guide (PDF)</span>
+          <span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span>
+          <span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span>
         </a>
         <a href="docs.html" class="active">
-          <span class="dd-title">Docs</span>
-          <span class="dd-desc">PM OS setup and reference</span>
+          <span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span>
+          <span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span>
         </a>
       </div>
     </li>
-    <li><a href="#">Pricing</a></li>
-    <li><a href="#">Services</a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
@@ -256,80 +331,80 @@
 <div class="docs-layout">
   <aside class="docs-sidebar">
     <div class="docs-sidebar-section">
-      <div class="docs-sidebar-title">Get Started</div>
-      <a href="#" class="active">Overview</a>
-      <a href="#">Free Skills Quick Start</a>
-      <a href="#">PM OS Setup</a>
-      <a href="#">Terminology</a>
+      <div class="docs-sidebar-title"><span data-en="Get Started" data-zh="立即開始"><span data-en="Get Started" data-zh="開始使用">Get Started</span></span></div>
+      <a href="#" class="active"><span data-en="Overview" data-zh="概覽">Overview</span></a>
+      <a href="#"><span data-en="Free Skills Quick Start" data-zh="免費技能快速開始">Free Skills Quick Start</span></a>
+      <a href="#"><span data-en="PM OS Setup" data-zh="PM OS 設定">PM OS Setup</span></a>
+      <a href="#"><span data-en="Terminology" data-zh="術語">Terminology</span></a>
       <a href="#">Terminal & Other Platforms</a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Context</div>
-      <a href="#">Enrich Your Context</a>
-      <a href="#">Context Optimization</a>
+      <a href="#"><span data-en="Enrich Your Context" data-zh="豐富你的脈絡">Enrich Your Context</span></a>
+      <a href="#"><span data-en="Context Optimization" data-zh="脈絡最佳化">Context Optimization</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Skills — Discovery</div>
-      <a href="#">Analyze an Interview</a>
-      <a href="#">Build Personas</a>
-      <a href="#">Analyze All Your Research</a>
+      <a href="#"><span data-en="Analyze an Interview" data-zh="分析訪談">Analyze an Interview</span></a>
+      <a href="#"><span data-en="Build Personas" data-zh="建立用戶角色">Build Personas</span></a>
+      <a href="#"><span data-en="Analyze All Your Research" data-zh="分析所有研究">Analyze All Your Research</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Skills — Strategy</div>
-      <a href="#">Analyze a Competitor</a>
-      <a href="#">Analyze Multiple Competitors</a>
-      <a href="#">Create a PRD</a>
+      <a href="#"><span data-en="Analyze a Competitor" data-zh="分析競爭對手">Analyze a Competitor</span></a>
+      <a href="#"><span data-en="Analyze Multiple Competitors" data-zh="分析多個競爭對手">Analyze Multiple Competitors</span></a>
+      <a href="#"><span data-en="Create a PRD" data-zh="建立 PRD">Create a PRD</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Skills — Communication</div>
-      <a href="#">Write a Status Update</a>
-      <a href="#">Process Meeting Notes</a>
-      <a href="#">Write Release Notes</a>
+      <a href="#"><span data-en="Write a Status Update" data-zh="撰寫狀態更新">Write a Status Update</span></a>
+      <a href="#"><span data-en="Process Meeting Notes" data-zh="處理會議記錄">Process Meeting Notes</span></a>
+      <a href="#"><span data-en="Write Release Notes" data-zh="撰寫發布說明">Write Release Notes</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Workflows</div>
-      <a href="#">Overview</a>
-      <a href="#">Batch Interview Analysis</a>
+      <a href="#"><span data-en="Overview" data-zh="概覽">Overview</span></a>
+      <a href="#"><span data-en="Batch Interview Analysis" data-zh="批次訪談分析">Batch Interview Analysis</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Advanced</div>
-      <a href="#">Using Agent Teams</a>
-      <a href="#">Extended Thinking</a>
+      <a href="#"><span data-en="Using Agent Teams" data-zh="使用 Agent 團隊">Using Agent Teams</span></a>
+      <a href="#"><span data-en="Extended Thinking" data-zh="延伸思考">Extended Thinking</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Reference</div>
-      <a href="#">All Commands</a>
-      <a href="#">All Skills</a>
-      <a href="#">Integrations</a>
+      <a href="#"><span data-en="All Commands" data-zh="所有指令">All Commands</span></a>
+      <a href="#"><span data-en="All Skills" data-zh="所有技能">All Skills</span></a>
+      <a href="#"><span data-en="Integrations" data-zh="整合">Integrations</span></a>
     </div>
     <div class="docs-sidebar-section">
       <div class="docs-sidebar-title">Help</div>
-      <a href="#">Troubleshooting</a>
+      <a href="#"><span data-en="Troubleshooting" data-zh="疑難排解">Troubleshooting</span></a>
     </div>
   </aside>
 
   <main class="docs-content">
-    <div class="section-label">Documentation</div>
-    <h1>Documentation</h1>
-    <p class="lead">Resiligen PM is a Product Management Operating System that runs on Claude. Skills for every product management task, personalized to your company and product.</p>
+    <div class="section-label"><span data-en="Documentation" data-zh="文件">Documentation</span></div>
+    <h1><span data-en="Documentation" data-zh="文件">Documentation</span></h1>
+    <p class="lead"><span data-en="Resiligen PM is a Product Management Operating System that runs on Claude. Skills for every product management task, personalized to your company and product." data-zh="Resiligen PM 是一個在 Claude 上運行的產品管理作業系統。為每個產品管理任務提供技能，個人化至你的公司和產品。">Resiligen PM is a Product Management Operating System that runs on Claude. Skills for every product management task, personalized to your company and product.</span></p>
 
     <div class="docs-section">
-      <h2>Get Started</h2>
+      <h2><span data-en="Get Started" data-zh="立即開始"><span data-en="Get Started" data-zh="開始使用">Get Started</span></span></h2>
       <div class="docs-cards">
         <a href="#" class="docs-card">
           <span class="docs-card-time">Free · 3 minutes</span>
-          <h3>Free Skills Quick Start</h3>
+          <h3><span data-en="Free Skills Quick Start" data-zh="免費技能快速開始">Free Skills Quick Start</span></h3>
           <p>Download individual PM skills and use them in Claude Code Desktop. No purchase required.</p>
         </a>
         <a href="#" class="docs-card">
           <span class="docs-card-time">$249 · 5 minutes</span>
-          <h3>PM OS Setup</h3>
+          <h3><span data-en="PM OS Setup" data-zh="PM OS 設定">PM OS Setup</span></h3>
           <p>Your full PM OS: personalized context files, 60+ skills, agent workflows, and organized workspace.</p>
         </a>
       </div>
       <div class="docs-note">
         <strong>You'll need:</strong> A Claude Pro ($20/mo) or Max ($100/mo) subscription from <a href="#">claude.com/pricing</a><br>
-        <strong>Need help?</strong> Check <a href="#">Troubleshooting</a> or email <a href="#"><span class="__cf_email__" data-cfemail="c5b6b0b5b5aab7b185a8bcb6a0a6aaaba1eba4ac">[email&#160;protected]</span></a>
+        <strong>Need help?</strong> Check <a href="#"><span data-en="Troubleshooting" data-zh="疑難排解">Troubleshooting</span></a> or email <a href="#"><span class="__cf_email__" data-cfemail="c5b6b0b5b5aab7b185a8bcb6a0a6aaaba1eba4ac">[email&#160;protected]</span></a>
       </div>
     </div>
 
@@ -338,22 +413,22 @@
       <div class="docs-cards">
         <a href="#" class="docs-card">
           <span class="docs-card-time">Discovery</span>
-          <h3>Analyze an Interview</h3>
+          <h3><span data-en="Analyze an Interview" data-zh="分析訪談">Analyze an Interview</span></h3>
           <p>Turn a raw interview transcript into structured insights with quotes and patterns.</p>
         </a>
         <a href="#" class="docs-card">
           <span class="docs-card-time">Discovery</span>
-          <h3>Build Personas</h3>
+          <h3><span data-en="Build Personas" data-zh="建立用戶角色">Build Personas</span></h3>
           <p>Create data-backed personas from research that go beyond demographics.</p>
         </a>
         <a href="#" class="docs-card">
           <span class="docs-card-time">Strategy</span>
-          <h3>Analyze a Competitor</h3>
+          <h3><span data-en="Analyze a Competitor" data-zh="分析競爭對手">Analyze a Competitor</span></h3>
           <p>Build a comprehensive competitor profile using the DHM framework.</p>
         </a>
         <a href="#" class="docs-card">
           <span class="docs-card-time">Strategy</span>
-          <h3>Create a PRD</h3>
+          <h3><span data-en="Create a PRD" data-zh="建立 PRD">Create a PRD</span></h3>
           <p>Transform a messy idea into a structured PRD that gets stakeholder alignment.</p>
         </a>
       </div>
@@ -364,12 +439,12 @@
       <div class="docs-cards">
         <a href="#" class="docs-card">
           <span class="docs-card-time">Workflow</span>
-          <h3>Batch Interview Analysis</h3>
+          <h3><span data-en="Batch Interview Analysis" data-zh="批次訪談分析">Batch Interview Analysis</span></h3>
           <p>Analyze 5–10 interviews in parallel with agent teams. Extract patterns automatically.</p>
         </a>
         <a href="#" class="docs-card">
           <span class="docs-card-time">Advanced</span>
-          <h3>Using Agent Teams</h3>
+          <h3><span data-en="Using Agent Teams" data-zh="使用 Agent 團隊">Using Agent Teams</span></h3>
           <p>Set up parallel agents to run multiple skills simultaneously for faster workflows.</p>
         </a>
       </div>
@@ -386,38 +461,38 @@
           <div class="nav-logo-icon">S</div>
           Resiligen PM
         </a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
         <div>
-          <h4>Product</h4>
+          <h4><span data-en="Product" data-zh="產品">Product</span></h4>
           <ul>
-            <li><a href="#">Services</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="#">Pricing</a></li>
+            <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Learn</h4>
+          <h4><span data-en="Learn" data-zh="學習">Learn</span></h4>
           <ul>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="playbook.html">Playbook</a></li>
-            <li><a href="docs.html">Docs</a></li>
+            <li><a href="learn.html"><span data-en="Learn" data-zh="學習">Learn</span></a></li>
+            <li><a href="playbook.html"><span data-en="Playbook" data-zh="手冊">Playbook</span></a></li>
+            <li><a href="docs.html"><span data-en="Docs" data-zh="文件">Docs</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Resources</h4>
+          <h4><span data-en="Resources" data-zh="資源">Resources</span></h4>
           <ul>
-            <li><a href="#">PM Maturity Assessment</a></li>
-            <li><a href="#">ROI Calculator</a></li>
+            <li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li>
+            <li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <h4><span data-en="Company" data-zh="公司">Company</span></h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
+            <li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li>
+            <li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li>
+            <li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li>
           </ul>
         </div>
       </div>

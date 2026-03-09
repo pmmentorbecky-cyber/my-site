@@ -74,7 +74,7 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px; height: 60px;
     background: rgba(10,8,16,0.85);
@@ -155,7 +155,7 @@
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; z-index: 0;
   }
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* aurora sits behind everything via z-index: 0 on canvas */
 
 
   .learn-hero {
@@ -239,6 +239,77 @@
   .cta-card h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); margin-bottom: 8px; }
   .cta-card p { font-size: 14px; color: var(--text2); }
 
+
+  /* ── UNIVERSAL CARD HOVER — lift + glow border ── */
+  .problem-card,
+  .skill-card,
+  .pricing-card,
+  .plan-card,
+  .pkg-card,
+  .article-card,
+  .featured-card,
+  .docs-card,
+  .chapter-card,
+  .workflow-card,
+  .step,
+  .founder-card,
+  .team-card,
+  .skill-card-main {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  }
+
+  .problem-card:hover,
+  .skill-card:hover,
+  .pricing-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .article-card:hover,
+  .featured-card:hover,
+  .docs-card:hover,
+  .chapter-card:hover,
+  .workflow-card:hover,
+  .step:hover,
+  .skill-card-main:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(136,125,253,0.18), 0 0 0 1px rgba(136,125,253,0.35) !important;
+    background: var(--bg3) !important;
+    z-index: 2;
+  }
+
+  /* Cards that already have their own border (not gap-based grids) */
+  .featured-card:hover,
+  .docs-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .team-card:hover,
+  .founder-card:hover {
+    border-color: rgba(136,125,253,0.5) !important;
+  }
+
+
+  
+
+
+  /* ── LANG SWITCHER ──────────────────────────────── */
+  .lang-switcher {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 100px; border: none;
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.18s;
+    color: var(--text3); background: transparent;
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .lang-btn.active {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 2px 8px rgba(136,125,253,0.35);
+  }
+  .lang-btn:hover:not(.active) { color: var(--text2); }
+
 </style>
 </head>
 <body>
@@ -250,37 +321,41 @@
     Resiligen PM
   </a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
         <a href="learn.html" class="active">
-          <span class="dd-title">Learn</span>
-          <span class="dd-desc">Articles and guides for PMs</span>
+          <span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span>
+          <span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span>
         </a>
         <a href="playbook.html">
-          <span class="dd-title">Playbook</span>
-          <span class="dd-desc">Free PM OS guide (PDF)</span>
+          <span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span>
+          <span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span>
         </a>
         <a href="docs.html">
-          <span class="dd-title">Docs</span>
-          <span class="dd-desc">PM OS setup and reference</span>
+          <span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span>
+          <span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span>
         </a>
       </div>
     </li>
-    <li><a href="#">Pricing</a></li>
-    <li><a href="#">Services</a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
 
 <div class="learn-hero">
-  <div class="section-label">Learn</div>
-  <h1>Learn</h1>
+  <div class="section-label"><span data-en="Learn" data-zh="學習">Learn</span></div>
+  <h1><span data-en="Learn" data-zh="學習">Learn</span></h1>
   <p>Practical guides for product managers building with AI. From getting started to advanced workflows.</p>
 </div>
 
@@ -289,7 +364,7 @@
   <a href="#" class="featured-card">
     <div>
       <div class="featured-badge">Featured · 11 min read</div>
-      <h2>How to Use Claude as a Product Manager: The Complete Guide</h2>
+      <h2><span data-en="How to Use Claude as a Product Manager: The Complete Guide" data-zh="如何以產品經理身份使用 Claude：完整指南">How to Use Claude as a Product Manager: The Complete Guide</span></h2>
       <p>Learn how to use Claude as a product manager — from setup and context files to running PM skills for discovery, specs, roadmaps, and stakeholder communication.</p>
       <div class="featured-read">Read article →</div>
     </div>
@@ -298,42 +373,42 @@
 
   <!-- Category filters -->
   <div class="categories">
-    <button class="cat-btn active">All</button>
-    <button class="cat-btn">AI for PMs</button>
-    <button class="cat-btn">Getting Started</button>
-    <button class="cat-btn">Skill Guides</button>
-    <button class="cat-btn">PM Workflows</button>
+    <button class="cat-btn active"><span data-en="All" data-zh="全部">All</span></button>
+    <button class="cat-btn"><span data-en="AI for PMs" data-zh="PM 的 AI 應用">AI for PMs</span></button>
+    <button class="cat-btn"><span data-en="Getting Started" data-zh="入門">Getting Started</span></button>
+    <button class="cat-btn"><span data-en="Skill Guides" data-zh="技能指南">Skill Guides</span></button>
+    <button class="cat-btn"><span data-en="PM Workflows" data-zh="PM 工作流程">PM Workflows</span></button>
     <button class="cat-btn">Team & Ops</button>
   </div>
 
   <!-- Articles Grid -->
   <div class="articles-grid">
     <a href="#" class="article-card">
-      <span class="article-cat">Getting Started</span>
+      <span class="article-cat"><span data-en="Getting Started" data-zh="入門">Getting Started</span></span>
       <h3>Setting Up Claude Code for Product Management</h3>
       <p>Install Claude Code Desktop, add your first skills, and run your first PM command in under 10 minutes.</p>
       <div class="article-meta">5 min read</div>
     </a>
     <a href="#" class="article-card">
-      <span class="article-cat">AI for PMs</span>
+      <span class="article-cat"><span data-en="AI for PMs" data-zh="PM 的 AI 應用">AI for PMs</span></span>
       <h3>Why Context Files Change Everything</h3>
       <p>Generic AI outputs are useless. Learn how context files make every skill output specific to your product.</p>
       <div class="article-meta">7 min read</div>
     </a>
     <a href="#" class="article-card">
-      <span class="article-cat">Skill Guides</span>
+      <span class="article-cat"><span data-en="Skill Guides" data-zh="技能指南">Skill Guides</span></span>
       <h3>Writing PRDs with the PRD Generator</h3>
       <p>A step-by-step walkthrough of turning a messy feature idea into a complete, stakeholder-ready PRD.</p>
       <div class="article-meta">8 min read</div>
     </a>
     <a href="#" class="article-card">
-      <span class="article-cat">PM Workflows</span>
+      <span class="article-cat"><span data-en="PM Workflows" data-zh="PM 工作流程">PM Workflows</span></span>
       <h3>The Discovery Sprint Workflow</h3>
       <p>Chain 4 skills together to go from raw research to actionable insights in under an hour.</p>
       <div class="article-meta">6 min read</div>
     </a>
     <a href="#" class="article-card">
-      <span class="article-cat">AI for PMs</span>
+      <span class="article-cat"><span data-en="AI for PMs" data-zh="PM 的 AI 應用">AI for PMs</span></span>
       <h3>Running Parallel Agent Workflows</h3>
       <p>Use agent teams to analyze 10 interviews simultaneously. How the Batch Interview Synthesis workflow actually works.</p>
       <div class="article-meta">9 min read</div>
@@ -352,7 +427,7 @@
       <h3>PM Team Maturity Assessment</h3>
       <p>Score your PM operation across 9 dimensions. See where your team runs on systems vs. individual heroics. Takes 3 minutes.</p>
     </div>
-    <a href="#" class="btn-gradient">Take the assessment</a>
+    <a href="#" class="btn-gradient"><span data-en="Take the assessment" data-zh="參加評估">Take the assessment</span></a>
   </div>
 </div>
 
@@ -365,38 +440,38 @@
           <div class="nav-logo-icon">S</div>
           Resiligen PM
         </a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
         <div>
-          <h4>Product</h4>
+          <h4><span data-en="Product" data-zh="產品">Product</span></h4>
           <ul>
-            <li><a href="#">Services</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="#">Pricing</a></li>
+            <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Learn</h4>
+          <h4><span data-en="Learn" data-zh="學習">Learn</span></h4>
           <ul>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="playbook.html">Playbook</a></li>
-            <li><a href="docs.html">Docs</a></li>
+            <li><a href="learn.html"><span data-en="Learn" data-zh="學習">Learn</span></a></li>
+            <li><a href="playbook.html"><span data-en="Playbook" data-zh="手冊">Playbook</span></a></li>
+            <li><a href="docs.html"><span data-en="Docs" data-zh="文件">Docs</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Resources</h4>
+          <h4><span data-en="Resources" data-zh="資源">Resources</span></h4>
           <ul>
-            <li><a href="#">PM Maturity Assessment</a></li>
-            <li><a href="#">ROI Calculator</a></li>
+            <li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li>
+            <li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <h4><span data-en="Company" data-zh="公司">Company</span></h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
+            <li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li>
+            <li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li>
+            <li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li>
           </ul>
         </div>
       </div>
@@ -572,5 +647,98 @@ function toggleDropdown(btn) {
   requestAnimationFrame(frame);
 })();
 </script>
+
+
+
+
+
+
+
+<script>
+// ── Resiligen PM · i18n engine ──────────────────────────────────────────────
+function setLang(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  localStorage.setItem('resi-lang', lang);
+  document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.toggle('active', lang === 'en'));
+  document.querySelectorAll('.lang-btn-zh').forEach(b => b.classList.toggle('active', lang === 'zh'));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+  });
+}
+
+(function () {
+  // 1. If user has already manually chosen a language, honour it — no API call needed
+  const saved = localStorage.getItem('resi-lang');
+  if (saved) {
+    const init = () => setLang(saved);
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+    return;
+  }
+
+  // 2. Asian timezone codes → default Chinese
+  //    This is instant (no network) and covers 99% of cases correctly.
+  const ASIAN_TZ = [
+    'Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Chongqing',
+    'Asia/Urumqi','Asia/Harbin','Asia/Macao','Asia/Singapore',
+    'Asia/Kuala_Lumpur','Asia/Bangkok','Asia/Jakarta','Asia/Ho_Chi_Minh',
+    'Asia/Seoul','Asia/Tokyo','Asia/Manila','Asia/Makassar',
+    'Asia/Brunei','Asia/Phnom_Penh','Asia/Vientiane','Asia/Rangoon',
+    'Asia/Yangon','Asia/Dhaka','Asia/Kolkata','Asia/Colombo',
+    'Asia/Kathmandu','Asia/Karachi','Asia/Tashkent','Asia/Almaty',
+    'Asia/Ulaanbaatar','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat',
+    'Asia/Kabul','Asia/Tehran','Asia/Baghdad','Asia/Kuwait',
+    'Asia/Riyadh','Asia/Dubai','Asia/Muscat','Asia/Beirut',
+    'Asia/Amman','Asia/Jerusalem','Asia/Nicosia','Asia/Baku',
+    'Asia/Yerevan','Asia/Tbilisi','Asia/Novosibirsk','Asia/Krasnoyarsk',
+    'Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Magadan',
+    'Asia/Sakhalin','Asia/Kamchatka','Asia/Anadyr',
+    'Pacific/Auckland','Pacific/Fiji','Pacific/Guam','Pacific/Honolulu',
+    'Australia/Sydney','Australia/Melbourne','Australia/Brisbane',
+    'Australia/Perth','Australia/Adelaide','Australia/Darwin',
+  ];
+
+  let detectedLang = 'zh';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ASIAN_TZ.some(z => tz.startsWith(z) || z === tz)) {
+      detectedLang = 'zh';
+    }
+  } catch (e) {}
+
+  // 3. Apply immediately (timezone is sync)
+  const init = () => setLang(detectedLang);
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  // 4. Also verify via IP geolocation in the background (silent, no flash)
+  //    Uses ip-api.com free tier — no key needed, rate limit 45 req/min
+  fetch('https://ip-api.com/json/?fields=continentCode,countryCode,timezone', {
+    cache: 'force-cache'  // browser caches response for subsequent pages
+  })
+  .then(r => r.json())
+  .then(data => {
+    const ASIAN_CONTINENTS = ['AS', 'OC'];  // Asia + Oceania
+    const ASIAN_COUNTRIES  = ['TW','HK','MO','CN','SG','MY','JP','KR',
+                               'VN','TH','PH','ID','MM','KH','LA','BN',
+                               'AU','NZ','IN','PK','BD','LK'];
+    const isAsian =
+      ASIAN_CONTINENTS.includes(data.continentCode) ||
+      ASIAN_COUNTRIES.includes(data.countryCode);
+
+    const ipLang = isAsian ? 'zh' : 'en'; // zh is global default; EN only for explicit non-Asia
+
+    // Only override if user hasn't manually chosen AND timezone guess was wrong
+    if (!localStorage.getItem('resi-lang') && ipLang !== detectedLang) {
+      setLang(ipLang);
+      // Still don't save to localStorage — only manual clicks get saved
+    }
+  })
+  .catch(() => { /* silent fail — timezone detection already applied */ });
+})();
+</script>
+
 </body>
 </html>

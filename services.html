@@ -50,7 +50,7 @@
   @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .footer-top { grid-template-columns: 1fr; gap: 40px; } .footer-links { grid-template-columns: repeat(2,1fr); } }
 
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
   .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
   .nav-logo-icon { width: 28px; height: 28px; background: var(--gradient); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff; font-family: 'DM Serif Display', serif; }
   .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
@@ -76,7 +76,7 @@
 
 
   #aurora-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* aurora sits behind everything via z-index: 0 on canvas */
 
 
   .services-hero { padding: 140px 40px 90px; max-width: 1100px; margin: 0 auto; }
@@ -161,6 +161,77 @@
     .founder-card { flex-direction: column; gap: 24px; }
   }
 
+
+  /* ── UNIVERSAL CARD HOVER — lift + glow border ── */
+  .problem-card,
+  .skill-card,
+  .pricing-card,
+  .plan-card,
+  .pkg-card,
+  .article-card,
+  .featured-card,
+  .docs-card,
+  .chapter-card,
+  .workflow-card,
+  .step,
+  .founder-card,
+  .team-card,
+  .skill-card-main {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  }
+
+  .problem-card:hover,
+  .skill-card:hover,
+  .pricing-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .article-card:hover,
+  .featured-card:hover,
+  .docs-card:hover,
+  .chapter-card:hover,
+  .workflow-card:hover,
+  .step:hover,
+  .skill-card-main:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(136,125,253,0.18), 0 0 0 1px rgba(136,125,253,0.35) !important;
+    background: var(--bg3) !important;
+    z-index: 2;
+  }
+
+  /* Cards that already have their own border (not gap-based grids) */
+  .featured-card:hover,
+  .docs-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .team-card:hover,
+  .founder-card:hover {
+    border-color: rgba(136,125,253,0.5) !important;
+  }
+
+
+  
+
+
+  /* ── LANG SWITCHER ──────────────────────────────── */
+  .lang-switcher {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 100px; border: none;
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.18s;
+    color: var(--text3); background: transparent;
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .lang-btn.active {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 2px 8px rgba(136,125,253,0.35);
+  }
+  .lang-btn:hover:not(.active) { color: var(--text2); }
+
 </style>
 </head>
 <body>
@@ -168,51 +239,55 @@
 <nav>
   <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
-        <a href="learn.html"><span class="dd-title">Learn</span><span class="dd-desc">Articles and guides for PMs</span></a>
-        <a href="playbook.html"><span class="dd-title">Playbook</span><span class="dd-desc">Free PM OS guide (PDF)</span></a>
-        <a href="docs.html"><span class="dd-title">Docs</span><span class="dd-desc">PM OS setup and reference</span></a>
+        <a href="learn.html"><span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span><span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span></a>
+        <a href="playbook.html"><span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span><span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span></a>
+        <a href="docs.html"><span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span><span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span></a>
       </div>
     </li>
-    <li><a href="pricing.html" >Pricing</a></li>
-    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="pricing.html" ><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html" class="active"><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="services-hero">
-  <div class="section-label">For PM Teams</div>
-  <h1>Your PMs use AI. We make it productive.</h1>
-  <p>Context loaded. Frameworks built in. Skills for every workflow. That's the difference between chatting with AI and having infrastructure.</p>
+  <div class="section-label"><span data-en="For PM Teams" data-zh="適合 PM 團隊">For PM Teams</span></div>
+  <h1><span data-en="Your PMs use AI. We make it productive." data-zh="你的 PM 在用 AI。我們讓它真正有效。">Your PMs use AI. We make it productive.</span></h1>
+  <p><span data-en="Context loaded. Frameworks built in. Skills for every workflow. That's the difference between chatting with AI and having infrastructure." data-zh="脈絡已載入，框架已內建，每個工作流程都有技能。這就是與 AI 聊天和擁有基礎建設的差別。">Context loaded. Frameworks built in. Skills for every workflow. That's the difference between chatting with AI and having infrastructure.</span></p>
   <div class="hero-ctas">
-    <button class="btn-gradient">Talk to Us</button>
-    <a href="#how" class="btn-ghost-lg">See How It Works</a>
+    <button class="btn-gradient"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+    <a href="#how" class="btn-ghost-lg"><span data-en="See How It Works" data-zh="了解運作方式">See How It Works</span></a>
   </div>
-  <div class="hero-footnote"><a href="#">Not sure where to start? Take our free PM maturity assessment →</a></div>
+  <div class="hero-footnote"><a href="#"><span data-en="Not sure where to start? Take our free PM maturity assessment →" data-zh="不確定從哪裡開始？參加我們的免費 PM 成熟度評估 →">Not sure where to start? Take our free PM maturity assessment →</span></a></div>
 </div>
 
 <!-- PROBLEMS -->
 <section class="problems-section">
-  <div class="section-label">The real cost of PM without infrastructure</div>
-  <h2 class="section-title">You hired great PMs. But without shared systems, every one of them starts from scratch.</h2>
+  <div class="section-label"><span data-en="The real cost of PM without infrastructure" data-zh="缺乏基礎建設的 PM 真實成本">The real cost of PM without infrastructure</span></div>
+  <h2 class="section-title"><span data-en="You hired great PMs. But without shared systems, every one of them starts from scratch." data-zh="你招募了優秀的 PM。但沒有共用系統，每個人都得從頭開始。">You hired great PMs. But without shared systems, every one of them starts from scratch.</span></h2>
   <div class="problems-grid" style="margin-top:48px;">
-    <div class="problem-card"><div class="problem-icon">⚠</div><h3>AI without infrastructure</h3><p>Your PMs re-explain the product every session. They edit generic outputs that miss the mark. They're chatting — not leveraging AI.</p></div>
-    <div class="problem-card"><div class="problem-icon">⊘</div><h3>No PM operations layer</h3><p>No shared templates, no competitive context, no tribal knowledge captured. Every PM re-invents the wheel on every task.</p></div>
-    <div class="problem-card"><div class="problem-icon">↗</div><h3>Headcount without leverage</h3><p>Each new PM adds cost but not compounding value. New hires take 3–6 months to ramp because product knowledge lives in someone's head.</p></div>
+    <div class="problem-card"><div class="problem-icon">⚠</div><h3><span data-en="AI without infrastructure" data-zh="沒有基礎建設的 AI">AI without infrastructure</span></h3><p><span data-en="Your PMs re-explain the product every session. They edit generic outputs that miss the mark. They're chatting — not leveraging AI." data-zh="你的 PM 每次都要重新解釋產品。他們在修改無關痛癢的輸出。他們只是在聊天——而不是善用 AI。">Your PMs re-explain the product every session. They edit generic outputs that miss the mark. They're chatting — not leveraging AI.</span></p></div>
+    <div class="problem-card"><div class="problem-icon">⊘</div><h3><span data-en="No PM operations layer" data-zh="缺乏 PM 運營層">No PM operations layer</span></h3><p><span data-en="No shared templates, no competitive context, no tribal knowledge captured. Every PM re-invents the wheel on every task." data-zh="沒有共用模板、沒有競爭脈絡、沒有組織知識沉澱。每個 PM 每項任務都在重新發明輪子。">No shared templates, no competitive context, no tribal knowledge captured. Every PM re-invents the wheel on every task.</span></p></div>
+    <div class="problem-card"><div class="problem-icon">↗</div><h3><span data-en="Headcount without leverage" data-zh="人頭增加，槓桿不增">Headcount without leverage</span></h3><p><span data-en="Each new PM adds cost but not compounding value. New hires take 3–6 months to ramp because product knowledge lives in someone's head." data-zh="每個新 PM 只增加成本而無複利價值。新人需要 3–6 個月才能上手，因為產品知識都在別人腦袋裡。">Each new PM adds cost but not compounding value. New hires take 3–6 months to ramp because product knowledge lives in someone's head.</span></p></div>
   </div>
 </section>
 
 <!-- WORKFLOW -->
 <section class="workflow-section">
-  <div class="section-label">Built for your entire PM workflow</div>
-  <h2 class="section-title">We map how your team works across the full product lifecycle.</h2>
+  <div class="section-label"><span data-en="Built for your entire PM workflow" data-zh="為你完整的 PM 工作流程而生">Built for your entire PM workflow</span></div>
+  <h2 class="section-title"><span data-en="We map how your team works across the full product lifecycle." data-zh="我們梳理你的團隊在完整產品生命週期中的運作方式。">We map how your team works across the full product lifecycle.</span></h2>
   <div class="workflow-grid" style="margin-top:48px;">
     <div class="workflow-card"><span class="workflow-tag">Discovery</span><h3>Discovery</h3><p>User research, interviews, JTBD</p></div>
     <div class="workflow-card"><span class="workflow-tag">Strategy</span><h3>Strategy</h3><p>Positioning, competitive, market sizing</p></div>
@@ -227,24 +302,24 @@
 
 <!-- HOW -->
 <section class="steps-section" id="how">
-  <div class="section-label">How we build your PM OS</div>
-  <h2 class="section-title">We never build before we map.</h2>
+  <div class="section-label"><span data-en="How we build your PM OS" data-zh="我們如何打造你的 PM OS">How we build your PM OS</span></div>
+  <h2 class="section-title"><span data-en="We never build before we map." data-zh="我們永遠先梳理，再建置。">We never build before we map.</span></h2>
   <div class="steps-grid" style="margin-top:48px;">
-    <div class="step active"><span class="step-num">1. Discover</span><h3>Discover</h3><p>We interview your team, map every PM workflow, identify bottlenecks, and design the architecture for your PM OS. You get the blueprint and ROI case.</p></div>
-    <div class="step"><span class="step-num">2. Build & Train</span><h3>Build &amp; Train</h3><p>We build your PM OS — custom context, skills, MCP integrations — then train every PM hands-on.</p></div>
-    <div class="step"><span class="step-num">3. Operate</span><h3>Operate</h3><p>Context maintenance, skill building, competitive intelligence — we keep the PM OS running and evolving as your team grows.</p></div>
+    <div class="step active"><span class="step-num"><span data-en="1. Discover" data-zh="1. 探索">1. Discover</span></span><h3>Discover</h3><p><span data-en="We interview your team, map every PM workflow, identify bottlenecks, and design the architecture for your PM OS. You get the blueprint and ROI case." data-zh="我們訪談你的團隊，梳理每個 PM 工作流程，找出瓶頸，並為你的 PM OS 設計架構。你將獲得藍圖和 ROI 論證。">We interview your team, map every PM workflow, identify bottlenecks, and design the architecture for your PM OS. You get the blueprint and ROI case.</span></p></div>
+    <div class="step"><span class="step-num">2. Build & Train</span><h3>Build &amp; Train</h3><p><span data-en="We build your PM OS — custom context, skills, MCP integrations — then train every PM hands-on." data-zh="我們建置你的 PM OS——客製化脈絡、技能、MCP 整合——然後對每位 PM 進行實操訓練。">We build your PM OS — custom context, skills, MCP integrations — then train every PM hands-on.</span></p></div>
+    <div class="step"><span class="step-num"><span data-en="3. Operate" data-zh="3. 運營">3. Operate</span></span><h3>Operate</h3><p><span data-en="Context maintenance, skill building, competitive intelligence — we keep the PM OS running and evolving as your team grows." data-zh="脈絡維護、技能建置、競爭情報——隨著你的團隊成長，我們讓 PM OS 持續運作和演進。">Context maintenance, skill building, competitive intelligence — we keep the PM OS running and evolving as your team grows.</span></p></div>
   </div>
 </section>
 
 <!-- PACKAGES -->
 <section class="packages-section">
-  <div class="section-label">Two ways to work with us</div>
-  <h2 class="section-title">Build the system. Keep it running.</h2>
+  <div class="section-label"><span data-en="Two ways to work with us" data-zh="兩種合作方式">Two ways to work with us</span></div>
+  <h2 class="section-title"><span data-en="Build the system. Keep it running." data-zh="建置系統，持續運作。">Build the system. Keep it running.</span></h2>
   <div class="packages-grid" style="margin-top:48px;">
     <div class="pkg-card featured">
       <div class="pkg-badge">Start here</div>
-      <h3>PM OS Implementation</h3>
-      <p>Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom PM OS, and get every PM productive.</p>
+      <h3><span data-en="PM OS Implementation" data-zh="PM OS 實作">PM OS Implementation</span></h3>
+      <p><span data-en="Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom PM OS, and get every PM productive." data-zh="依據你的團隊規模、整合工具和工作流程客製化設計。我們梳理你的 PM 工作流程、建置客製化 PM OS，讓每位 PM 都能高效運作。">Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom PM OS, and get every PM productive.</span></p>
       <ul class="pkg-features">
         <li><span class="check">✓</span><div><strong>Discovery & workflow mapping</strong> — every process, bottleneck, and ROI quantified</div></li>
         <li><span class="check">✓</span><div><strong>Custom context files</strong> — written from interviews, not a wizard</div></li>
@@ -253,13 +328,13 @@
         <li><span class="check">✓</span><div><strong>Hands-on training</strong> — every PM runs their first skill live</div></li>
         <li><span class="check">✓</span><div><strong>30-day support</strong> — iteration, questions, skill tweaks</div></li>
       </ul>
-      <button class="btn-gradient" style="width:100%;text-align:center;">Talk to Us</button>
-      <p class="pkg-note"><a href="#">Or take our free PM maturity assessment →</a></p>
+      <button class="btn-gradient" style="width:100%;text-align:center;"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+      <p class="pkg-note"><a href="#"><span data-en="Or take our free PM maturity assessment →" data-zh="或參加我們的免費 PM 成熟度評估 →">Or take our free PM maturity assessment →</span></a></p>
     </div>
     <div class="pkg-card">
       <div class="pkg-badge">Ongoing</div>
-      <h3>Managed Services</h3>
-      <p>Monthly engagement scoped to your team's needs. We keep your PM OS running and evolving.</p>
+      <h3><span data-en="Managed Services" data-zh="管理服務">Managed Services</span></h3>
+      <p><span data-en="Monthly engagement scoped to your team's needs. We keep your PM OS running and evolving." data-zh="依據你的團隊需求的月度服務。我們讓你的 PM OS 持續運作和演進。">Monthly engagement scoped to your team's needs. We keep your PM OS running and evolving.</span></p>
       <ul class="pkg-features">
         <li><span class="check">✓</span><div><strong>Context maintenance</strong> — competitors, personas, product always current</div></li>
         <li><span class="check">✓</span><div><strong>Custom skill development</strong> — new skills as processes evolve</div></li>
@@ -267,8 +342,8 @@
         <li><span class="check">✓</span><div><strong>Competitive intelligence</strong> — monthly reports with recommendations</div></li>
         <li><span class="check">✓</span><div><strong>Strategic advisory</strong> — monthly calls, roadmap reviews</div></li>
       </ul>
-      <button class="btn-gradient" style="width:100%;text-align:center;">Talk to Us</button>
-      <p class="pkg-note"><a href="#">Or take our free PM maturity assessment →</a></p>
+      <button class="btn-gradient" style="width:100%;text-align:center;"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+      <p class="pkg-note"><a href="#"><span data-en="Or take our free PM maturity assessment →" data-zh="或參加我們的免費 PM 成熟度評估 →">Or take our free PM maturity assessment →</span></a></p>
     </div>
   </div>
 </section>
@@ -287,22 +362,22 @@
 
 <!-- FAQ -->
 <section class="faq-section">
-  <div class="section-label">Common Questions</div>
-  <h2 class="section-title">Everything you need to know.</h2>
+  <div class="section-label"><span data-en="Common Questions" data-zh="常見問題">Common Questions</span></div>
+  <h2 class="section-title"><span data-en="Everything you need to know." data-zh="你需要知道的一切。">Everything you need to know.</span></h2>
   <div class="faq-list">
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does the full process take?</button><div class="faq-a">Discovery takes 2 weeks. Implementation takes 4–6 weeks after that. From first call to a fully running PM OS, expect 6–8 weeks total.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What determines the final price?</button><div class="faq-a">Three things: the number of PMs we implement and train, custom MCP integrations (Jira, Linear, Notion), and additional custom skills for your workflows. We scope everything during discovery — no surprises.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What do we need before we start?</button><div class="faq-a">Each PM needs a Claude Pro subscription ($20/mo from Anthropic) and Claude Code installed. That's it. Discovery extracts everything else through conversation.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if we already use Notion or Confluence?</button><div class="faq-a">We integrate with them. The PM OS doesn't replace your tools — it connects them. Your docs become active context that Claude can reason about, not passive storage.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do we own everything you build?</button><div class="faq-a">Yes. Context files, skills, architecture — it's all yours. If you stop working with us, everything keeps running. There's no lock-in.</div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-en="How long does the full process take?" data-zh="完整流程需要多久？">How long does the full process take?</span></button><div class="faq-a"><span data-en="Discovery takes 2 weeks. Implementation takes 4–6 weeks after that. From first call to a fully running PM OS, expect 6–8 weeks total." data-zh="探索需要 2 週。實作在此之後需要 4–6 週。從第一次通話到 PM OS 完全運行，預計共 6–8 週。">Discovery takes 2 weeks. Implementation takes 4–6 weeks after that. From first call to a fully running PM OS, expect 6–8 weeks total.</span></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-en="What determines the final price?" data-zh="什麼決定最終價格？">What determines the final price?</span></button><div class="faq-a"><span data-en="Three things: the number of PMs we implement and train, custom MCP integrations (Jira, Linear, Notion), and additional custom skills for your workflows. We scope everything during discovery — no surprises." data-zh="三個因素：我們實作和訓練的 PM 數量、客製化 MCP 整合（Jira、Linear、Notion），以及為你的工作流程額外定制的技能。我們在探索階段確定所有範圍——沒有意外。">Three things: the number of PMs we implement and train, custom MCP integrations (Jira, Linear, Notion), and additional custom skills for your workflows. We scope everything during discovery — no surprises.</span></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-en="What do we need before we start?" data-zh="我們開始前需要準備什麼？">What do we need before we start?</span></button><div class="faq-a"><span data-en="Each PM needs a Claude Pro subscription ($20/mo from Anthropic) and Claude Code installed. That's it. Discovery extracts everything else through conversation." data-zh="每位 PM 需要 Claude Pro 訂閱（Anthropic 每月 $20）和已安裝的 Claude Code。就這樣。探索階段通過對話提取所有其他資訊。">Each PM needs a Claude Pro subscription ($20/mo from Anthropic) and Claude Code installed. That's it. Discovery extracts everything else through conversation.</span></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-en="What if we already use Notion or Confluence?" data-zh="如果我們已經使用 Notion 或 Confluence 怎麼辦？">What if we already use Notion or Confluence?</span></button><div class="faq-a"><span data-en="We integrate with them. The PM OS doesn't replace your tools — it connects them. Your docs become active context that Claude can reason about, not passive storage." data-zh="我們與它們整合。PM OS 不會取代你的工具——它將它們連接起來。你的文件成為 Claude 可以推理的主動脈絡，而不是被動儲存。">We integrate with them. The PM OS doesn't replace your tools — it connects them. Your docs become active context that Claude can reason about, not passive storage.</span></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-en="Do we own everything you build?" data-zh="我們擁有你建置的一切嗎？">Do we own everything you build?</span></button><div class="faq-a"><span data-en="Yes. Context files, skills, architecture — it's all yours. If you stop working with us, everything keeps running. There's no lock-in." data-zh="是的。脈絡檔案、技能、架構——全部都是你的。如果你停止與我們合作，一切繼續運行。沒有鎖定。">Yes. Context files, skills, architecture — it's all yours. If you stop working with us, everything keeps running. There's no lock-in.</span></div></div>
   </div>
 </section>
 
 <!-- CTA BOTTOM -->
 <div class="cta-bottom">
   <h2>Find out what PM chaos is costing your team.</h2>
-  <p>Tell us about your team — we'll come back with a clear picture of where AI saves you the most time.</p>
-  <button class="btn-gradient">Talk to Us</button>
+  <p><span data-en="Tell us about your team — we'll come back with a clear picture of where AI saves you the most time." data-zh="告訴我們你的團隊狀況——我們會告訴你 AI 最能為你節省時間的地方。">Tell us about your team — we'll come back with a clear picture of where AI saves you the most time.</span></p>
+  <button class="btn-gradient"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   <div class="cta-bottom-note"><a href="#">Not sure yet? Take our free PM maturity assessment →</a></div>
 </div>
 
@@ -319,13 +394,13 @@ function toggleFaq(btn) {
     <div class="footer-top">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
-        <div><h4>Product</h4><ul><li><a href="services.html">Services</a></li><li><a href="skills.html">Skills</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
-        <div><h4>Learn</h4><ul><li><a href="learn.html">Learn</a></li><li><a href="playbook.html">Playbook</a></li><li><a href="docs.html">Docs</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="#">PM Maturity Assessment</a></li><li><a href="#">ROI Calculator</a></li></ul></div>
-        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+        <div><h4><span data-en="Product" data-zh="產品">Product</span></h4><ul><li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li><li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li><li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li></ul></div>
+        <div><h4><span data-en="Learn" data-zh="學習">Learn</span></h4><ul><li><a href="learn.html"><span data-en="Learn" data-zh="學習">Learn</span></a></li><li><a href="playbook.html"><span data-en="Playbook" data-zh="手冊">Playbook</span></a></li><li><a href="docs.html"><span data-en="Docs" data-zh="文件">Docs</span></a></li></ul></div>
+        <div><h4><span data-en="Resources" data-zh="資源">Resources</span></h4><ul><li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li><li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li></ul></div>
+        <div><h4><span data-en="Company" data-zh="公司">Company</span></h4><ul><li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li><li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li><li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li></ul></div>
       </div>
     </div>
     <div class="footer-copy">© 2026 Resiligen PM Academy · resiligen.pm</div>
@@ -497,5 +572,98 @@ function toggleDropdown(btn) {
   requestAnimationFrame(frame);
 })();
 </script>
+
+
+
+
+
+
+
+<script>
+// ── Resiligen PM · i18n engine ──────────────────────────────────────────────
+function setLang(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  localStorage.setItem('resi-lang', lang);
+  document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.toggle('active', lang === 'en'));
+  document.querySelectorAll('.lang-btn-zh').forEach(b => b.classList.toggle('active', lang === 'zh'));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+  });
+}
+
+(function () {
+  // 1. If user has already manually chosen a language, honour it — no API call needed
+  const saved = localStorage.getItem('resi-lang');
+  if (saved) {
+    const init = () => setLang(saved);
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+    return;
+  }
+
+  // 2. Asian timezone codes → default Chinese
+  //    This is instant (no network) and covers 99% of cases correctly.
+  const ASIAN_TZ = [
+    'Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Chongqing',
+    'Asia/Urumqi','Asia/Harbin','Asia/Macao','Asia/Singapore',
+    'Asia/Kuala_Lumpur','Asia/Bangkok','Asia/Jakarta','Asia/Ho_Chi_Minh',
+    'Asia/Seoul','Asia/Tokyo','Asia/Manila','Asia/Makassar',
+    'Asia/Brunei','Asia/Phnom_Penh','Asia/Vientiane','Asia/Rangoon',
+    'Asia/Yangon','Asia/Dhaka','Asia/Kolkata','Asia/Colombo',
+    'Asia/Kathmandu','Asia/Karachi','Asia/Tashkent','Asia/Almaty',
+    'Asia/Ulaanbaatar','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat',
+    'Asia/Kabul','Asia/Tehran','Asia/Baghdad','Asia/Kuwait',
+    'Asia/Riyadh','Asia/Dubai','Asia/Muscat','Asia/Beirut',
+    'Asia/Amman','Asia/Jerusalem','Asia/Nicosia','Asia/Baku',
+    'Asia/Yerevan','Asia/Tbilisi','Asia/Novosibirsk','Asia/Krasnoyarsk',
+    'Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Magadan',
+    'Asia/Sakhalin','Asia/Kamchatka','Asia/Anadyr',
+    'Pacific/Auckland','Pacific/Fiji','Pacific/Guam','Pacific/Honolulu',
+    'Australia/Sydney','Australia/Melbourne','Australia/Brisbane',
+    'Australia/Perth','Australia/Adelaide','Australia/Darwin',
+  ];
+
+  let detectedLang = 'zh';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ASIAN_TZ.some(z => tz.startsWith(z) || z === tz)) {
+      detectedLang = 'zh';
+    }
+  } catch (e) {}
+
+  // 3. Apply immediately (timezone is sync)
+  const init = () => setLang(detectedLang);
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  // 4. Also verify via IP geolocation in the background (silent, no flash)
+  //    Uses ip-api.com free tier — no key needed, rate limit 45 req/min
+  fetch('https://ip-api.com/json/?fields=continentCode,countryCode,timezone', {
+    cache: 'force-cache'  // browser caches response for subsequent pages
+  })
+  .then(r => r.json())
+  .then(data => {
+    const ASIAN_CONTINENTS = ['AS', 'OC'];  // Asia + Oceania
+    const ASIAN_COUNTRIES  = ['TW','HK','MO','CN','SG','MY','JP','KR',
+                               'VN','TH','PH','ID','MM','KH','LA','BN',
+                               'AU','NZ','IN','PK','BD','LK'];
+    const isAsian =
+      ASIAN_CONTINENTS.includes(data.continentCode) ||
+      ASIAN_COUNTRIES.includes(data.countryCode);
+
+    const ipLang = isAsian ? 'zh' : 'en'; // zh is global default; EN only for explicit non-Asia
+
+    // Only override if user hasn't manually chosen AND timezone guess was wrong
+    if (!localStorage.getItem('resi-lang') && ipLang !== detectedLang) {
+      setLang(ipLang);
+      // Still don't save to localStorage — only manual clicks get saved
+    }
+  })
+  .catch(() => { /* silent fail — timezone detection already applied */ });
+})();
+</script>
+
 </body>
 </html>

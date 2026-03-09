@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill | Resiligen PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0810;--bg2:#0e0c18;--bg3:#131020;
+  --border:#1e1a30;--border2:#2a2545;
+  --text:#f0eeff;--text2:#a090cc;--text3:#6050a0;
+  --blue:#4887FE;--purple:#887DFD;--teal:#67E9E9;
+  --gradient:linear-gradient(135deg,#887DFD 0%,#887DFD 30%,#4887FE 70%,#67E9E9 100%);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+#aurora-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(10,8,16,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.nav-logo-icon{width:28px;height:28px;background:var(--gradient);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;font-family:'DM Serif Display',serif}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--text2);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-dropdown-btn{font-size:14px;color:var(--text2);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;padding:0;transition:color .2s}
+.nav-dropdown-btn:hover,.nav-dropdown-btn.open{color:var(--text)}
+.nav-dropdown-btn::after{content:'⌃';font-size:10px;transition:transform .2s;display:inline-block}
+.nav-dropdown-btn.open::after{transform:rotate(180deg)}
+.nav-dropdown{display:none;position:absolute;top:calc(100% + 20px);left:50%;transform:translateX(-50%);background:#13102a;border:1px solid var(--border2);border-radius:12px;padding:8px;min-width:260px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:1100}
+.nav-dropdown.open{display:block;animation:dropIn .18s ease}
+@keyframes dropIn{from{opacity:0;transform:translateX(-50%) translateY(-8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.nav-dropdown a{display:block;padding:12px 14px;border-radius:8px;transition:background .15s}
+.nav-dropdown a:hover{background:rgba(136,125,253,.1)}
+.nav-dropdown a .dd-title{font-size:14px;font-weight:600;color:var(--text);display:block;margin-bottom:2px}
+.nav-dropdown a .dd-desc{font-size:12px;color:var(--text3);display:block}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.btn-outline{padding:8px 18px;border:1px solid var(--border2);border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text2);background:transparent;cursor:pointer;transition:all .2s}
+.btn-outline:hover{border-color:var(--purple);color:var(--text)}
+.btn-primary{padding:8px 18px;border:none;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;color:#fff;background:var(--blue);cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:#5e97ff}
+.lang-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:100px;padding:3px;gap:2px;flex-shrink:0}
+.lang-btn{padding:4px 12px;border-radius:100px;border:none;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .18s;color:var(--text3);background:transparent;letter-spacing:.04em}
+.lang-btn.active{background:var(--gradient);color:#fff;box-shadow:0 2px 8px rgba(136,125,253,.35)}
+.lang-btn:hover:not(.active){color:var(--text2)}
+.page-wrap{max-width:1060px;margin:0 auto;padding:0 40px}
+.back-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:80px 0 0;font-size:13px;color:var(--text3);transition:color .2s}
+.back-link:hover{color:var(--text2)}
+.skill-cat-path{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 18px}
+.cat-dot{width:7px;height:7px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:6px}
+.skill-hero-title{font-family:'DM Serif Display',serif;font-size:clamp(36px,4.5vw,58px);font-weight:400;color:#fff;line-height:1.05;letter-spacing:-.025em;margin-bottom:18px;position:relative;z-index:1}
+.skill-hero-desc{font-size:18px;color:var(--text2);line-height:1.65;max-width:600px;position:relative;z-index:1}
+.skill-grid{display:grid;grid-template-columns:1fr 280px;gap:72px;margin-top:56px;position:relative;z-index:1;align-items:start}
+.content-section{margin-bottom:52px}
+.section-h{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:20px}
+.section-body{font-size:15px;color:var(--text2);line-height:1.75}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.check-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5}
+.check-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(103,233,233,.1);border:1px solid rgba(103,233,233,.3);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.check-icon svg{width:11px;height:11px;stroke:var(--teal);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.workflow-card{border:1px solid rgba(136,125,253,.3);border-radius:14px;padding:22px 24px;background:rgba(136,125,253,.06);display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;transition:all .2s;text-decoration:none;width:100%}
+.workflow-card:hover{background:rgba(136,125,253,.1);border-color:rgba(136,125,253,.5);transform:translateY(-2px)}
+.workflow-card-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.workflow-card-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
+.workflow-card-sub{font-size:13px;color:var(--text2)}
+.workflow-card-arrow{font-size:22px;color:var(--purple);flex-shrink:0}
+.steps-list{display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}
+.step-item:first-child{padding-top:0}
+.step-item:last-child{border-bottom:none}
+.step-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:rgba(72,135,254,.12);border:1px solid rgba(72,135,254,.25);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue)}
+.step-text{font-size:14px;color:var(--text2);line-height:1.65;padding-top:5px}
+.step-text code{font-family:'Courier New',monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border2);padding:1px 7px;border-radius:4px;color:var(--teal)}
+.best-for-list{display:flex;flex-wrap:wrap;gap:8px}
+.best-for-tag{padding:7px 16px;border:1px solid var(--border2);border-radius:100px;font-size:13px;font-weight:500;color:var(--text2);background:var(--bg2)}
+.faq-item{border-top:1px solid var(--border)}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 0;background:none;border:none;cursor:pointer;text-align:left;gap:16px}
+.faq-q{font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
+.faq-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text3);transition:transform .2s,color .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--purple)}
+.faq-answer{display:none;padding:0 0 20px;font-size:14px;color:var(--text2);line-height:1.7}
+.faq-item.open .faq-answer{display:block}
+.skill-sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:14px}
+.sidebar-stat,.sidebar-cmd,.sidebar-cta{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:22px}
+.s-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.s-value-big{font-size:20px;font-weight:700;color:var(--teal);line-height:1.2}
+.s-value-after{font-size:15px;font-weight:600;color:var(--teal);margin-top:2px}
+.s-sub{font-size:12px;color:var(--text3);margin-top:5px}
+.s-cmd{font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.cta-title{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:#fff;margin-bottom:8px}
+.cta-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:18px}
+.cta-main{display:block;width:100%;text-align:center;padding:13px;border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .22s;border:none;background:var(--gradient);color:#fff;box-shadow:0 0 28px rgba(72,135,254,.2);margin-bottom:10px}
+.cta-main:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(72,135,254,.35)}
+.cta-sec{display:block;width:100%;text-align:center;padding:12px;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;border:1px solid var(--border2);color:var(--text2)}
+.cta-sec:hover{border-color:var(--purple);color:var(--text)}
+.more-section{padding:52px 0 80px;border-top:1px solid var(--border)}
+.more-h{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:24px}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.more-card{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all .22s;text-decoration:none}
+.more-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(136,125,253,.15);border-color:rgba(136,125,253,.3);background:var(--bg3)}
+.more-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:6px}
+.more-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
+.more-card p{font-size:11px;color:var(--teal)}
+.footer-wrapper{border-top:1px solid var(--border);padding:60px 40px;position:relative;z-index:1}
+.footer-inner{max-width:1060px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:200px 1fr;gap:80px;margin-bottom:48px}
+.footer-brand p{font-size:13px;color:var(--text3);margin-top:12px;line-height:1.6}
+.footer-links{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.footer-links h4{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.footer-links ul{list-style:none}
+.footer-links li{margin-bottom:10px}
+.footer-links a{font-size:14px;color:var(--text2);transition:color .2s}
+.footer-links a:hover{color:var(--blue)}
+.footer-copy{border-top:1px solid var(--border);padding-top:24px;font-size:13px;color:var(--text3)}
+.not-found-wrap{text-align:center;padding:160px 40px;position:relative;z-index:1}
+.not-found-wrap h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:16px}
+.not-found-wrap p{color:var(--text2);margin-bottom:32px}
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .page-wrap{padding:0 20px}
+  .skill-grid{grid-template-columns:1fr;gap:40px}
+  .skill-sidebar{position:static}
+  .footer-top{grid-template-columns:1fr;gap:40px}
+  .footer-links{grid-template-columns:repeat(2,1fr)}
+  .footer-wrapper{padding:40px 20px}
+  .more-section{padding:40px 0 60px}
+}
+</style>
+</head>
+<body>
+<canvas id="aurora-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">S</div>
+    Resiligen PM
+  </a>
+  <ul class="nav-links">
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+    <li>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
+      <div class="nav-dropdown">
+        <a href="learn.html">
+          <span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span>
+          <span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span>
+        </a>
+        <a href="playbook.html">
+          <span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span>
+          <span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span>
+        </a>
+        <a href="docs.html">
+          <span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span>
+          <span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span>
+        </a>
+      </div>
+    </li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+  </ul>
+  <div class="nav-cta">
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+  </div>
+</nav>
+<div id="skill-root"></div>
+<div class="footer-wrapper">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">S</div>
+          Resiligen PM
+        </a>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4><span data-en="Product" data-zh="產品">Product</span></h4>
+          <ul>
+            <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span data-en="Learn" data-zh="學習">Learn</span></h4>
+          <ul>
+            <li><a href="#"><span data-en="AI for PMs" data-zh="PM 的 AI 應用">AI for PMs</span></a></li>
+            <li><a href="#"><span data-en="Getting Started" data-zh="入門">Getting Started</span></a></li>
+            <li><a href="#"><span data-en="Skill Guides" data-zh="技能指南">Skill Guides</span></a></li>
+            <li><a href="#"><span data-en="PM Workflows" data-zh="PM 工作流程">PM Workflows</span></a></li>
+            <li><a href="#"><span data-en="Team &amp; Ops" data-zh="團隊與運營">Team &amp; Ops</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span data-en="Resources" data-zh="資源">Resources</span></h4>
+          <ul>
+            <li><a href="#"><span data-en="Docs" data-zh="文件">Docs</span></a></li>
+            <li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li>
+            <li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4><span data-en="Company" data-zh="公司">Company</span></h4>
+          <ul>
+            <li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li>
+            <li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li>
+            <li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Resiligen PM Academy · v1.1 · resiligen.pm</div>
+  </div>
+</div>
+<script>
+const ALL_SKILLS = {"competitive-profile-builder": {"slug": "competitive-profile-builder", "cat": "research", "is_agent": false, "title_en": "Competitive Profile Builder", "title_zh": "競品分析", "desc_en": "Create comprehensive competitor analysis using Gibson Biddle's DHM framework.", "desc_zh": "用 Gibson Biddle 的 DHM 框架建立完整競品分析，找出策略定位。", "time": "4-6 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Competitive", "problem_en": "Competitor research takes days of manual browsing, note-taking, and synthesis. By the time you finish, the landscape has already shifted — and the output is too long for anyone to actually read.", "problem_zh": "競品研究要花好幾天手動瀏覽、記錄和整合。等你完成，市場格局可能已經改變了——而且輸出結果太長，沒有人真的會讀完。", "bullets_en": ["DHM framework analysis (Delight, Hard to copy, Monetize)", "Positioning matrix with clear differentiation gaps", "Feature comparison table ready to share", "Strategic implications and recommended responses", "Evidence-backed, not anecdotal"], "bullets_zh": ["DHM 框架分析（Delight、Hard to copy、Monetize）", "帶有清楚差異缺口的定位矩陣", "可直接分享的功能比較表", "策略含義與建議回應", "有證據支撐，非主觀臆測"], "best_for_en": ["Quarterly reviews", "New market entry", "Competitive pitches", "Strategic planning"], "best_for_zh": ["季度回顧", "新市場進入", "競爭提案", "策略規劃"], "faq_en": [["How many competitors can I analyze at once?", "As many as you need. Start with 3-5 direct competitors. The skill formats them into a side-by-side comparison automatically."], ["What if I don't have access to their pricing?", "The skill works with what you have. It flags gaps and suggests ways to estimate pricing from public signals."], ["Can I update this analysis later?", "Yes. Paste your previous output and ask Claude to update specific sections with new information."]], "faq_zh": [["一次可以分析幾個競品？", "依你需求而定。從 3-5 個直接競品開始。技能會自動格式化成並排比較表。"], ["如果我拿不到他們的定價怎麼辦？", "技能會根據你有的資料運作。它會標記缺口，並建議從公開訊號估算定價的方法。"], ["之後可以更新分析嗎？", "可以。貼上之前的輸出，要求 Claude 用新資訊更新特定章節。"]], "cmd": "/competitive", "related": "competitive-landscape-mapper"}, "jtbd-extractor": {"slug": "jtbd-extractor", "cat": "research", "is_agent": false, "title_en": "JTBD Extractor", "title_zh": "JTBD 洞察", "desc_en": "Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities.", "desc_zh": "從研究資料萃取 JTBD 陳述句，找出真正的創新機會點。", "time": "4-6 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery / jtbd", "problem_en": "Most product teams build based on feature requests, not underlying jobs. You end up shipping things that don't get used because you solved the wrong problem.", "problem_zh": "大多數產品團隊基於功能需求而非底層任務來建構產品。你最終交付的東西沒人用，因為你解決的是錯誤的問題。", "bullets_en": ["JTBD statements in 'When I... I want to... So I can...' format", "Functional, social, and emotional job dimensions", "Underserved jobs ranked by opportunity score", "Direct quotes from your research as evidence", "Jobs mapped to current product gaps"], "bullets_zh": ["用「當我……我想要……所以我可以……」格式的 JTBD 陳述", "功能性、社會性和情感性任務維度", "按機會分數排名的未被滿足任務", "來自你研究的直接引言作為佐證", "對應現有產品缺口的任務地圖"], "best_for_en": ["Customer interviews", "Discovery synthesis", "Innovation workshops", "Roadmap prioritization"], "best_for_zh": ["客戶訪談", "發現階段整合", "創新工作坊", "Roadmap 優先排序"], "faq_en": [["What inputs does this need?", "Raw interview transcripts, survey responses, support tickets, or any text where customers describe their work. The messier the input, the more value the skill adds."], ["How is JTBD different from user stories?", "User stories describe what you're building. JTBD describes why the customer needs it — independent of any solution. JTBD leads to better product decisions."], ["Can I use this without interview data?", "Yes. You can also provide product reviews, NPS comments, or your own observations. More data = more accurate jobs."]], "faq_zh": [["這需要什麼輸入？", "原始訪談逐字稿、問卷回應、客服票券，或任何客戶描述其工作的文字。輸入越凌亂，技能增加的價值越大。"], ["JTBD 和 User Story 有什麼不同？", "User Story 描述你要建什麼。JTBD 描述客戶為什麼需要它——獨立於任何解決方案。JTBD 帶來更好的產品決策。"], ["沒有訪談資料可以用嗎？", "可以。你也可以提供產品評論、NPS 評論或你自己的觀察。資料越多 = 任務越準確。"]], "cmd": "/jtbd", "related": "user-interview-analyzer"}, "user-interview-analyzer": {"slug": "user-interview-analyzer", "cat": "research", "is_agent": false, "title_en": "User Interview Analyzer", "title_zh": "訪談分析", "desc_en": "Transform interview transcripts into structured insights with quotes, patterns, and recommendations.", "desc_zh": "把訪談逐字稿轉成結構化洞察，附引述、模式與建議。", "time": "1-2 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery / interview", "problem_en": "Manual user interview analyzer takes too long and the output is hard to act on. Teams either skip it or do it poorly under time pressure.", "problem_zh": "手動進行訪談分析需要太長時間，而且輸出結果難以付諸行動。團隊要麼跳過，要麼在時間壓力下做得很差。", "bullets_en": ["Structured framework-driven analysis", "Evidence-backed insights with direct quotes", "Actionable recommendations with clear rationale", "Ready-to-share output format"], "bullets_zh": ["以框架驅動的結構化分析", "有直接引言佐證的洞察", "有清楚理由的可執行建議", "可直接分享的輸出格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How much context do I need to provide?", "The more the better. Product area, target users, and specific questions you want answered are a great starting point."], ["Can I iterate on the output?", "Yes. The output is a starting point. Ask Claude to go deeper on any section, reframe an insight, or add a dimension you care about."]], "faq_zh": [["需要提供多少脈絡？", "越多越好。產品領域、目標使用者和你想回答的具體問題是很好的起點。"], ["可以反覆修改輸出嗎？", "可以。輸出是起點。要求 Claude 深入探討任何章節、重新框架一個洞察，或添加你關心的維度。"]], "cmd": "/user_interview_analy", "related": null}, "research-synthesis-engine": {"slug": "research-synthesis-engine", "cat": "research", "is_agent": false, "title_en": "Research Synthesis Engine", "title_zh": "研究整合", "desc_en": "Synthesize multiple research sources into coherent insights with clear evidence chains.", "desc_zh": "整合多份研究資料，產出有清楚論據脈絡的完整洞察報告。", "time": "8+ hrs → 1 hr", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery / research", "problem_en": "Manual research synthesis engine takes too long and the output is hard to act on. Teams either skip it or do it poorly under time pressure.", "problem_zh": "手動進行研究整合需要太長時間，而且輸出結果難以付諸行動。團隊要麼跳過，要麼在時間壓力下做得很差。", "bullets_en": ["Structured framework-driven analysis", "Evidence-backed insights with direct quotes", "Actionable recommendations with clear rationale", "Ready-to-share output format"], "bullets_zh": ["以框架驅動的結構化分析", "有直接引言佐證的洞察", "有清楚理由的可執行建議", "可直接分享的輸出格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How much context do I need to provide?", "The more the better. Product area, target users, and specific questions you want answered are a great starting point."], ["Can I iterate on the output?", "Yes. The output is a starting point. Ask Claude to go deeper on any section, reframe an insight, or add a dimension you care about."]], "faq_zh": [["需要提供多少脈絡？", "越多越好。產品領域、目標使用者和你想回答的具體問題是很好的起點。"], ["可以反覆修改輸出嗎？", "可以。輸出是起點。要求 Claude 深入探討任何章節、重新框架一個洞察，或添加你關心的維度。"]], "cmd": "/research_synthesis_e", "related": null}, "persona-generator": {"slug": "persona-generator", "cat": "research", "is_agent": false, "title_en": "Persona Generator", "title_zh": "Persona 建立", "desc_en": "Create data-backed user personas that go beyond demographics to capture behaviors and motivations.", "desc_zh": "建立有數據支撐的 Persona，超越人口統計、深入行為與動機。", "time": "8+ hrs → 1 hr", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery / persona", "problem_en": "Manual persona generator takes too long and the output is hard to act on. Teams either skip it or do it poorly under time pressure.", "problem_zh": "手動進行Persona 建立需要太長時間，而且輸出結果難以付諸行動。團隊要麼跳過，要麼在時間壓力下做得很差。", "bullets_en": ["Structured framework-driven analysis", "Evidence-backed insights with direct quotes", "Actionable recommendations with clear rationale", "Ready-to-share output format"], "bullets_zh": ["以框架驅動的結構化分析", "有直接引言佐證的洞察", "有清楚理由的可執行建議", "可直接分享的輸出格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How much context do I need to provide?", "The more the better. Product area, target users, and specific questions you want answered are a great starting point."], ["Can I iterate on the output?", "Yes. The output is a starting point. Ask Claude to go deeper on any section, reframe an insight, or add a dimension you care about."]], "faq_zh": [["需要提供多少脈絡？", "越多越好。產品領域、目標使用者和你想回答的具體問題是很好的起點。"], ["可以反覆修改輸出嗎？", "可以。輸出是起點。要求 Claude 深入探討任何章節、重新框架一個洞察，或添加你關心的維度。"]], "cmd": "/persona_generator", "related": null}, "feature-request-analyzer": {"slug": "feature-request-analyzer", "cat": "research", "is_agent": false, "title_en": "Feature Request Analyzer", "title_zh": "功能需求整理", "desc_en": "Turn scattered feature requests into a prioritized list based on actual demand.", "desc_zh": "把散落各處的功能需求彙整成有優先順序的清單。", "time": "4-6 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery", "problem_en": "Manual feature request analyzer takes too long and the output is hard to act on. Teams either skip it or do it poorly under time pressure.", "problem_zh": "手動進行功能需求整理需要太長時間，而且輸出結果難以付諸行動。團隊要麼跳過，要麼在時間壓力下做得很差。", "bullets_en": ["Structured framework-driven analysis", "Evidence-backed insights with direct quotes", "Actionable recommendations with clear rationale", "Ready-to-share output format"], "bullets_zh": ["以框架驅動的結構化分析", "有直接引言佐證的洞察", "有清楚理由的可執行建議", "可直接分享的輸出格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How much context do I need to provide?", "The more the better. Product area, target users, and specific questions you want answered are a great starting point."], ["Can I iterate on the output?", "Yes. The output is a starting point. Ask Claude to go deeper on any section, reframe an insight, or add a dimension you care about."]], "faq_zh": [["需要提供多少脈絡？", "越多越好。產品領域、目標使用者和你想回答的具體問題是很好的起點。"], ["可以反覆修改輸出嗎？", "可以。輸出是起點。要求 Claude 深入探討任何章節、重新框架一個洞察，或添加你關心的維度。"]], "cmd": "/feature_request_anal", "related": null}, "competitive-landscape-mapper": {"slug": "competitive-landscape-mapper", "cat": "research", "is_agent": false, "title_en": "Competitive Landscape Mapper", "title_zh": "競品格局地圖", "desc_en": "Map multiple competitors into a unified landscape with positioning matrices and feature comparisons.", "desc_zh": "將多家競品整合成一張格局地圖，含定位矩陣與功能比較。", "time": "8+ hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Competitive", "problem_en": "Manual competitive landscape mapper takes too long and the output is hard to act on. Teams either skip it or do it poorly under time pressure.", "problem_zh": "手動進行競品格局地圖需要太長時間，而且輸出結果難以付諸行動。團隊要麼跳過，要麼在時間壓力下做得很差。", "bullets_en": ["Structured framework-driven analysis", "Evidence-backed insights with direct quotes", "Actionable recommendations with clear rationale", "Ready-to-share output format"], "bullets_zh": ["以框架驅動的結構化分析", "有直接引言佐證的洞察", "有清楚理由的可執行建議", "可直接分享的輸出格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How much context do I need to provide?", "The more the better. Product area, target users, and specific questions you want answered are a great starting point."], ["Can I iterate on the output?", "Yes. The output is a starting point. Ask Claude to go deeper on any section, reframe an insight, or add a dimension you care about."]], "faq_zh": [["需要提供多少脈絡？", "越多越好。產品領域、目標使用者和你想回答的具體問題是很好的起點。"], ["可以反覆修改輸出嗎？", "可以。輸出是起點。要求 Claude 深入探討任何章節、重新框架一個洞察，或添加你關心的維度。"]], "cmd": "/competitive_landscap", "related": null}, "batch-interview-synthesis": {"slug": "batch-interview-synthesis", "cat": "agent", "is_agent": true, "title_en": "Batch Interview Synthesis", "title_zh": "批次訪談分析", "desc_en": "Analyze 5-10 interviews in parallel. Extract patterns, themes, and opportunities automatically.", "desc_zh": "平行分析 5–10 份訪談，自動萃取模式、主題與機會點。", "time": "⚡ 7-10 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 4, "cat_tag": "Discovery", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/batch_interview_synt", "related": null}, "okr-coach": {"slug": "okr-coach", "cat": "kickoff", "is_agent": false, "title_en": "OKR Coach", "title_zh": "OKR 教練", "desc_en": "Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls.", "desc_zh": "用《OKR 做最重要的事》方法論撰寫並優化 OKR，並指出常見陷阱。", "time": "2-3 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / okr", "problem_en": "Most OKRs are just repackaged tasks. They measure activity, not outcomes. Come review time, nobody can tell if you actually moved the needle.", "problem_zh": "大多數 OKR 只是重新包裝的任務。它們衡量的是活動，而非結果。到了回顧時，沒有人能說清楚你是否真的帶來了改變。", "bullets_en": ["Objectives that inspire, not just inform", "Key Results that are truly measurable (not task lists)", "Common OKR pitfall detection and correction", "Cascade alignment from company → team → individual", "Confidence scores and leading indicator suggestions"], "bullets_zh": ["能激勵而非只是告知的目標", "真正可量測的關鍵結果（不是任務清單）", "常見 OKR 陷阱偵測與修正", "從公司 → 團隊 → 個人的串聯對齊", "信心分數與領先指標建議"], "best_for_en": ["Quarterly planning", "OKR reviews", "New team onboarding", "Strategic alignment"], "best_for_zh": ["季度規劃", "OKR 回顧", "新團隊入職", "策略對齊"], "faq_en": [["How many OKRs should a team have?", "1-3 objectives per team, 2-4 key results per objective. More than that dilutes focus and makes accountability fuzzy."], ["What's the difference between a KR and a task?", "A KR measures outcome (MAU grew 20%). A task measures activity (shipped feature X). If your KR sounds like a task, this skill will catch it."], ["Can I use this for personal OKRs too?", "Yes. The framework works at any level — company, team, or individual. Just specify the scope when you start."]], "faq_zh": [["一個團隊應該有多少 OKR？", "每個團隊 1-3 個目標，每個目標 2-4 個關鍵結果。超過這個數量會分散焦點，讓問責變得模糊。"], ["KR 和任務有什麼不同？", "KR 衡量結果（MAU 增長 20%）。任務衡量活動（交付功能 X）。如果你的 KR 聽起來像任務，這個技能會發現它。"], ["可以用於個人 OKR 嗎？", "可以。框架適用於任何層級——公司、團隊或個人。只需在開始時指定範圍。"]], "cmd": "/okr", "related": "north-star-finder"}, "positioning-statement-generator": {"slug": "positioning-statement-generator", "cat": "kickoff", "is_agent": false, "title_en": "Positioning Statement Generator", "title_zh": "產品定位", "desc_en": "Creates positioning using April Dunford's Obviously Awesome framework.", "desc_zh": "使用 April Dunford《Obviously Awesome》框架產出精準的產品定位陳述。", "time": "3 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / positioning", "problem_en": "Without a structured approach, positioning statement generator turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，產品定位變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/positioning_statemen", "related": null}, "go-to-market-strategy": {"slug": "go-to-market-strategy", "cat": "kickoff", "is_agent": false, "title_en": "Go-to-Market Strategy", "title_zh": "GTM 策略", "desc_en": "Creates a complete GTM plan with channels, messaging, timeline, and success metrics.", "desc_zh": "產出完整 GTM 計畫，涵蓋通路、訊息、時程與成功指標。", "time": "6-8 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / gtm", "problem_en": "Most GTM plans are just a list of channels. They don't answer: Who exactly is the first customer? What do they need to believe to buy? How do you reach them before you have budget?", "problem_zh": "大多數 GTM 計畫只是管道清單。它們沒有回答：第一個客戶是誰？他們需要相信什麼才會購買？在沒有預算之前如何觸及他們？", "bullets_en": ["ICP definition with behavioral, not just demographic attributes", "Positioning and messaging by segment", "Channel strategy with sequencing and resource requirements", "Launch timeline with dependencies", "Success metrics for each phase"], "bullets_zh": ["帶有行為屬性（不只是人口統計）的 ICP 定義", "按細分市場的定位和訊息", "帶有順序和資源需求的管道策略", "有相依性的發布時間表", "每個階段的成功指標"], "best_for_en": ["New product launch", "Entering new market", "Repositioning", "New feature rollout"], "best_for_zh": ["新產品發布", "進入新市場", "重新定位", "新功能推出"], "faq_en": [["How is a GTM plan different from a marketing plan?", "A marketing plan covers ongoing campaigns. GTM is a one-time launch strategy focused on who to reach first, how to reach them, and what to say — before you scale."], ["What if I have almost no budget?", "Specify this as a constraint. The skill will prioritize organic, community, and partnership channels that work without spend."], ["Can I use this for B2B and B2C?", "Yes. Specify your model upfront and the skill applies the appropriate frameworks — sales-led for B2B, product-led for B2C/PLG."]], "faq_zh": [["GTM 計畫和行銷計畫有什麼不同？", "行銷計畫涵蓋持續的活動。GTM 是一次性發布策略，專注於首先觸及誰、如何觸及他們，以及在擴大規模之前說什麼。"], ["如果我幾乎沒有預算怎麼辦？", "將此指定為限制條件。技能會優先考慮不需要花費就能運作的有機、社群和夥伴管道。"], ["可以用於 B2B 和 B2C 嗎？", "可以。預先指定你的模式，技能會應用適當的框架——B2B 用銷售主導，B2C/PLG 用產品主導。"]], "cmd": "/gtm", "related": "positioning-statement-generator"}, "quarterly-planning-template": {"slug": "quarterly-planning-template", "cat": "kickoff", "is_agent": false, "title_en": "Quarterly Planning Template", "title_zh": "季度規劃", "desc_en": "Creates a quarterly plan with themes, bets, and resource allocation.", "desc_zh": "產出季度計畫，含主題、賭注與資源分配。", "time": "1-2 weeks → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Planning / quarterly", "problem_en": "Without a structured approach, quarterly planning template turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，季度規劃變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/quarterly_planning_t", "related": null}, "prioritization-engine": {"slug": "prioritization-engine", "cat": "kickoff", "is_agent": false, "title_en": "Prioritization Engine", "title_zh": "功能優先排序", "desc_en": "Score and rank features using RICE, ICE, or weighted scoring with clear documentation.", "desc_zh": "用 RICE、ICE 或加權評分排列功能優先順序，並產出清楚文件。", "time": "4-6 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / prioritize", "problem_en": "Without a structured approach, prioritization engine turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，功能優先排序變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/prioritization_engin", "related": null}, "swot-analysis-generator": {"slug": "swot-analysis-generator", "cat": "kickoff", "is_agent": false, "title_en": "SWOT Analysis Generator", "title_zh": "SWOT 分析", "desc_en": "Creates a structured SWOT analysis with strategic implications.", "desc_zh": "產出結構化 SWOT 分析，含策略意涵。", "time": "2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / swot", "problem_en": "Without a structured approach, swot analysis generator turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，SWOT 分析變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/swot_analysis_genera", "related": null}, "pricing-strategy-analyzer": {"slug": "pricing-strategy-analyzer", "cat": "kickoff", "is_agent": false, "title_en": "Pricing Strategy Analyzer", "title_zh": "定價策略", "desc_en": "Analyze pricing strategy with competitive positioning, packaging, and revenue modeling.", "desc_zh": "分析定價策略，含競品定位、套裝組合與收益模型。", "time": "2-3 days → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / pricing", "problem_en": "Without a structured approach, pricing strategy analyzer turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，定價策略變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/pricing_strategy_ana", "related": null}, "north-star-finder": {"slug": "north-star-finder", "cat": "kickoff", "is_agent": false, "title_en": "North Star Finder", "title_zh": "North Star 指標", "desc_en": "Identify and validate your product's North Star metric with supporting input metrics.", "desc_zh": "找出並驗證你的 North Star 指標，搭配輸入指標體系。", "time": "4-6 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / north-star", "problem_en": "Without a structured approach, north star finder turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，North Star 指標變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/north_star_finder", "related": null}, "ai-product-strategy": {"slug": "ai-product-strategy", "cat": "kickoff", "is_agent": false, "title_en": "AI Product Strategy", "title_zh": "AI 產品策略", "desc_en": "Develop AI product strategy and identify AI opportunities. Build, buy, or partner?", "desc_zh": "制定 AI 產品策略，找出 AI 應用機會。自建、購買還是合作？", "time": "3-4 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy / ai", "problem_en": "Without a structured approach, ai product strategy turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，AI 產品策略變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/ai_product_strategy", "related": null}, "sprint-planning-assistant": {"slug": "sprint-planning-assistant", "cat": "kickoff", "is_agent": false, "title_en": "Sprint Planning Assistant", "title_zh": "Sprint 規劃", "desc_en": "Creates a sprint plan with goals, capacity, and committed work.", "desc_zh": "產出 Sprint 計畫，含目標、產能與承諾工作項。", "time": "2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Planning / sprint", "problem_en": "Without a structured approach, sprint planning assistant turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，Sprint 規劃變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/sprint_planning_assi", "related": null}, "feature-decomposition-tool": {"slug": "feature-decomposition-tool", "cat": "kickoff", "is_agent": false, "title_en": "Feature Decomposition Tool", "title_zh": "功能拆解", "desc_en": "Breaks down a feature into shippable chunks with dependencies mapped.", "desc_zh": "把一個功能拆解成可交付的小塊，並標出依賴關係。", "time": "4-6 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Planning", "problem_en": "Without a structured approach, feature decomposition tool turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，功能拆解變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/feature_decompositio", "related": null}, "devil-s-advocate": {"slug": "devil-s-advocate", "cat": "kickoff", "is_agent": false, "title_en": "Devil's Advocate", "title_zh": "魔鬼辯護人", "desc_en": "Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios.", "desc_zh": "挑戰你的 PRD 與規格，找出盲點、隱藏假設與潛在失敗情境。", "time": "1-2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy", "problem_en": "Without a structured approach, devil's advocate turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，魔鬼辯護人變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/devil_s_advocate", "related": null}, "daily-plan": {"slug": "daily-plan", "cat": "kickoff", "is_agent": false, "title_en": "Daily Plan", "title_zh": "每日計畫", "desc_en": "Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on.", "desc_zh": "產出與目標對齊的每日計畫，每天清楚知道最重要的事。", "time": "30 min → 5 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Planning", "problem_en": "Without a structured approach, daily plan turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，每日計畫變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/daily_plan", "related": null}, "weekly-plan": {"slug": "weekly-plan", "cat": "kickoff", "is_agent": false, "title_en": "Weekly Plan", "title_zh": "每週計畫", "desc_en": "Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait.", "desc_zh": "產出與季度目標對齊的本週優先事項，清楚分辨輕重緩急。", "time": "45 min → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Planning", "problem_en": "Without a structured approach, weekly plan turns into a long meeting with no clear output. Decisions get revisited and alignment doesn't stick.", "problem_zh": "沒有結構化的方法，每週計畫變成一個沒有明確輸出的長會議。決策被重新討論，對齊無法持久。", "bullets_en": ["Strategic output aligned to business goals", "Clear decisions and next steps", "Stakeholder-ready format", "Documented assumptions for future reference"], "bullets_zh": ["對齊業務目標的策略輸出", "清楚的決策和下一步", "利害關係人可直接使用的格式", "記錄好的假設供日後參考"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if I don't have all the information?", "Start with what you have. The skill will flag assumptions and gaps, and you can fill them in as you learn more."], ["How do I get stakeholder buy-in on the output?", "Share the output before the meeting and ask for async feedback. The structured format makes it easier to review and comment than an unstructured doc."]], "faq_zh": [["如果我沒有所有資訊怎麼辦？", "從你有的開始。技能會標記假設和缺口，你可以在學到更多後填補它們。"], ["如何獲得利害關係人對輸出的認可？", "在會議之前分享輸出，並要求非同步回饋。結構化格式比非結構化文件更容易審查和評論。"]], "cmd": "/weekly_plan", "related": null}, "prd-writer": {"slug": "prd-writer", "cat": "design", "is_agent": false, "title_en": "PRD Writer", "title_zh": "PRD 撰寫", "desc_en": "Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building.", "desc_zh": "將混亂的想法轉化為結構化的 PRD，在工程團隊開始建置前取得利害關係人共識。", "time": "4-6 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Specs / prd", "problem_en": "PRDs are either too vague (engineers ask 'what do you actually want?') or too detailed (nobody reads them). Scope creep starts before development begins.", "problem_zh": "PRD 不是太模糊（工程師問「你到底要什麼？」）就是太詳細（沒人讀）。範疇蔓延在開發開始之前就已經發生。", "bullets_en": ["Problem-first structure (not solution-first)", "Evidence requirements enforced", "V/U/F/V risk assessment built in", "Success criteria with measurable metrics", "Non-goals to prevent scope creep", "Staged sign-off process"], "bullets_zh": ["問題優先結構（非解決方案優先）", "強制要求佐證資料", "內建 V/U/F/V 風險評估", "帶有可量測指標的成功標準", "明確 Non-goals 防止範疇蔓延", "分階段簽核流程"], "best_for_en": ["New features", "Major initiatives", "Cross-team projects", "Formal documentation"], "best_for_zh": ["新功能", "重大計畫", "跨團隊專案", "正式文件"], "faq_en": [["How long should a PRD be?", "1-3 pages. Comprehensive enough to answer key questions, concise enough that stakeholders will actually read it. This skill enforces that discipline."], ["What's the difference between a PRD and a technical spec?", "A PRD defines WHAT and WHY (owned by Product). A tech spec defines HOW to build it (owned by Engineering). PRD comes first."], ["Do I need a PRD for every feature?", "Not for small fixes. Use a PRD when the feature is significant, multiple stakeholders need alignment, or there's meaningful risk to assess."]], "faq_zh": [["PRD 應該多長？", "1-3 頁。足以回答關鍵問題，但足夠簡潔讓利害關係人真的會讀。這個技能強制執行這個準則。"], ["PRD 和技術規格有什麼不同？", "PRD 定義做什麼和為什麼（由 Product 負責）。技術規格定義如何建構（由 Engineering 負責）。PRD 優先。"], ["每個功能都需要 PRD 嗎？", "小修正不需要。當功能重要、多個利害關係人需要對齊，或有重大風險需要評估時，才用 PRD。"]], "cmd": "/prd", "related": "problem-to-prd"}, "user-story-writer": {"slug": "user-story-writer", "cat": "design", "is_agent": false, "title_en": "User Story Writer", "title_zh": "User Story", "desc_en": "Write clear user stories with acceptance criteria following the INVEST principles.", "desc_zh": "依照 INVEST 原則撰寫清楚的 User Story，含驗收條件。", "time": "30 min → 5 min per story", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Specs / user-stories", "problem_en": "Stories written without discipline become ambiguous requirements that engineers have to interpret. Acceptance criteria get forgotten, and 'done' means different things to different people.", "problem_zh": "缺乏規範寫出的 Story 會變成工程師必須自己詮釋的模糊需求。驗收標準被遺忘，「完成」對不同人意味著不同事情。", "bullets_en": ["INVEST-compliant stories (Independent, Negotiable, Valuable, Estimable, Small, Testable)", "Acceptance criteria in Given/When/Then format", "Edge cases and error states included", "Definition of Done checklist", "Batch generation from a feature description"], "bullets_zh": ["符合 INVEST 原則的 Story（獨立、可協商、有價值、可估算、夠小、可測試）", "Given/When/Then 格式的驗收標準", "包含邊緣案例和錯誤狀態", "完成定義（Definition of Done）清單", "從功能描述批次生成"], "best_for_en": ["Sprint planning", "Backlog refinement", "Design handoff", "Engineering alignment"], "best_for_zh": ["Sprint 規劃", "Backlog 精煉", "設計交付", "工程對齊"], "faq_en": [["How granular should stories be?", "Each story should be completable in one sprint (1-2 weeks). If you can't estimate it or it spans multiple teams, break it down. This skill flags stories that are too large."], ["Should I write stories before or after design?", "Both work. Pre-design stories capture the 'what and why'. Post-design stories are more specific about UI behavior. Specify which mode when you run the skill."], ["Can I generate stories from a PRD?", "Yes. Paste your PRD and the skill will generate a full set of user stories with acceptance criteria, ready for backlog grooming."]], "faq_zh": [["Story 應該多細緻？", "每個 Story 應該在一個 Sprint（1-2 週）內可以完成。如果無法估算或跨越多個團隊，就拆分它。這個技能會標記太大的 Story。"], ["應該在設計前還是設計後寫 Story？", "兩者都可以。設計前的 Story 捕捉「做什麼和為什麼」。設計後的 Story 對 UI 行為更具體。執行技能時指定哪種模式。"], ["可以從 PRD 生成 Story 嗎？", "可以。貼上 PRD，技能會生成完整的 User Story 集合，附帶驗收標準，可直接進行 Backlog 梳理。"]], "cmd": "/user_story", "related": "prd-writer"}, "product-brief-writer": {"slug": "product-brief-writer", "cat": "design", "is_agent": false, "title_en": "Product Brief Writer", "title_zh": "Product Brief", "desc_en": "Write one-page product briefs to get buy-in before investing in full specs.", "desc_zh": "撰寫一頁式 Product Brief，在投入完整規格前取得支持。", "time": "1-2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Specs / brief", "problem_en": "Undisciplined product brief writer creates documents that engineers can't build from and stakeholders won't read. The gaps show up as bugs and scope creep.", "problem_zh": "缺乏規範的Product Brief會創建工程師無法依此開發、利害關係人不會閱讀的文件。這些缺口以錯誤和範疇蔓延的形式出現。", "bullets_en": ["Engineering-ready documentation", "Problem-first structure", "Success criteria with measurable metrics", "Non-goals to prevent scope creep"], "bullets_zh": ["工程可直接使用的文件", "問題優先結構", "帶有可量測指標的成功標準", "明確的 Non-goals 防止範疇蔓延"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Should I write this before or after design mockups?", "Before. Define what to build first, then design. Use this to align stakeholders before any wireframes."], ["Can I paste in an existing draft to improve it?", "Yes. Paste your draft and ask Claude to apply the framework to restructure and strengthen it."]], "faq_zh": [["應該在設計稿之前還是之後寫？", "之前。先定義要建什麼，再設計。在任何線框圖之前用它來對齊利害關係人。"], ["可以貼入現有草稿來改善嗎？", "可以。貼入草稿，要求 Claude 應用框架重新整理和強化它。"]], "cmd": "/product_brief_writer", "related": null}, "one-pager-creator": {"slug": "one-pager-creator", "cat": "design", "is_agent": false, "title_en": "One-Pager Creator", "title_zh": "One-Pager", "desc_en": "Create compelling one-page feature briefs that align stakeholders quickly.", "desc_zh": "製作吸引人的一頁式功能簡報，快速讓利害關係人達成共識。", "time": "2-3 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Specs / one-pager", "problem_en": "Undisciplined one-pager creator creates documents that engineers can't build from and stakeholders won't read. The gaps show up as bugs and scope creep.", "problem_zh": "缺乏規範的One-Pager會創建工程師無法依此開發、利害關係人不會閱讀的文件。這些缺口以錯誤和範疇蔓延的形式出現。", "bullets_en": ["Engineering-ready documentation", "Problem-first structure", "Success criteria with measurable metrics", "Non-goals to prevent scope creep"], "bullets_zh": ["工程可直接使用的文件", "問題優先結構", "帶有可量測指標的成功標準", "明確的 Non-goals 防止範疇蔓延"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Should I write this before or after design mockups?", "Before. Define what to build first, then design. Use this to align stakeholders before any wireframes."], ["Can I paste in an existing draft to improve it?", "Yes. Paste your draft and ask Claude to apply the framework to restructure and strengthen it."]], "faq_zh": [["應該在設計稿之前還是之後寫？", "之前。先定義要建什麼，再設計。在任何線框圖之前用它來對齊利害關係人。"], ["可以貼入現有草稿來改善嗎？", "可以。貼入草稿，要求 Claude 應用框架重新整理和強化它。"]], "cmd": "/one_pager_creator", "related": null}, "technical-spec-writer": {"slug": "technical-spec-writer", "cat": "design", "is_agent": false, "title_en": "Technical Spec Writer", "title_zh": "技術規格", "desc_en": "Write technical specifications with architecture, data models, and API designs.", "desc_zh": "撰寫技術規格，含架構、資料模型與 API 設計。", "time": "6-8 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Specs / tech-spec", "problem_en": "Undisciplined technical spec writer creates documents that engineers can't build from and stakeholders won't read. The gaps show up as bugs and scope creep.", "problem_zh": "缺乏規範的技術規格會創建工程師無法依此開發、利害關係人不會閱讀的文件。這些缺口以錯誤和範疇蔓延的形式出現。", "bullets_en": ["Engineering-ready documentation", "Problem-first structure", "Success criteria with measurable metrics", "Non-goals to prevent scope creep"], "bullets_zh": ["工程可直接使用的文件", "問題優先結構", "帶有可量測指標的成功標準", "明確的 Non-goals 防止範疇蔓延"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Should I write this before or after design mockups?", "Before. Define what to build first, then design. Use this to align stakeholders before any wireframes."], ["Can I paste in an existing draft to improve it?", "Yes. Paste your draft and ask Claude to apply the framework to restructure and strengthen it."]], "faq_zh": [["應該在設計稿之前還是之後寫？", "之前。先定義要建什麼，再設計。在任何線框圖之前用它來對齊利害關係人。"], ["可以貼入現有草稿來改善嗎？", "可以。貼入草稿，要求 Claude 應用框架重新整理和強化它。"]], "cmd": "/technical_spec_write", "related": null}, "journey-map-creator": {"slug": "journey-map-creator", "cat": "design", "is_agent": false, "title_en": "Journey Map Creator", "title_zh": "使用者旅程地圖", "desc_en": "Build detailed customer journey maps that identify pain points and opportunities across touchpoints.", "desc_zh": "建立詳細的顧客旅程地圖，找出各觸點的痛點與機會。", "time": "6-8 hrs → 1 hr", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Discovery", "problem_en": "Undisciplined journey map creator creates documents that engineers can't build from and stakeholders won't read. The gaps show up as bugs and scope creep.", "problem_zh": "缺乏規範的使用者旅程地圖會創建工程師無法依此開發、利害關係人不會閱讀的文件。這些缺口以錯誤和範疇蔓延的形式出現。", "bullets_en": ["Engineering-ready documentation", "Problem-first structure", "Success criteria with measurable metrics", "Non-goals to prevent scope creep"], "bullets_zh": ["工程可直接使用的文件", "問題優先結構", "帶有可量測指標的成功標準", "明確的 Non-goals 防止範疇蔓延"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Should I write this before or after design mockups?", "Before. Define what to build first, then design. Use this to align stakeholders before any wireframes."], ["Can I paste in an existing draft to improve it?", "Yes. Paste your draft and ask Claude to apply the framework to restructure and strengthen it."]], "faq_zh": [["應該在設計稿之前還是之後寫？", "之前。先定義要建什麼，再設計。在任何線框圖之前用它來對齊利害關係人。"], ["可以貼入現有草稿來改善嗎？", "可以。貼入草稿，要求 Claude 應用框架重新整理和強化它。"]], "cmd": "/journey_map_creator", "related": null}, "problem-to-prd": {"slug": "problem-to-prd", "cat": "agent", "is_agent": true, "title_en": "Problem to PRD", "title_zh": "問題→PRD", "desc_en": "Turn a problem into engineering-ready specs: JTBD analysis, opportunity tree, full PRD, and sprint-ready stories.", "desc_zh": "把問題轉化為工程可執行規格：JTBD 分析、機會樹、完整 PRD 與 Sprint 故事。", "time": "⚡ 3 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 4, "cat_tag": "Specs", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/problem_to_prd", "related": null}, "roadmap-builder": {"slug": "roadmap-builder", "cat": "develop", "is_agent": false, "title_en": "Roadmap Builder", "title_zh": "Roadmap 規劃", "desc_en": "Creates a structured product roadmap from your goals, constraints, and priorities.", "desc_zh": "從目標、限制與優先順序產出結構化產品 Roadmap。", "time": "4-6 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Roadmap / planning", "problem_en": "Roadmaps either become commitment documents that trap you, or vague wish lists that nobody trusts. Neither version helps your team decide what to work on next.", "problem_zh": "Roadmap 不是變成困住你的承諾文件，就是沒人信任的模糊願望清單。這兩個版本都無法幫助你的團隊決定接下來要做什麼。", "bullets_en": ["Outcome-based roadmap (not feature list)", "Now / Next / Later structure with clear rationale", "Dependencies and risks surfaced", "Stakeholder-ready narrative", "Linked to OKRs and North Star metric"], "bullets_zh": ["以結果為基礎的 Roadmap（非功能清單）", "帶有清楚理由的 Now / Next / Later 結構", "相依性和風險浮現", "利害關係人可直接使用的敘事", "連結 OKR 和 North Star 指標"], "best_for_en": ["Quarterly reviews", "Executive presentations", "Team alignment", "New PMs inheriting a product"], "best_for_zh": ["季度回顧", "主管簡報", "團隊對齊", "接手產品的新 PM"], "faq_en": [["Should a roadmap have dates?", "It depends on your audience. This skill produces a Now/Next/Later format by default, which avoids the false precision of dates while still communicating priority."], ["How do I handle stakeholder pressure to commit to dates?", "The skill includes a section on managing commitments. Use ranges instead of specific dates and tie delivery to outcomes, not ship dates."], ["Can I input my current roadmap to restructure it?", "Yes. Paste your existing roadmap and ask Claude to apply the outcome-based framework to restructure it."]], "faq_zh": [["Roadmap 應該有日期嗎？", "視受眾而定。這個技能預設產出 Now/Next/Later 格式，避免日期的虛假精確性，同時仍然傳達優先順序。"], ["如何處理利害關係人要求承諾日期的壓力？", "技能包含管理承諾的章節。用範圍而非具體日期，並將交付與結果而非出貨日期掛鉤。"], ["可以輸入現有 Roadmap 來重新整理嗎？", "可以。貼上現有 Roadmap，要求 Claude 應用以結果為基礎的框架重新整理。"]], "cmd": "/roadmap", "related": "prioritization-engine"}, "sprint-retro-facilitator": {"slug": "sprint-retro-facilitator", "cat": "develop", "is_agent": false, "title_en": "Sprint Retro Facilitator", "title_zh": "Sprint Retro", "desc_en": "Structures sprint retrospectives with prompts, synthesis, and action items.", "desc_zh": "以提示、綜合整理與行動項目規劃 Sprint 回顧。", "time": "1 hr → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Operations / retro", "problem_en": "Retros turn into complaint sessions or rubber-stamp meetings where nothing actually changes. The same issues come up every sprint because action items never get followed through.", "problem_zh": "Retro 變成抱怨大會或橡皮章會議，什麼都沒有真正改變。因為行動項目從來沒有跟進，所以每個 Sprint 都出現同樣的問題。", "bullets_en": ["Structured prompts for What Went Well / Delta / Actions", "Pattern detection across multiple retros", "Action items with clear owners and due dates", "Anonymous input synthesis (if provided)", "Follow-up tracker for previous actions"], "bullets_zh": ["What Went Well / Delta / Actions 的結構化提示", "跨多個 Retro 的模式偵測", "帶有明確負責人和到期日的行動項目", "匿名輸入整合（如提供）", "追蹤上次行動項目的後續"], "best_for_en": ["End of sprint", "Quarterly team reviews", "Project post-mortems", "Team health checks"], "best_for_zh": ["Sprint 結束", "季度團隊回顧", "專案事後分析", "團隊健康檢測"], "faq_en": [["How long does a retro take with this skill?", "30-45 minutes for the meeting itself. The skill handles all prep and synthesis, saving you 1-2 hours of post-meeting work."], ["What if team members are reluctant to share?", "Run it asynchronously. Collect inputs via a form or doc, paste the raw responses into Claude, and the skill synthesizes themes without attribution."], ["Can I track action items across multiple retros?", "Yes. Paste your previous retro output at the start and the skill checks what was completed before opening new items."]], "faq_zh": [["使用這個技能 Retro 需要多久？", "會議本身 30-45 分鐘。技能處理所有準備和整合工作，幫你節省 1-2 小時的會後工作。"], ["如果團隊成員不願意分享怎麼辦？", "非同步執行。透過表單或文件收集輸入，將原始回應貼給 Claude，技能會在不標注來源的情況下整合主題。"], ["可以跨多個 Retro 追蹤行動項目嗎？", "可以。在開始時貼上之前的 Retro 輸出，技能會在開放新項目之前檢查已完成的內容。"]], "cmd": "/retro", "related": "team-health-check"}, "team-health-check": {"slug": "team-health-check", "cat": "develop", "is_agent": false, "title_en": "Team Health Check", "title_zh": "團隊健康檢測", "desc_en": "Run structured team health checks to surface what is working and what is not.", "desc_zh": "執行結構化的團隊健康檢查，找出運作良好與需要改善的地方。", "time": "3-4 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Operations", "problem_en": "Without a consistent process, team health check produces inconsistent results. The same mistakes repeat, and there's no institutional memory.", "problem_zh": "沒有一致的流程，團隊健康檢測產生不一致的結果。同樣的錯誤重複出現，沒有組織記憶。", "bullets_en": ["Structured output ready to action", "Clear owners and next steps", "Repeatable process for every sprint", "Team-aligned format"], "bullets_zh": ["可立即執行的結構化輸出", "明確的負責人和下一步", "每個 Sprint 可重複使用的流程", "團隊對齊的格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How often should I run this?", "As needed — most teams run this once per sprint or per quarter depending on the skill type."], ["What inputs work best?", "Meeting notes, Slack threads, or a brief description of the situation. The more specific, the better the output."]], "faq_zh": [["應該多常執行？", "視需要而定——大多數團隊依技能類型每個 Sprint 或每季執行一次。"], ["什麼輸入效果最好？", "會議記錄、Slack 串文，或情況的簡短描述。越具體，輸出越好。"]], "cmd": "/team_health_check", "related": null}, "incident-post-mortem": {"slug": "incident-post-mortem", "cat": "develop", "is_agent": false, "title_en": "Incident Post-Mortem", "title_zh": "事故 Post-Mortem", "desc_en": "Writes a blameless incident post-mortem with root cause analysis.", "desc_zh": "撰寫無指責的事故 Post-Mortem，含根本原因分析。", "time": "2-3 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Operations", "problem_en": "Without a consistent process, incident post-mortem produces inconsistent results. The same mistakes repeat, and there's no institutional memory.", "problem_zh": "沒有一致的流程，事故 Post-Mortem產生不一致的結果。同樣的錯誤重複出現，沒有組織記憶。", "bullets_en": ["Structured output ready to action", "Clear owners and next steps", "Repeatable process for every sprint", "Team-aligned format"], "bullets_zh": ["可立即執行的結構化輸出", "明確的負責人和下一步", "每個 Sprint 可重複使用的流程", "團隊對齊的格式"], "best_for_en": [], "best_for_zh": [], "faq_en": [["How often should I run this?", "As needed — most teams run this once per sprint or per quarter depending on the skill type."], ["What inputs work best?", "Meeting notes, Slack threads, or a brief description of the situation. The more specific, the better the output."]], "faq_zh": [["應該多常執行？", "視需要而定——大多數團隊依技能類型每個 Sprint 或每季執行一次。"], ["什麼輸入效果最好？", "會議記錄、Slack 串文，或情況的簡短描述。越具體，輸出越好。"]], "cmd": "/incident_post_mortem", "related": null}, "metric-framework-builder": {"slug": "metric-framework-builder", "cat": "test", "is_agent": false, "title_en": "Metric Framework Builder", "title_zh": "指標框架", "desc_en": "Build comprehensive metrics frameworks using AARRR pirate metrics or input/output methodology.", "desc_zh": "用 AARRR 或輸入/輸出方法論建立完整指標框架。", "time": "4-6 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Data / metrics", "problem_en": "Teams track everything and understand nothing. Dashboards with 50 metrics create noise, not clarity. Nobody can agree on what 'doing well' actually looks like.", "problem_zh": "團隊追蹤一切卻什麼都不了解。有 50 個指標的儀表板製造噪音，而非清晰度。沒有人能同意「表現良好」實際上是什麼樣子。", "bullets_en": ["AARRR or Input/Output framework applied", "1 North Star metric with 3-5 input metrics", "Leading vs lagging indicator split", "Guardrail metrics to prevent gaming", "Data source and measurement cadence for each metric"], "bullets_zh": ["AARRR 或輸入/輸出框架應用", "1 個 North Star 指標加上 3-5 個輸入指標", "領先與落後指標區分", "防止數字遊戲的護欄指標", "每個指標的資料來源和量測頻率"], "best_for_en": ["New product launch", "Team goal-setting", "OKR planning", "Investor reporting"], "best_for_zh": ["新產品發布", "團隊目標設定", "OKR 規劃", "投資人報告"], "faq_en": [["What's the difference between AARRR and Input/Output?", "AARRR is funnel-based (great for consumer products). Input/Output separates what you control (inputs) from what results (outputs). Use I/O when you have a complex product."], ["How many metrics should I track?", "Start with 1 North Star and 3-5 inputs. You can always add more. Fewer metrics force prioritization and create accountability."], ["Can I use this to audit existing metrics?", "Yes. Paste your current metric list and the skill will identify redundancies, missing guardrails, and metrics that are outputs masquerading as inputs."]], "faq_zh": [["AARRR 和輸入/輸出有什麼不同？", "AARRR 以漏斗為基礎（適合消費者產品）。輸入/輸出區分你可以控制的（輸入）和結果（輸出）。當你有複雜產品時使用 I/O。"], ["應該追蹤多少指標？", "從 1 個 North Star 和 3-5 個輸入開始。你隨時可以增加。更少的指標強制優先排序並建立問責制。"], ["可以用來審查現有指標嗎？", "可以。貼上你目前的指標清單，技能會識別冗餘、缺失的護欄，以及偽裝成輸入的輸出指標。"]], "cmd": "/metrics", "related": "north-star-finder"}, "a-b-test-designer": {"slug": "a-b-test-designer", "cat": "test", "is_agent": false, "title_en": "A/B Test Designer", "title_zh": "A/B 測試設計", "desc_en": "Design statistically sound experiments with clear hypotheses and sample size calculations.", "desc_zh": "設計統計嚴謹的實驗，含清楚的假設與樣本數計算。", "time": "2 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Data", "problem_en": "Most A/B tests are designed wrong. Wrong sample sizes, multiple changes in one test, no clear hypothesis. You run for 2 weeks and end up with results you can't trust.", "problem_zh": "大多數 A/B 測試設計錯誤。錯誤的樣本數、一次測試多個變更、沒有清楚的假設。你跑了 2 週，得到的是你不能信任的結果。", "bullets_en": ["Single-variable hypothesis (not multi-change tests)", "Sample size calculator with power analysis", "Primary and guardrail metrics defined upfront", "Minimum Detectable Effect based on your traffic", "Pre-mortem: what could invalidate this test"], "bullets_zh": ["單變數假設（非多變更測試）", "含統計功效分析的樣本數計算機", "預先定義主要指標和護欄指標", "基於你的流量的最小可偵測效應", "事前分析：什麼可能使這個測試失效"], "best_for_en": ["Conversion optimization", "Onboarding experiments", "Pricing tests", "Feature rollouts"], "best_for_zh": ["轉換率優化", "入職實驗", "定價測試", "功能推出"], "faq_en": [["What's the right sample size?", "It depends on your baseline conversion rate and minimum effect you care about. The skill calculates this for you — just input your current metrics."], ["How long should I run a test?", "Until you reach statistical significance OR your predetermined sample size — whichever comes first. Never stop early because you see a winner."], ["Can I test multiple things at once?", "You can run parallel tests on different user segments. Never test multiple changes to the same flow simultaneously — it makes results impossible to interpret."]], "faq_zh": [["樣本數應該多大？", "這取決於你的基準轉換率和你關心的最小效應。技能為你計算——只需輸入你目前的指標。"], ["測試應該跑多久？", "直到達到統計顯著性或你預定的樣本數——以先到者為準。永遠不要因為看到贏家就提前停止。"], ["可以同時測試多件事嗎？", "你可以對不同用戶群運行並行測試。永遠不要同時對同一個流程測試多個變更——這會讓結果無法解讀。"]], "cmd": "/ab_test", "related": "experiment-designer"}, "funnel-analyzer": {"slug": "funnel-analyzer", "cat": "test", "is_agent": false, "title_en": "Funnel Analyzer", "title_zh": "轉換漏斗診斷", "desc_en": "Diagnose conversion funnel problems and generate data-backed improvement hypotheses.", "desc_zh": "診斷轉換漏斗問題，產出有數據支撐的改善假設。", "time": "3-4 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Data / funnel", "problem_en": "Ad-hoc funnel analyzer leads to decisions you can't defend. Data is collected but not structured, and the insights don't drive action.", "problem_zh": "臨時性的轉換漏斗診斷導致你無法為之辯護的決策。資料被收集但未結構化，洞察無法驅動行動。", "bullets_en": ["Statistically sound methodology", "Clear hypothesis and measurable outcomes", "Sample size and significance guidance", "Documented assumptions and risks"], "bullets_zh": ["統計嚴謹的方法論", "清楚的假設和可量測的結果", "樣本數和顯著性指引", "記錄好的假設和風險"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Do I need statistical knowledge?", "No. The skill explains significance thresholds in plain language and does the calculations for you."], ["What if my traffic is too low?", "The skill flags this and suggests alternatives — longer run times, qualitative signals, or phased rollouts."]], "faq_zh": [["需要統計學知識嗎？", "不需要。技能用簡單語言解釋顯著性門檻並為你進行計算。"], ["如果流量太低怎麼辦？", "技能會標記這個問題並建議替代方案——更長的執行時間、定性訊號或分階段推出。"]], "cmd": "/funnel_analyzer", "related": null}, "experiment-designer": {"slug": "experiment-designer", "cat": "test", "is_agent": false, "title_en": "Experiment Designer", "title_zh": "實驗設計", "desc_en": "Design A/B tests with proper methodology, sample sizes, and statistical significance thresholds.", "desc_zh": "設計 A/B 測試，含正確方法論、樣本數與統計顯著門檻。", "time": "2-3 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Data", "problem_en": "Ad-hoc experiment designer leads to decisions you can't defend. Data is collected but not structured, and the insights don't drive action.", "problem_zh": "臨時性的實驗設計導致你無法為之辯護的決策。資料被收集但未結構化，洞察無法驅動行動。", "bullets_en": ["Statistically sound methodology", "Clear hypothesis and measurable outcomes", "Sample size and significance guidance", "Documented assumptions and risks"], "bullets_zh": ["統計嚴謹的方法論", "清楚的假設和可量測的結果", "樣本數和顯著性指引", "記錄好的假設和風險"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Do I need statistical knowledge?", "No. The skill explains significance thresholds in plain language and does the calculations for you."], ["What if my traffic is too low?", "The skill flags this and suggests alternatives — longer run times, qualitative signals, or phased rollouts."]], "faq_zh": [["需要統計學知識嗎？", "不需要。技能用簡單語言解釋顯著性門檻並為你進行計算。"], ["如果流量太低怎麼辦？", "技能會標記這個問題並建議替代方案——更長的執行時間、定性訊號或分階段推出。"]], "cmd": "/experiment_designer", "related": null}, "a-b-test-analyzer": {"slug": "a-b-test-analyzer", "cat": "test", "is_agent": false, "title_en": "A/B Test Analyzer", "title_zh": "A/B 結果解讀", "desc_en": "Interpret experiment results with statistical rigor and clear ship/no-ship recommendations.", "desc_zh": "以統計嚴謹度解讀實驗結果，給出明確的上線/不上線建議。", "time": "2-3 hrs → 20 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Data", "problem_en": "Ad-hoc a/b test analyzer leads to decisions you can't defend. Data is collected but not structured, and the insights don't drive action.", "problem_zh": "臨時性的A/B 結果解讀導致你無法為之辯護的決策。資料被收集但未結構化，洞察無法驅動行動。", "bullets_en": ["Statistically sound methodology", "Clear hypothesis and measurable outcomes", "Sample size and significance guidance", "Documented assumptions and risks"], "bullets_zh": ["統計嚴謹的方法論", "清楚的假設和可量測的結果", "樣本數和顯著性指引", "記錄好的假設和風險"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Do I need statistical knowledge?", "No. The skill explains significance thresholds in plain language and does the calculations for you."], ["What if my traffic is too low?", "The skill flags this and suggests alternatives — longer run times, qualitative signals, or phased rollouts."]], "faq_zh": [["需要統計學知識嗎？", "不需要。技能用簡單語言解釋顯著性門檻並為你進行計算。"], ["如果流量太低怎麼辦？", "技能會標記這個問題並建議替代方案——更長的執行時間、定性訊號或分階段推出。"]], "cmd": "/a_b_test_analyzer", "related": null}, "hypothesis-validator": {"slug": "hypothesis-validator", "cat": "test", "is_agent": false, "title_en": "Hypothesis Validator", "title_zh": "假設驗證", "desc_en": "Structure and validate product hypotheses before committing engineering resources.", "desc_zh": "在投入工程資源前，結構化地驗證產品假設。", "time": "2 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Strategy", "problem_en": "Ad-hoc hypothesis validator leads to decisions you can't defend. Data is collected but not structured, and the insights don't drive action.", "problem_zh": "臨時性的假設驗證導致你無法為之辯護的決策。資料被收集但未結構化，洞察無法驅動行動。", "bullets_en": ["Statistically sound methodology", "Clear hypothesis and measurable outcomes", "Sample size and significance guidance", "Documented assumptions and risks"], "bullets_zh": ["統計嚴謹的方法論", "清楚的假設和可量測的結果", "樣本數和顯著性指引", "記錄好的假設和風險"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Do I need statistical knowledge?", "No. The skill explains significance thresholds in plain language and does the calculations for you."], ["What if my traffic is too low?", "The skill flags this and suggests alternatives — longer run times, qualitative signals, or phased rollouts."]], "faq_zh": [["需要統計學知識嗎？", "不需要。技能用簡單語言解釋顯著性門檻並為你進行計算。"], ["如果流量太低怎麼辦？", "技能會標記這個問題並建議替代方案——更長的執行時間、定性訊號或分階段推出。"]], "cmd": "/hypothesis_validator", "related": null}, "hypothesis-tester": {"slug": "hypothesis-tester", "cat": "agent", "is_agent": true, "title_en": "Hypothesis Tester", "title_zh": "假設驗證", "desc_en": "Debug metrics drops with first principles. Generate competing hypotheses, evaluate evidence, get next steps.", "desc_zh": "用第一原理除錯指標下降。產出競爭假設、評估證據、取得後續步驟。", "time": "⚡ 2 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 3, "cat_tag": "Data", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/hypothesis_tester", "related": null}, "release-notes-pro": {"slug": "release-notes-pro", "cat": "release", "is_agent": false, "title_en": "Release Notes Pro", "title_zh": "Release Notes", "desc_en": "Write customer-facing release notes that highlight value, not just features.", "desc_zh": "撰寫以顧客為導向的 Release Notes，強調價值而非只列功能。", "time": "1-2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Communication / release-notes", "problem_en": "Release notes written by engineers say 'fixed bug in authentication module.' Release notes that actually help customers say 'you can now stay logged in longer.' The gap between the two is your customer relationship.", "problem_zh": "工程師寫的 Release Notes 說「修復認證模組中的錯誤」。真正幫助客戶的 Release Notes 說「你現在可以保持更長時間的登入狀態」。兩者之間的差距就是你的客戶關係。", "bullets_en": ["Customer-value framing (not technical implementation)", "Tiered by impact: highlights vs full changelog", "Multiple audience versions: power users, new users, enterprise", "Clear call-to-action for each change", "Consistent voice and formatting"], "bullets_zh": ["客戶價值框架（非技術實作）", "按影響力分層：重點 vs 完整更新日誌", "多受眾版本：進階用戶、新用戶、企業", "每個變更的清楚行動號召", "一致的語氣和格式"], "best_for_en": ["Product launches", "Sprint releases", "App store updates", "Customer newsletters"], "best_for_zh": ["產品發布", "Sprint 版本", "App Store 更新", "客戶電子報"], "faq_en": [["What input format works best?", "A list of shipped features and bug fixes is enough. Paste your Jira tickets, GitHub PR titles, or even a rough bullet list. The skill does the translation."], ["Can I maintain a consistent brand voice?", "Yes. Paste examples of your previous release notes and the skill will match your established voice before generating new ones."], ["Should release notes be long or short?", "Short. Lead with 2-3 highlights. Full changelog below the fold for those who want it. This skill produces both in one run."]], "faq_zh": [["什麼輸入格式效果最好？", "交付功能和修復的清單就足夠了。貼上你的 Jira 票券、GitHub PR 標題，甚至粗略的項目清單。技能負責翻譯。"], ["可以保持一致的品牌語氣嗎？", "可以。貼上你之前 Release Notes 的範例，技能會在生成新內容之前匹配你已建立的語氣。"], ["Release Notes 應該長還是短？", "短。以 2-3 個重點開始。完整更新日誌在下方，給想要的人看。這個技能一次生成兩者。"]], "cmd": "/release_notes", "related": "customer-announcement-writer"}, "executive-update-generator": {"slug": "executive-update-generator", "cat": "release", "is_agent": false, "title_en": "Executive Update Generator", "title_zh": "主管進度更新", "desc_en": "Create crisp executive updates using the SCQA (Situation, Complication, Question, Answer) framework.", "desc_zh": "用 SCQA 框架（情境、複雜性、問題、答案）撰寫簡潔的主管更新。", "time": "2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Communication / status", "problem_en": "Writing exec updates takes 2 hours and usually misses the mark. Either too much detail (execs stop reading) or too little (they lose confidence). Getting the SCQA structure right is hard under pressure.", "problem_zh": "撰寫主管更新要花 2 小時，而且通常不到位。太多細節（主管停止閱讀）或太少（他們失去信心）。在壓力下掌握 SCQA 結構很難。", "bullets_en": ["SCQA framework (Situation, Complication, Question, Answer)", "Exec-calibrated length (1/2 page max)", "Headline-first structure for skimmers", "Risks and asks surfaced, not buried", "Multiple format options: email, Slack, doc"], "bullets_zh": ["SCQA 框架（情境、複雜化、問題、答案）", "主管校準的長度（最多半頁）", "略讀者的標題優先結構", "風險和需求浮現，不被埋沒", "多種格式選項：email、Slack、文件"], "best_for_en": ["Weekly status updates", "Escalations", "Project milestones", "Risk communication"], "best_for_zh": ["每週狀態更新", "升級事項", "專案里程碑", "風險溝通"], "faq_en": [["What's SCQA?", "A consulting framework for structuring communication. Situation (what's true), Complication (what changed), Question (so what do we do?), Answer (here's what I recommend). It forces clarity."], ["Can I use this for board-level communication?", "Yes. For board updates, specify the audience and the skill adjusts the framing — more strategic, less operational."], ["What if I have bad news to share?", "SCQA is especially good for bad news. It leads with context, not blame, and always ends with a recommended path forward."]], "faq_zh": [["什麼是 SCQA？", "一個用於構建溝通的顧問框架。情境（什麼是真的）、複雜化（什麼改變了）、問題（那我們怎麼辦？）、答案（這是我的建議）。它強制清晰度。"], ["可以用於董事會層級的溝通嗎？", "可以。對於董事會更新，指定受眾，技能會調整框架——更具策略性，少一些運營細節。"], ["如果我有壞消息要分享怎麼辦？", "SCQA 特別適合壞消息。它以脈絡而非責備開場，並且總是以建議的前進路徑結束。"]], "cmd": "/exec_update", "related": "board-deck-generator"}, "stakeholder-simulator": {"slug": "stakeholder-simulator", "cat": "release", "is_agent": false, "title_en": "Stakeholder Simulator", "title_zh": "關係人反應模擬", "desc_en": "Simulate how different stakeholders will react to your proposal and prepare responses.", "desc_zh": "模擬不同利害關係人對你的提案的反應，並預先準備回應。", "time": "2-3 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Communication", "problem_en": "You present your proposal, and the CFO asks about ROI. The engineering lead says it's too complex. The CEO wants to know the competitive angle. You weren't ready for any of it.", "problem_zh": "你提交提案，CFO 問 ROI。工程主管說太複雜了。CEO 想知道競爭角度。你對這些都沒有準備。", "bullets_en": ["Realistic objections from each stakeholder type (CEO, CFO, CTO, etc.)", "Recommended responses and framing for each", "Hidden concerns that stakeholders won't say out loud", "Pre-read or pre-brief tailored to each person", "Red flags that could kill the proposal"], "bullets_zh": ["每種利害關係人類型的真實異議（CEO、CFO、CTO 等）", "每種情況的建議回應和框架", "利害關係人不會大聲說出的隱藏顧慮", "針對每個人量身打造的預讀或預先簡報", "可能毀掉提案的紅旗"], "best_for_en": ["Board presentations", "Budget requests", "Cross-functional proposals", "Exec reviews"], "best_for_zh": ["董事會簡報", "預算申請", "跨職能提案", "主管審查"], "faq_en": [["How accurate are the simulated reactions?", "They're based on common stakeholder patterns and the context you provide. The more you tell Claude about each person, the more accurate the simulation."], ["Can I input a specific person's past reactions?", "Yes. Describe their previous objections or communication style and the skill tailors the simulation to them specifically."], ["Should I share this output with the stakeholders?", "Never share the simulation itself. Use it to prepare your talking points and pre-empt objections in your actual presentation."]], "faq_zh": [["模擬的反應有多準確？", "基於常見的利害關係人模式和你提供的脈絡。你告訴 Claude 每個人的資訊越多，模擬就越準確。"], ["可以輸入特定人的過去反應嗎？", "可以。描述他們之前的異議或溝通風格，技能會針對他們具體調整模擬。"], ["我應該和利害關係人分享這個輸出嗎？", "絕對不要分享模擬本身。用它來準備你的談話重點，並在實際演示中預先處理異議。"]], "cmd": "/stakeholder_sim", "related": "executive-update-generator"}, "customer-announcement-writer": {"slug": "customer-announcement-writer", "cat": "release", "is_agent": false, "title_en": "Customer Announcement Writer", "title_zh": "客戶公告", "desc_en": "Writes customer announcements in multiple formats (email, in-app, social).", "desc_zh": "以多種格式（Email、App 內、社群）撰寫顧客公告。", "time": "2 hrs → 10 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Launch / announcement", "problem_en": "Unstructured customer announcement writer creates inconsistency that erodes trust. Stakeholders get confused, customers feel uninformed, and the team reinvents the wheel every time.", "problem_zh": "非結構化的客戶公告造成侵蝕信任的不一致性。利害關係人感到困惑，客戶感到資訊不足，團隊每次都重新發明輪子。", "bullets_en": ["Professional communication ready to send", "Audience-appropriate tone and format", "Clear call-to-action", "Consistent brand voice"], "bullets_zh": ["準備好發送的專業溝通", "適合受眾的語氣和格式", "清楚的行動號召", "一致的品牌語氣"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Can I customize for different audiences?", "Yes. Specify the audience (engineering, exec, customer) and the skill adapts tone and format accordingly."], ["What if I need to localize the output?", "After generating, ask Claude to translate or localize. It maintains tone and adapts for cultural context."]], "faq_zh": [["可以為不同受眾客製化嗎？", "可以。指定受眾（工程、主管、客戶），技能會相應調整語氣和格式。"], ["如果需要本地化怎麼辦？", "生成後，要求 Claude 翻譯或本地化。它會保持語氣並適應文化背景。"]], "cmd": "/customer_announcemen", "related": null}, "launch-checklist-generator": {"slug": "launch-checklist-generator", "cat": "release", "is_agent": false, "title_en": "Launch Checklist Generator", "title_zh": "上線 Checklist", "desc_en": "Generate comprehensive launch checklists customized to your release type and team structure.", "desc_zh": "依上線類型與團隊結構產出客製化的完整上線清單。", "time": "2-3 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Launch", "problem_en": "Unstructured launch checklist generator creates inconsistency that erodes trust. Stakeholders get confused, customers feel uninformed, and the team reinvents the wheel every time.", "problem_zh": "非結構化的上線 Checklist造成侵蝕信任的不一致性。利害關係人感到困惑，客戶感到資訊不足，團隊每次都重新發明輪子。", "bullets_en": ["Professional communication ready to send", "Audience-appropriate tone and format", "Clear call-to-action", "Consistent brand voice"], "bullets_zh": ["準備好發送的專業溝通", "適合受眾的語氣和格式", "清楚的行動號召", "一致的品牌語氣"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Can I customize for different audiences?", "Yes. Specify the audience (engineering, exec, customer) and the skill adapts tone and format accordingly."], ["What if I need to localize the output?", "After generating, ask Claude to translate or localize. It maintains tone and adapts for cultural context."]], "faq_zh": [["可以為不同受眾客製化嗎？", "可以。指定受眾（工程、主管、客戶），技能會相應調整語氣和格式。"], ["如果需要本地化怎麼辦？", "生成後，要求 Claude 翻譯或本地化。它會保持語氣並適應文化背景。"]], "cmd": "/launch_checklist_gen", "related": null}, "meeting-notes-processor": {"slug": "meeting-notes-processor", "cat": "release", "is_agent": false, "title_en": "Meeting Notes Processor", "title_zh": "會議記錄整理", "desc_en": "Transform raw meeting notes into structured decisions, action items, and follow-ups.", "desc_zh": "將原始會議記錄轉化為結構化的決議、行動項目與後續追蹤。", "time": "30 min → 5 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Communication", "problem_en": "Unstructured meeting notes processor creates inconsistency that erodes trust. Stakeholders get confused, customers feel uninformed, and the team reinvents the wheel every time.", "problem_zh": "非結構化的會議記錄整理造成侵蝕信任的不一致性。利害關係人感到困惑，客戶感到資訊不足，團隊每次都重新發明輪子。", "bullets_en": ["Professional communication ready to send", "Audience-appropriate tone and format", "Clear call-to-action", "Consistent brand voice"], "bullets_zh": ["準備好發送的專業溝通", "適合受眾的語氣和格式", "清楚的行動號召", "一致的品牌語氣"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Can I customize for different audiences?", "Yes. Specify the audience (engineering, exec, customer) and the skill adapts tone and format accordingly."], ["What if I need to localize the output?", "After generating, ask Claude to translate or localize. It maintains tone and adapts for cultural context."]], "faq_zh": [["可以為不同受眾客製化嗎？", "可以。指定受眾（工程、主管、客戶），技能會相應調整語氣和格式。"], ["如果需要本地化怎麼辦？", "生成後，要求 Claude 翻譯或本地化。它會保持語氣並適應文化背景。"]], "cmd": "/meeting_notes_proces", "related": null}, "board-deck-generator": {"slug": "board-deck-generator", "cat": "release", "is_agent": false, "title_en": "Board Deck Generator", "title_zh": "董事會簡報", "desc_en": "Creates board meeting presentation with narrative arc and key metrics.", "desc_zh": "建立具有敘事弧線與關鍵指標的董事會報告簡報。", "time": "6-8 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 0, "cat_tag": "Communication", "problem_en": "Unstructured board deck generator creates inconsistency that erodes trust. Stakeholders get confused, customers feel uninformed, and the team reinvents the wheel every time.", "problem_zh": "非結構化的董事會簡報造成侵蝕信任的不一致性。利害關係人感到困惑，客戶感到資訊不足，團隊每次都重新發明輪子。", "bullets_en": ["Professional communication ready to send", "Audience-appropriate tone and format", "Clear call-to-action", "Consistent brand voice"], "bullets_zh": ["準備好發送的專業溝通", "適合受眾的語氣和格式", "清楚的行動號召", "一致的品牌語氣"], "best_for_en": [], "best_for_zh": [], "faq_en": [["Can I customize for different audiences?", "Yes. Specify the audience (engineering, exec, customer) and the skill adapts tone and format accordingly."], ["What if I need to localize the output?", "After generating, ask Claude to translate or localize. It maintains tone and adapts for cultural context."]], "faq_zh": [["可以為不同受眾客製化嗎？", "可以。指定受眾（工程、主管、客戶），技能會相應調整語氣和格式。"], ["如果需要本地化怎麼辦？", "生成後，要求 Claude 翻譯或本地化。它會保持語氣並適應文化背景。"]], "cmd": "/board_deck_generator", "related": null}, "competitive-intel-pack": {"slug": "competitive-intel-pack", "cat": "agent", "is_agent": true, "title_en": "Competitive Intel Pack", "title_zh": "競品搜集", "desc_en": "Research 5 competitors in parallel. Get DHM analysis, pricing comparison, and strategic recommendations fast.", "desc_zh": "平行研究 5 家競品，快速取得 DHM 分析、定價比較與策略建議。", "time": "⚡ 4 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 5, "cat_tag": "Competitive", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/competitive_intel_pa", "related": null}, "market-sizing-analyzer": {"slug": "market-sizing-analyzer", "cat": "agent", "is_agent": true, "title_en": "Market Sizing Analyzer", "title_zh": "市場規模估算", "desc_en": "Calculate TAM/SAM/SOM with bottom-up and top-down estimates. Get data sources and assumptions documented.", "desc_zh": "用由下而上與由上而下方法計算 TAM/SAM/SOM，並記錄資料來源與假設。", "time": "⚡ 4 hrs → 45 min", "quote_en": "", "quote_zh": "", "chains": 2, "cat_tag": "Strategy", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/market_sizing_analyz", "related": null}, "voc-analysis": {"slug": "voc-analysis", "cat": "agent", "is_agent": true, "title_en": "VoC Analysis", "title_zh": "客戶回饋分析", "desc_en": "Analyze 100+ feedback items from support, NPS, G2, and requests. Extract patterns and prioritize opportunities.", "desc_zh": "分析 100+ 條來自客服、NPS、G2 與需求的回饋，萃取模式並優先排序機會。", "time": "⚡ 3 hrs → 30 min", "quote_en": "", "quote_zh": "", "chains": 3, "cat_tag": "Discovery", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/voc_analysis", "related": null}, "multi-perspective-review": {"slug": "multi-perspective-review", "cat": "agent", "is_agent": true, "title_en": "Multi-Perspective Review", "title_zh": "多方視角審查", "desc_en": "Run 7 stakeholder perspectives on any document — Engineering, Design, Executive, Legal, Customer, Devil's Advocate, and Sales.", "desc_zh": "對任何文件執行 7 種利害關係人視角審查：工程、設計、主管、法務、顧客、魔鬼代言人、業務。", "time": "⚡ 2 hrs → 15 min", "quote_en": "", "quote_zh": "", "chains": 7, "cat_tag": "Communication", "problem_en": "Doing this manually requires coordinating multiple tools and steps. Context gets lost between steps, quality is inconsistent, and it takes far too long.", "problem_zh": "手動完成這件事需要協調多個工具和步驟。步驟之間的脈絡會流失，品質不一致，而且花費的時間太長。", "bullets_en": ["Multiple parallel workstreams automated", "Consistent quality across all steps", "Full output in fraction of the time", "Reproducible workflow you can run again"], "bullets_zh": ["多個並行工作流程自動化", "所有步驟的一致品質", "在幾分之一的時間內完成完整輸出", "可以再次執行的可重現工作流程"], "best_for_en": [], "best_for_zh": [], "faq_en": [["What if the agent workflow fails midway?", "Each step produces an intermediate output. If something goes wrong, you can resume from the last completed step rather than starting over."], ["How do I know the quality is good?", "Review the output from each step before proceeding. The skill surfaces its reasoning, so you can catch errors early."]], "faq_zh": [["如果 Agent 工作流程中途失敗怎麼辦？", "每個步驟都會產出中間輸出。如果出現問題，你可以從上次完成的步驟繼續，而不是重新開始。"], ["如何知道品質是好的？", "在繼續之前審查每個步驟的輸出。技能會呈現其推理過程，讓你可以早期發現錯誤。"]], "cmd": "/multi_perspective_re", "related": null}};
+
+const STAGES = {
+  research:{zh:'研究',en:'Research',color:'#887DFD'},
+  kickoff:{zh:'啟動',en:'Kick Off',color:'#4887FE'},
+  design:{zh:'設計',en:'Design',color:'#67a4fe'},
+  develop:{zh:'開發',en:'Develop',color:'#67E9E9'},
+  test:{zh:'測試',en:'Test',color:'#a0f0b0'},
+  release:{zh:'發布',en:'Release',color:'#f0c070'},
+  agent:{zh:'Agent',en:'Agent',color:'#887DFD'},
+};
+</script>
+<script>
+(function() {
+  const canvas = document.getElementById('aurora-canvas');
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vert = `
+    attribute vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos,0.0,1.0); }
+  `;
+
+  // Crepuscular / light-ray shader with directional streaks
+  const frag = `
+    precision highp float;
+    uniform vec2  u_res;
+    uniform float u_time;
+
+    float hash21(vec2 p) {
+      p = fract(p * vec2(234.34, 435.345));
+      p += dot(p, p + 34.23);
+      return fract(p.x * p.y);
+    }
+
+    // Smooth value noise
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f*f*(3.0-2.0*f);
+      return mix(
+        mix(hash21(i), hash21(i+vec2(1,0)), f.x),
+        mix(hash21(i+vec2(0,1)), hash21(i+vec2(1,1)), f.x),
+        f.y
+      );
+    }
+
+    // FBM
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i=0; i<5; i++) {
+        v += a * noise(p);
+        p  = p * 2.0 + vec2(1.7, 9.2);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Directional light beam
+    float beam(vec2 uv, vec2 origin, vec2 dir, float spread, float t) {
+      vec2 d = uv - origin;
+      float proj  = dot(d, normalize(dir));
+      float perp  = length(d - proj * normalize(dir));
+      float falloff = 1.0 / (1.0 + proj * 1.2);
+      float width = spread + 0.05 * sin(t * 0.8 + proj * 3.0);
+      float ray = smoothstep(width, 0.0, perp) * smoothstep(-0.05, 0.15, proj);
+      // add noise to break up uniformity
+      float n = fbm(uv * 4.0 + t * 0.15) * 0.4 + 0.6;
+      return ray * falloff * n;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      // correct aspect
+      uv.x *= u_res.x / u_res.y;
+      float aspect = u_res.x / u_res.y;
+      float t = u_time * 0.00035;
+
+      // ── BEAM 1: purple from top-left ──
+      vec2 o1 = vec2(-0.1 + sin(t*0.6)*0.08, 1.05 + cos(t*0.4)*0.05);
+      vec2 d1 = vec2(0.6, -0.9);
+      float ray1 = beam(uv * vec2(1.0, 1.0), o1 * vec2(aspect,1.0), d1, 0.22, t);
+
+      // ── BEAM 2: blue from top-right ──
+      vec2 o2 = vec2(aspect + 0.1 + cos(t*0.5)*0.10, 1.08 + sin(t*0.7)*0.05);
+      vec2 d2 = vec2(-0.8, -0.85);
+      float ray2 = beam(uv * vec2(1.0,1.0), o2, d2, 0.25, t + 1.5);
+
+      // ── BEAM 3: teal from right-center ──
+      vec2 o3 = vec2(aspect + 0.05 + sin(t*0.9)*0.08, 0.50 + cos(t*0.6)*0.10);
+      vec2 d3 = vec2(-1.0, -0.15);
+      float ray3 = beam(uv * vec2(1.0,1.0), o3, d3, 0.18, t + 3.0);
+
+      // ── BEAM 4: purple from top-center ──
+      vec2 o4 = vec2(aspect*0.5 + sin(t*0.7)*0.15, 1.10);
+      vec2 d4 = vec2(0.05, -1.0);
+      float ray4 = beam(uv * vec2(1.0,1.0), o4, d4, 0.30, t + 0.8);
+
+      // Brand colors (bright, saturated)
+      vec3 purple = vec3(0.533, 0.490, 0.992); // #887DFD
+      vec3 blue   = vec3(0.282, 0.529, 0.996); // #4887FE
+      vec3 teal   = vec3(0.404, 0.914, 0.914); // #67E9E9
+
+      vec3 col = vec3(0.0);
+      col += purple * ray1 * 0.85;
+      col += blue   * ray2 * 0.75;
+      col += teal   * ray3 * 0.60;
+      col += purple * ray4 * 0.50;
+
+      // Soft ambient glow in bg
+      float ambient_purple = smoothstep(1.0, 0.0, length(uv - vec2(aspect*0.35, 0.85))) * 0.12;
+      float ambient_blue   = smoothstep(0.9, 0.0, length(uv - vec2(aspect*0.70, 0.90))) * 0.10;
+      col += purple * ambient_purple;
+      col += blue   * ambient_blue;
+
+      // Keep it dark — powerful cap
+      col = pow(col, vec3(0.9));
+      col = clamp(col * 0.75, 0.0, 0.55);
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function mkShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vert));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, frag));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, ts - start);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+function toggleDropdown(btn) {
+  const dd = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+  document.addEventListener('click', function close(e) {
+    if (!btn.parentElement.contains(e.target)) {
+      btn.classList.remove('open');
+      dd.classList.remove('open');
+      document.removeEventListener('click', close);
+    }
+  });
+}
+</script>
+<script>
+let LANG = (function(){
+  try { const s=localStorage.getItem('resiligen-lang'); if(s) return s; } catch(e){}
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+  const asian=['Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Singapore','Asia/Tokyo','Asia/Seoul'];
+  return asian.some(a=>tz===a) ? 'zh' : 'en';
+})();
+function setLang(l){
+  LANG=l;
+  try{localStorage.setItem('resiligen-lang',l);}catch(e){}
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  render();
+}
+function t(en,zh){ return LANG==='zh'?zh:en; }
+function getSlug(){
+  const h=location.hash.replace('#','');
+  return h||new URLSearchParams(location.search).get('skill')||'';
+}
+function toggleFaq(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function render(){
+  const slug=getSlug();
+  const sk=ALL_SKILLS[slug];
+  const root=document.getElementById('skill-root');
+  if(!sk){
+    root.innerHTML='<div class="not-found-wrap"><h1>Skill not found</h1><p>We couldn\'t find that skill. <a href="skills.html" style="color:var(--purple)">Browse all skills →</a></p></div>';
+    return;
+  }
+  const stage=STAGES[sk.cat]||STAGES.research;
+  const title=t(sk.title_en,sk.title_zh);
+  document.title=title+' | Resiligen PM';
+
+  // bullets
+  const bulls=LANG==='zh'?sk.bullets_zh:sk.bullets_en;
+  const bullsHTML=(bulls||[]).map(b=>`
+    <li><span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></span>${b}</li>`).join('');
+
+  // best for
+  const bfList=LANG==='zh'?sk.best_for_zh:sk.best_for_en;
+  const bfHTML=(bfList&&bfList.length)?`
+    <div class="content-section">
+      <h2 class="section-h">${t('Best For','最適合')}</h2>
+      <div class="best-for-list">${(bfList||[]).map(b=>`<span class="best-for-tag">${b}</span>`).join('')}</div>
+    </div>`:' ';
+
+  // faq
+  const faqs=LANG==='zh'?sk.faq_zh:sk.faq_en;
+  const faqHTML=(faqs&&faqs.length)?`
+    <div class="content-section">
+      <h2 class="section-h">${t('Frequently Asked Questions','常見問題')}</h2>
+      <div>${(faqs||[]).map((f,i)=>`
+        <div class="faq-item" id="fq${i}">
+          <button class="faq-toggle" onclick="toggleFaq('fq${i}')">
+            <span class="faq-q">${f[0]}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">${f[1]}</div>
+        </div>`).join('')}
+      </div>
+    </div>`:' ';
+
+  // workflow card for related skill
+  const relSk=sk.related?ALL_SKILLS[sk.related]:null;
+  const wfHTML=(sk.is_agent||relSk)?`
+    <div class="content-section">
+      <h2 class="section-h">${t('Want this automated?','想自動化這個流程？')}</h2>
+      <a class="workflow-card" href="skill-detail.html#${sk.is_agent?slug:(relSk?relSk.slug:'')}">
+        <div>
+          <div class="workflow-card-badge">⚡ Agent Workflow</div>
+          <div class="workflow-card-title">${sk.is_agent?title:(relSk?t(relSk.title_en,relSk.title_zh):'')}</div>
+          <div class="workflow-card-sub">${sk.chains||relSk&&relSk.chains||'Multiple'} ${t('skills automated','個技能自動串接')} · ${sk.is_agent?sk.time:(relSk?relSk.time:'')}</div>
+        </div>
+        <div class="workflow-card-arrow">→</div>
+      </a>
+    </div>`:' ';
+
+  // steps
+  const cmd=sk.cmd||'/skill';
+  const steps=[
+    [t('Load context','載入脈絡'), t('Open Claude and make sure your PM OS context file is loaded in your project.','打開 Claude，確認你的 PM OS 脈絡檔案已載入專案。')],
+    [t('Run the command','執行指令'), `${t('Type','在 Claude 輸入')} <code>${cmd}</code> ${t('in Claude — or describe your need in plain language.','，或用自然語言描述你的需求。')}`],
+    [t('Provide input','提供輸入'), t('Give Claude your context: goals, raw notes, URLs, or relevant background.','給 Claude 你的脈絡：目標、原始筆記、網址或相關背景資料。')],
+    [t('Get your output','取得輸出'), t('Review the structured result. Ready to share, paste, or drop into your docs.','審閱結構化輸出，可直接分享、貼上或放入文件。')],
+  ];
+  const stepsHTML=steps.map((s,i)=>`
+    <div class="step-item">
+      <div class="step-num">${i+1}</div>
+      <div class="step-text"><strong style="color:var(--text);display:block;margin-bottom:3px">${s[0]}</strong>${s[1]}</div>
+    </div>`).join('');
+
+  // more skills
+  const same=Object.values(ALL_SKILLS).filter(s=>s.cat===sk.cat&&s.slug!==slug).slice(0,4);
+  const moreHTML=same.length?`
+    <div class="more-section">
+      <h2 class="more-h">${t('More skills in this stage','同階段的其他技能')}</h2>
+      <div class="more-grid">${same.map(s=>`
+        <a class="more-card" href="skill-detail.html#${s.slug}">
+          <span class="more-tag">${s.cat_tag}</span>
+          <h4>${t(s.title_en,s.title_zh)}</h4>
+          <p>${s.time}</p>
+        </a>`).join('')}
+      </div>
+    </div>`:' ';
+
+  // time split
+  const timeParts=sk.time.split('→');
+  const timeBefore=timeParts[0]?timeParts[0].trim():sk.time;
+  const timeAfter=timeParts[1]?timeParts[1].trim():'';
+
+  root.innerHTML=`
+    <div class="page-wrap" style="position:relative;z-index:1">
+      <a class="back-link" href="skills.html">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>
+        ${t('Back to Skills','返回技能庫')}
+      </a>
+      <div class="skill-cat-path">
+        <span class="cat-dot" style="background:${stage.color}"></span>
+        <span style="color:${stage.color}">${t(stage.en,stage.zh)}</span>
+        <span style="opacity:.4;margin:0 6px">/</span>
+        <span style="color:var(--text3)">${sk.cat_tag}</span>
+      </div>
+      <h1 class="skill-hero-title">${title}</h1>
+      <p class="skill-hero-desc">${t(sk.desc_en,sk.desc_zh)}</p>
+      <div class="skill-grid">
+        <div class="skill-content">
+          ${sk.problem_en?`<div class="content-section"><h2 class="section-h">${t('The Problem','為什麼這很難')}</h2><p class="section-body">${t(sk.problem_en,sk.problem_zh)}</p></div>`:''}
+          ${bulls&&bulls.length?`<div class="content-section"><h2 class="section-h">${t('What You Get','你會得到什麼')}</h2><ul class="check-list">${bullsHTML}</ul></div>`:''}
+          ${wfHTML}
+          <div class="content-section">
+            <h2 class="section-h">${t('How to Use This Skill','怎麼使用這個技能')}</h2>
+            <div class="steps-list">${stepsHTML}</div>
+          </div>
+          ${bfHTML}
+          ${faqHTML}
+        </div>
+        <aside class="skill-sidebar">
+          <div class="sidebar-stat">
+            <div class="s-label">${t('Time Saved','節省時間')}</div>
+            <div class="s-value-big">${timeBefore}</div>
+            ${timeAfter?`<div class="s-value-after">→ ${timeAfter}</div>`:''}
+            <div class="s-sub">${t('vs. doing it manually','vs. 手動作業')}</div>
+          </div>
+          <div class="sidebar-cmd">
+            <div class="s-label">${t('Slash Command','Claude 指令')}</div>
+            <div class="s-cmd">${cmd}</div>
+            <div class="s-sub">${t('Type this in Claude to activate','在 Claude 輸入此指令')}</div>
+          </div>
+          <div class="sidebar-cta">
+            <div class="cta-title">${t('Add to your kit','加入你的工具包')}</div>
+            <div class="cta-sub">${t('Get all 60+ skills with personalized context — ready in 5 minutes.','取得全部 60+ 個技能和個人化脈絡——5 分鐘就緒。')}</div>
+            <a href="pricing.html" class="cta-main">${t('Get PM OS · $249','取得 PM OS · $249')}</a>
+            <a href="skills.html" class="cta-sec">${t('Browse all skills','瀏覽所有技能')}</a>
+          </div>
+        </aside>
+      </div>
+      ${moreHTML}
+    </div>
+  `;
+
+  document.querySelectorAll('[data-en][data-zh]').forEach(el=>{
+    el.textContent=LANG==='zh'?el.dataset.zh:el.dataset.en;
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===LANG));
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('hashchange',render);
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  render();
+});
+</script>
+</body>
+</html>

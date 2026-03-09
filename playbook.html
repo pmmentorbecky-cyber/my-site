@@ -74,7 +74,7 @@
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px; height: 60px;
     background: rgba(10,8,16,0.85);
@@ -155,7 +155,7 @@
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; z-index: 0;
   }
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* aurora sits behind everything via z-index: 0 on canvas */
 
 
   .playbook-hero {
@@ -231,6 +231,77 @@
   .download-form input::placeholder { color: var(--text3); }
   .download-note { font-size: 12px; color: var(--text3); }
 
+
+  /* ── UNIVERSAL CARD HOVER — lift + glow border ── */
+  .problem-card,
+  .skill-card,
+  .pricing-card,
+  .plan-card,
+  .pkg-card,
+  .article-card,
+  .featured-card,
+  .docs-card,
+  .chapter-card,
+  .workflow-card,
+  .step,
+  .founder-card,
+  .team-card,
+  .skill-card-main {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  }
+
+  .problem-card:hover,
+  .skill-card:hover,
+  .pricing-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .article-card:hover,
+  .featured-card:hover,
+  .docs-card:hover,
+  .chapter-card:hover,
+  .workflow-card:hover,
+  .step:hover,
+  .skill-card-main:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(136,125,253,0.18), 0 0 0 1px rgba(136,125,253,0.35) !important;
+    background: var(--bg3) !important;
+    z-index: 2;
+  }
+
+  /* Cards that already have their own border (not gap-based grids) */
+  .featured-card:hover,
+  .docs-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .team-card:hover,
+  .founder-card:hover {
+    border-color: rgba(136,125,253,0.5) !important;
+  }
+
+
+  
+
+
+  /* ── LANG SWITCHER ──────────────────────────────── */
+  .lang-switcher {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 100px; border: none;
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.18s;
+    color: var(--text3); background: transparent;
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .lang-btn.active {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 2px 8px rgba(136,125,253,0.35);
+  }
+  .lang-btn:hover:not(.active) { color: var(--text2); }
+
 </style>
 </head>
 <body>
@@ -242,97 +313,101 @@
     Resiligen PM
   </a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
         <a href="learn.html">
-          <span class="dd-title">Learn</span>
-          <span class="dd-desc">Articles and guides for PMs</span>
+          <span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span>
+          <span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span>
         </a>
         <a href="playbook.html" class="active">
-          <span class="dd-title">Playbook</span>
-          <span class="dd-desc">Free PM OS guide (PDF)</span>
+          <span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span>
+          <span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span>
         </a>
         <a href="docs.html">
-          <span class="dd-title">Docs</span>
-          <span class="dd-desc">PM OS setup and reference</span>
+          <span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span>
+          <span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span>
         </a>
       </div>
     </li>
-    <li><a href="#">Pricing</a></li>
-    <li><a href="#">Services</a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
 
 <div class="playbook-hero">
   <div>
-    <div class="section-label">Free Playbook</div>
-    <h1>The PM Operating System Playbook</h1>
+    <div class="section-label"><span data-en="Free Playbook" data-zh="免費手冊">Free Playbook</span></div>
+    <h1><span data-en="The PM Operating System Playbook" data-zh="PM 作業系統手冊">The PM Operating System Playbook</span></h1>
     <p>Five chapters to take your PM team from ad-hoc AI prompting to a structured operating system — with action steps you can start today.</p>
-    <a href="#download" class="btn-gradient">Get the Free Playbook</a>
+    <a href="#download" class="btn-gradient"><span data-en="Get the Free Playbook" data-zh="取得免費手冊">Get the Free Playbook</span></a>
   </div>
   <div class="playbook-book">
     <div class="playbook-book-title">The PM OS Playbook</div>
     <div class="playbook-book-sub">Resiligen PM · 5 Chapters · Free PDF</div>
     <div class="playbook-chapters">
-      <div class="pb-chapter"><span class="pb-num">1</span> Assess Your PM Operation</div>
-      <div class="pb-chapter"><span class="pb-num">2</span> The PM OS Architecture</div>
-      <div class="pb-chapter"><span class="pb-num">3</span> Build the Foundation</div>
-      <div class="pb-chapter"><span class="pb-num">4</span> Run Your First Workflow</div>
-      <div class="pb-chapter"><span class="pb-num">5</span> Scale Across Your Team</div>
+      <div class="pb-chapter"><span class="pb-num">1</span><span data-en="Assess Your PM Operation" data-zh="評估你的 PM 運營">Assess Your PM Operation</span></div>
+      <div class="pb-chapter"><span class="pb-num">2</span><span data-en="The PM OS Architecture" data-zh="PM OS 架構">The PM OS Architecture</span></div>
+      <div class="pb-chapter"><span class="pb-num">3</span><span data-en="Build the Foundation" data-zh="建立基礎">Build the Foundation</span></div>
+      <div class="pb-chapter"><span class="pb-num">4</span><span data-en="Run Your First Workflow" data-zh="執行你的第一個工作流程">Run Your First Workflow</span></div>
+      <div class="pb-chapter"><span class="pb-num">5</span><span data-en="Scale Across Your Team" data-zh="跨團隊擴展">Scale Across Your Team</span></div>
     </div>
   </div>
 </div>
 
 <div class="chapters-section">
-  <div class="section-label">What's Inside</div>
-  <h2 class="section-title" style="margin-bottom:48px;">Each chapter builds on the last.</h2>
+  <div class="section-label"><span data-en="What's Inside" data-zh="內容介紹">What's Inside</span></div>
+  <h2 class="section-title" style="margin-bottom:48px;"><span data-en="Each chapter builds on the last." data-zh="每個章節環環相扣。">Each chapter builds on the last.</span></h2>
 
   <div class="chapters-grid">
     <div class="chapter-card">
       <span class="chapter-num">Chapter 1</span>
-      <h3>Assess Your PM Operation</h3>
+      <h3><span data-en="Assess Your PM Operation" data-zh="評估你的 PM 運營">Assess Your PM Operation</span></h3>
       <p>Score your team across 9 dimensions of PM maturity and identify your biggest gaps.</p>
     </div>
     <div class="chapter-card">
       <span class="chapter-num">Chapter 2</span>
-      <h3>The PM OS Architecture</h3>
+      <h3><span data-en="The PM OS Architecture" data-zh="PM OS 架構">The PM OS Architecture</span></h3>
       <p>The 4-layer model that turns scattered AI usage into a structured operating system.</p>
     </div>
     <div class="chapter-card">
       <span class="chapter-num">Chapter 3</span>
-      <h3>Build the Foundation</h3>
+      <h3><span data-en="Build the Foundation" data-zh="建立基礎">Build the Foundation</span></h3>
       <p>Create context files that give Claude deep knowledge of your product, team, and market.</p>
     </div>
     <div class="chapter-card">
       <span class="chapter-num">Chapter 4</span>
-      <h3>Run Your First Workflow</h3>
+      <h3><span data-en="Run Your First Workflow" data-zh="執行你的第一個工作流程">Run Your First Workflow</span></h3>
       <p>Chain skills into repeatable workflows that compress hours of PM work into minutes.</p>
     </div>
     <div class="chapter-card">
       <span class="chapter-num">Chapter 5</span>
-      <h3>Scale Across Your Team</h3>
+      <h3><span data-en="Scale Across Your Team" data-zh="跨團隊擴展">Scale Across Your Team</span></h3>
       <p>Standardize quality across every PM without micromanagement or heavy process.</p>
     </div>
     <div class="chapter-card">
       <span class="chapter-num">Every Chapter</span>
-      <h3>"Do This Now" Actions</h3>
+      <h3><span data-en="&quot;Do This Now&quot; Actions" data-zh="「現在就做」行動清單">"Do This Now" Actions</span></h3>
       <p>Concrete steps at the end of each chapter so you can apply what you learned immediately.</p>
     </div>
   </div>
 
   <div class="download-box" id="download">
-    <h2>Get the free playbook</h2>
+    <h2><span data-en="Get the free playbook" data-zh="取得免費手冊">Get the free playbook</span></h2>
     <p>Enter your email and we'll send you the PDF instantly.</p>
     <div class="download-form">
       <input type="email" placeholder="your@email.com">
-      <button class="btn-gradient">Download</button>
+      <button class="btn-gradient"><span data-en="Download" data-zh="下載">Download</span></button>
     </div>
     <div class="download-note">No spam. Unsubscribe anytime.</div>
   </div>
@@ -347,38 +422,38 @@
           <div class="nav-logo-icon">S</div>
           Resiligen PM
         </a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
         <div>
-          <h4>Product</h4>
+          <h4><span data-en="Product" data-zh="產品">Product</span></h4>
           <ul>
-            <li><a href="#">Services</a></li>
-            <li><a href="skills.html">Skills</a></li>
-            <li><a href="#">Pricing</a></li>
+            <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Learn</h4>
+          <h4><span data-en="Learn" data-zh="學習">Learn</span></h4>
           <ul>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="playbook.html">Playbook</a></li>
-            <li><a href="docs.html">Docs</a></li>
+            <li><a href="learn.html"><span data-en="Learn" data-zh="學習">Learn</span></a></li>
+            <li><a href="playbook.html"><span data-en="Playbook" data-zh="手冊">Playbook</span></a></li>
+            <li><a href="docs.html"><span data-en="Docs" data-zh="文件">Docs</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Resources</h4>
+          <h4><span data-en="Resources" data-zh="資源">Resources</span></h4>
           <ul>
-            <li><a href="#">PM Maturity Assessment</a></li>
-            <li><a href="#">ROI Calculator</a></li>
+            <li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li>
+            <li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li>
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <h4><span data-en="Company" data-zh="公司">Company</span></h4>
           <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Terms</a></li>
+            <li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li>
+            <li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li>
+            <li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li>
           </ul>
         </div>
       </div>
@@ -554,5 +629,98 @@ function toggleDropdown(btn) {
   requestAnimationFrame(frame);
 })();
 </script>
+
+
+
+
+
+
+
+<script>
+// ── Resiligen PM · i18n engine ──────────────────────────────────────────────
+function setLang(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  localStorage.setItem('resi-lang', lang);
+  document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.toggle('active', lang === 'en'));
+  document.querySelectorAll('.lang-btn-zh').forEach(b => b.classList.toggle('active', lang === 'zh'));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+  });
+}
+
+(function () {
+  // 1. If user has already manually chosen a language, honour it — no API call needed
+  const saved = localStorage.getItem('resi-lang');
+  if (saved) {
+    const init = () => setLang(saved);
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+    return;
+  }
+
+  // 2. Asian timezone codes → default Chinese
+  //    This is instant (no network) and covers 99% of cases correctly.
+  const ASIAN_TZ = [
+    'Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Chongqing',
+    'Asia/Urumqi','Asia/Harbin','Asia/Macao','Asia/Singapore',
+    'Asia/Kuala_Lumpur','Asia/Bangkok','Asia/Jakarta','Asia/Ho_Chi_Minh',
+    'Asia/Seoul','Asia/Tokyo','Asia/Manila','Asia/Makassar',
+    'Asia/Brunei','Asia/Phnom_Penh','Asia/Vientiane','Asia/Rangoon',
+    'Asia/Yangon','Asia/Dhaka','Asia/Kolkata','Asia/Colombo',
+    'Asia/Kathmandu','Asia/Karachi','Asia/Tashkent','Asia/Almaty',
+    'Asia/Ulaanbaatar','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat',
+    'Asia/Kabul','Asia/Tehran','Asia/Baghdad','Asia/Kuwait',
+    'Asia/Riyadh','Asia/Dubai','Asia/Muscat','Asia/Beirut',
+    'Asia/Amman','Asia/Jerusalem','Asia/Nicosia','Asia/Baku',
+    'Asia/Yerevan','Asia/Tbilisi','Asia/Novosibirsk','Asia/Krasnoyarsk',
+    'Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Magadan',
+    'Asia/Sakhalin','Asia/Kamchatka','Asia/Anadyr',
+    'Pacific/Auckland','Pacific/Fiji','Pacific/Guam','Pacific/Honolulu',
+    'Australia/Sydney','Australia/Melbourne','Australia/Brisbane',
+    'Australia/Perth','Australia/Adelaide','Australia/Darwin',
+  ];
+
+  let detectedLang = 'zh';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ASIAN_TZ.some(z => tz.startsWith(z) || z === tz)) {
+      detectedLang = 'zh';
+    }
+  } catch (e) {}
+
+  // 3. Apply immediately (timezone is sync)
+  const init = () => setLang(detectedLang);
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  // 4. Also verify via IP geolocation in the background (silent, no flash)
+  //    Uses ip-api.com free tier — no key needed, rate limit 45 req/min
+  fetch('https://ip-api.com/json/?fields=continentCode,countryCode,timezone', {
+    cache: 'force-cache'  // browser caches response for subsequent pages
+  })
+  .then(r => r.json())
+  .then(data => {
+    const ASIAN_CONTINENTS = ['AS', 'OC'];  // Asia + Oceania
+    const ASIAN_COUNTRIES  = ['TW','HK','MO','CN','SG','MY','JP','KR',
+                               'VN','TH','PH','ID','MM','KH','LA','BN',
+                               'AU','NZ','IN','PK','BD','LK'];
+    const isAsian =
+      ASIAN_CONTINENTS.includes(data.continentCode) ||
+      ASIAN_COUNTRIES.includes(data.countryCode);
+
+    const ipLang = isAsian ? 'zh' : 'en'; // zh is global default; EN only for explicit non-Asia
+
+    // Only override if user hasn't manually chosen AND timezone guess was wrong
+    if (!localStorage.getItem('resi-lang') && ipLang !== detectedLang) {
+      setLang(ipLang);
+      // Still don't save to localStorage — only manual clicks get saved
+    }
+  })
+  .catch(() => { /* silent fail — timezone detection already applied */ });
+})();
+</script>
+
 </body>
 </html>

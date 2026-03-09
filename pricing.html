@@ -50,7 +50,7 @@
   @media (max-width: 900px) { nav { padding: 0 20px; } .nav-links { display: none; } .footer-top { grid-template-columns: 1fr; gap: 40px; } .footer-links { grid-template-columns: repeat(2,1fr); } }
 
 
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; background: rgba(10,8,16,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
   .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: var(--text); }
   .nav-logo-icon { width: 28px; height: 28px; background: var(--gradient); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff; font-family: 'DM Serif Display', serif; }
   .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
@@ -76,7 +76,7 @@
 
 
   #aurora-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  body > *:not(#aurora-canvas) { position: relative; z-index: 1; }
+  /* aurora sits behind everything via z-index: 0 on canvas */
 
 
   .pricing-hero { padding: 140px 40px 80px; max-width: 1100px; margin: 0 auto; text-align: center; }
@@ -135,6 +135,77 @@
   .faq-a.open { display: block; }
   .faq-a a { color: var(--purple); text-decoration: underline; text-underline-offset: 3px; }
 
+
+  /* ── UNIVERSAL CARD HOVER — lift + glow border ── */
+  .problem-card,
+  .skill-card,
+  .pricing-card,
+  .plan-card,
+  .pkg-card,
+  .article-card,
+  .featured-card,
+  .docs-card,
+  .chapter-card,
+  .workflow-card,
+  .step,
+  .founder-card,
+  .team-card,
+  .skill-card-main {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  }
+
+  .problem-card:hover,
+  .skill-card:hover,
+  .pricing-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .article-card:hover,
+  .featured-card:hover,
+  .docs-card:hover,
+  .chapter-card:hover,
+  .workflow-card:hover,
+  .step:hover,
+  .skill-card-main:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(136,125,253,0.18), 0 0 0 1px rgba(136,125,253,0.35) !important;
+    background: var(--bg3) !important;
+    z-index: 2;
+  }
+
+  /* Cards that already have their own border (not gap-based grids) */
+  .featured-card:hover,
+  .docs-card:hover,
+  .plan-card:hover,
+  .pkg-card:hover,
+  .team-card:hover,
+  .founder-card:hover {
+    border-color: rgba(136,125,253,0.5) !important;
+  }
+
+
+  
+
+
+  /* ── LANG SWITCHER ──────────────────────────────── */
+  .lang-switcher {
+    display: flex; align-items: center;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 100px; padding: 3px; gap: 2px;
+    flex-shrink: 0;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 100px; border: none;
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.18s;
+    color: var(--text3); background: transparent;
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .lang-btn.active {
+    background: var(--gradient); color: #fff;
+    box-shadow: 0 2px 8px rgba(136,125,253,0.35);
+  }
+  .lang-btn:hover:not(.active) { color: var(--text2); }
+
 </style>
 </head>
 <body>
@@ -142,86 +213,90 @@
 <nav>
   <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
   <ul class="nav-links">
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
     <li>
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)">Resources</button>
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
-        <a href="learn.html"><span class="dd-title">Learn</span><span class="dd-desc">Articles and guides for PMs</span></a>
-        <a href="playbook.html"><span class="dd-title">Playbook</span><span class="dd-desc">Free PM OS guide (PDF)</span></a>
-        <a href="docs.html"><span class="dd-title">Docs</span><span class="dd-desc">PM OS setup and reference</span></a>
+        <a href="learn.html"><span class="dd-title"><span data-en="Learn" data-zh="學習">Learn</span></span><span class="dd-desc"><span data-en="Articles and guides for PMs" data-zh="PM 文章與指南">Articles and guides for PMs</span></span></a>
+        <a href="playbook.html"><span class="dd-title"><span data-en="Playbook" data-zh="手冊">Playbook</span></span><span class="dd-desc"><span data-en="Free PM OS guide (PDF)" data-zh="免費 PM OS 指南 (PDF)">Free PM OS guide (PDF)</span></span></a>
+        <a href="docs.html"><span class="dd-title"><span data-en="Docs" data-zh="文件">Docs</span></span><span class="dd-desc"><span data-en="PM OS setup and reference" data-zh="PM OS 設定與參考">PM OS setup and reference</span></span></a>
       </div>
     </li>
-    <li><a href="pricing.html" class="active">Pricing</a></li>
-    <li><a href="services.html" >Services</a></li>
+    <li><a href="pricing.html" class="active"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
+    <li><a href="services.html" ><span data-en="Services" data-zh="服務">Services</span></a></li>
   </ul>
   <div class="nav-cta">
-    <button class="btn-outline">Log in</button>
-    <button class="btn-primary">Talk to Us</button>
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn lang-btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+      <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
+    </div>
+    <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
+    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
   </div>
 </nav>
 
 <div class="pricing-hero">
-  <div class="section-label">Pricing</div>
-  <h1>Choose your starting point.</h1>
+  <div class="section-label"><span data-en="Pricing" data-zh="定價">Pricing</span></div>
+  <h1><span data-en="Choose your starting point." data-zh="選擇你的起點。">Choose your starting point.</span></h1>
 </div>
 
 <div class="pricing-body">
 
   <!-- Individual PMs -->
-  <div class="pricing-group-label">For Individual PMs</div>
+  <div class="pricing-group-label"><span data-en="For Individual PMs" data-zh="適合個人 PM">For Individual PMs</span></div>
   <div class="individual-grid">
     <div class="plan-card">
       <div class="plan-badge">Free</div>
-      <div class="plan-name">Free Skills</div>
+      <div class="plan-name"><span data-en="Free Skills" data-zh="免費技能">Free Skills</span></div>
       <div class="plan-price-free">$0</div>
-      <div class="plan-desc">60+ PM skills for Claude Code. Browse, download, use.</div>
+      <div class="plan-desc"><span data-en="60+ PM skills for Claude Code. Browse, download, use." data-zh="60+ 個 PM 技能供 Claude Code 使用。瀏覽、下載、馬上用。">60+ PM skills for Claude Code. Browse, download, use.</span></div>
       <ul class="plan-features">
-        <li><span class="check">✓</span> PRD generator, competitive analysis, roadmap builder</li>
-        <li><span class="check">✓</span> Built on proven PM frameworks</li>
-        <li><span class="check">✓</span> Download individually, use in Claude Code</li>
+        <li><span class="check">✓</span><span data-en="PRD generator, competitive analysis, roadmap builder" data-zh="PRD 生成器、競爭分析、路線圖規劃器">PRD generator, competitive analysis, roadmap builder</span></li>
+        <li><span class="check">✓</span><span data-en="Built on proven PM frameworks" data-zh="基於經過驗證的 PM 框架">Built on proven PM frameworks</span></li>
+        <li><span class="check">✓</span><span data-en="Download individually, use in Claude Code" data-zh="個別下載，在 Claude Code 中使用">Download individually, use in Claude Code</span></li>
       </ul>
-      <a href="skills.html" class="plan-cta">Browse Skills</a>
+      <a href="skills.html" class="plan-cta"><span data-en="Browse Skills" data-zh="瀏覽技能">Browse Skills</span></a>
     </div>
     <div class="plan-card featured">
       <div class="plan-badge">Most Popular</div>
-      <div class="plan-name">PM Operating System</div>
+      <div class="plan-name"><span data-en="PM Operating System" data-zh="PM 作業系統">PM Operating System</span></div>
       <div class="plan-price-row">
         <span class="plan-price-orig">$499</span>
         <span class="plan-price-curr">$249</span>
-        <span class="plan-price-period"> one-time</span>
+        <span class="plan-price-period"><span data-en="one-time" data-zh="一次性付款">one-time</span></span>
       </div>
-      <div class="plan-desc">The complete system — personalized and ready in 5 minutes.</div>
+      <div class="plan-desc"><span data-en="The complete system — personalized and ready in 5 minutes." data-zh="完整系統——個人化，5 分鐘即可就緒。">The complete system — personalized and ready in 5 minutes.</span></div>
       <ul class="plan-features">
-        <li><span class="check">✓</span> All 60+ skills in one download</li>
-        <li><span class="check">✓</span> Personalized context — company, product, personas, competitors</li>
-        <li><span class="check">✓</span> 6 sub-agents + 5 team workflows</li>
-        <li><span class="check">✓</span> One-time purchase. Lifetime access</li>
+        <li><span class="check">✓</span><span data-en="All 60+ skills in one download" data-zh="60+ 個技能一次下載">All 60+ skills in one download</span></li>
+        <li><span class="check">✓</span><span data-en="Personalized context — company, product, personas, competitors" data-zh="個人化脈絡——公司、產品、用戶角色、競爭對手">Personalized context — company, product, personas, competitors</span></li>
+        <li><span class="check">✓</span><span data-en="6 sub-agents + 5 team workflows" data-zh="6 個子 Agent + 5 個團隊工作流程">6 sub-agents + 5 team workflows</span></li>
+        <li><span class="check">✓</span><span data-en="One-time purchase. Lifetime access" data-zh="一次購買，終身使用">One-time purchase. Lifetime access</span></li>
       </ul>
-      <button class="plan-cta primary">Buy Now</button>
+      <button class="plan-cta primary"><span data-en="Buy Now" data-zh="立即購買">Buy Now</span></button>
     </div>
   </div>
 
   <!-- PM Teams -->
-  <div class="pricing-group-label">For PM Teams</div>
+  <div class="pricing-group-label"><span data-en="For PM Teams" data-zh="適合 PM 團隊">For PM Teams</span></div>
   <div class="team-card">
     <div>
-      <div class="plan-badge">We build it for you</div>
-      <h3>Custom PM OS</h3>
-      <p>Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom system, and get every PM productive.</p>
+      <div class="plan-badge"><span data-en="We build it for you" data-zh="由我們為你建置">We build it for you</span></div>
+      <h3><span data-en="Custom PM OS" data-zh="客製化 PM OS">Custom PM OS</span></h3>
+      <p><span data-en="Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom system, and get every PM productive." data-zh="依據你的團隊規模、整合工具和工作流程客製化設計。我們梳理你的 PM 工作流程、建置客製化系統，讓每位 PM 都能高效運作。">Custom-scoped to your team size, integrations, and workflows. We map your PM workflows, build your custom system, and get every PM productive.</span></p>
       <ul class="team-features">
         <li><span class="check">✓</span><div><strong>Discovery & workflow mapping</strong> — bottlenecks and ROI quantified</div></li>
         <li><span class="check">✓</span><div><strong>Full implementation</strong> — custom context, skills, integrations, training</div></li>
         <li><span class="check">✓</span><div><strong>Hands-on training</strong> — every PM runs their first skill live</div></li>
         <li><span class="check">✓</span><div><strong>Optional managed services</strong> — we keep it running and evolving</div></li>
-        <li><span class="check">✓</span><div>You own everything we build</div></li>
+        <li><span class="check">✓</span><div><span data-en="You own everything we build" data-zh="你擁有我們打造的一切">You own everything we build</span></div></li>
       </ul>
     </div>
     <div>
       <div class="team-ctas">
-        <button class="btn-gradient" style="text-align:center;">Talk to Us</button>
-        <a href="services.html" class="btn-ghost-lg" style="text-align:center;">See how it works</a>
+        <button class="btn-gradient" style="text-align:center;"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+        <a href="services.html" class="btn-ghost-lg" style="text-align:center;"><span data-en="See how it works" data-zh="了解運作方式">See how it works</span></a>
       </div>
-      <p class="team-note" style="margin-top:16px;"><a href="#">Or take our free PM maturity assessment →</a></p>
+      <p class="team-note" style="margin-top:16px;"><a href="#"><span data-en="Or take our free PM maturity assessment →" data-zh="或參加我們的免費 PM 成熟度評估 →">Or take our free PM maturity assessment →</span></a></p>
     </div>
   </div>
 
@@ -229,28 +304,28 @@
 
 <!-- FAQ -->
 <div class="faq-section">
-  <div class="section-label">Common Questions</div>
-  <h2 class="section-title">Everything you need to know.</h2>
+  <div class="section-label"><span data-en="Common Questions" data-zh="常見問題">Common Questions</span></div>
+  <h2 class="section-title"><span data-en="Everything you need to know." data-zh="你需要知道的一切。">Everything you need to know.</span></h2>
   <div class="faq-list">
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button>
-      <div class="faq-a">ChatGPT forgets your context every session. Resiligen PM loads your company, product, personas, and competitors once — and every skill uses that context automatically. No more re-explaining your business to AI.</div>
+      <button class="faq-q" onclick="toggleFaq(this)"><span data-en="Why not just use ChatGPT?" data-zh="為什麼不直接用 ChatGPT？">Why not just use ChatGPT?</span></button>
+      <div class="faq-a"><span data-en="ChatGPT forgets your context every session. Resiligen PM loads your company, product, personas, and competitors once — and every skill uses that context automatically. No more re-explaining your business to AI." data-zh="ChatGPT 每次都會遺忘你的脈絡。Resiligen PM 只需載入一次你的公司、產品、用戶角色和競爭對手——每個技能自動使用這些脈絡。不再需要向 AI 重新解釋你的業務。">ChatGPT forgets your context every session. Resiligen PM loads your company, product, personas, and competitors once — and every skill uses that context automatically. No more re-explaining your business to AI.</span></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Do I need Claude Pro?</button>
-      <div class="faq-a">Yes. Resiligen PM runs on Claude Code, which requires a Claude Pro subscription ($20/mo) from Anthropic. Claude Code is included with Pro.</div>
+      <button class="faq-q" onclick="toggleFaq(this)"><span data-en="Do I need Claude Pro?" data-zh="我需要 Claude Pro 嗎？">Do I need Claude Pro?</span></button>
+      <div class="faq-a"><span data-en="Yes. Resiligen PM runs on Claude Code, which requires a Claude Pro subscription ($20/mo) from Anthropic. Claude Code is included with Pro." data-zh="需要。Resiligen PM 在 Claude Code 上運行，需要 Anthropic 的 Claude Pro 訂閱（每月 $20）。Pro 方案已包含 Claude Code。">Yes. Resiligen PM runs on Claude Code, which requires a Claude Pro subscription ($20/mo) from Anthropic. Claude Code is included with Pro.</span></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">How long does setup take?</button>
-      <div class="faq-a">5 minutes. Download the ZIP, open it in Claude Code, run /welcome. Answer a few questions. Done.</div>
+      <button class="faq-q" onclick="toggleFaq(this)"><span data-en="How long does setup take?" data-zh="設定需要多久？">How long does setup take?</span></button>
+      <div class="faq-a"><span data-en="5 minutes. Download the ZIP, open it in Claude Code, run /welcome. Answer a few questions. Done." data-zh="5 分鐘。下載 ZIP、在 Claude Code 中開啟、執行 /welcome。回答幾個問題。完成。">5 minutes. Download the ZIP, open it in Claude Code, run /welcome. Answer a few questions. Done.</span></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">Can I use this with my team?</button>
+      <button class="faq-q" onclick="toggleFaq(this)"><span data-en="Can I use this with my team?" data-zh="我可以和團隊一起使用嗎？">Can I use this with my team?</span></button>
       <div class="faq-a">The $249 PM OS is single-user. For teams, we build a shared system with custom context, skills, and onboarding for every PM. <a href="services.html">See services</a>.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">Can I expense this through my L&D budget?</button>
-      <div class="faq-a">Often, yes. Every skill teaches a proven PM framework (JTBD, Teresa Torres, Gibson Biddle) while applying it to your work. Many PMs expense this as professional development.</div>
+      <div class="faq-a"><span data-en="Often, yes. Every skill teaches a proven PM framework (JTBD, Teresa Torres, Gibson Biddle) while applying it to your work. Many PMs expense this as professional development." data-zh="通常可以。每個技能都在傳授經過驗證的 PM 框架（JTBD、Teresa Torres、Gibson Biddle）的同時將其應用於你的工作。許多 PM 將此作為專業發展費用報銷。">Often, yes. Every skill teaches a proven PM framework (JTBD, Teresa Torres, Gibson Biddle) while applying it to your work. Many PMs expense this as professional development.</span></div>
     </div>
   </div>
 </div>
@@ -268,13 +343,13 @@ function toggleFaq(btn) {
     <div class="footer-top">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo"><div class="nav-logo-icon">R</div>Resiligen PM</a>
-        <p>The PM Operating System for Product Teams.</p>
+        <p><span data-en="The PM Operating System for Product Teams." data-zh="PM 團隊的產品管理作業系統。">The PM Operating System for Product Teams.</span></p>
       </div>
       <div class="footer-links">
-        <div><h4>Product</h4><ul><li><a href="services.html">Services</a></li><li><a href="skills.html">Skills</a></li><li><a href="pricing.html">Pricing</a></li></ul></div>
-        <div><h4>Learn</h4><ul><li><a href="learn.html">Learn</a></li><li><a href="playbook.html">Playbook</a></li><li><a href="docs.html">Docs</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="#">PM Maturity Assessment</a></li><li><a href="#">ROI Calculator</a></li></ul></div>
-        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+        <div><h4><span data-en="Product" data-zh="產品">Product</span></h4><ul><li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li><li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li><li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li></ul></div>
+        <div><h4><span data-en="Learn" data-zh="學習">Learn</span></h4><ul><li><a href="learn.html"><span data-en="Learn" data-zh="學習">Learn</span></a></li><li><a href="playbook.html"><span data-en="Playbook" data-zh="手冊">Playbook</span></a></li><li><a href="docs.html"><span data-en="Docs" data-zh="文件">Docs</span></a></li></ul></div>
+        <div><h4><span data-en="Resources" data-zh="資源">Resources</span></h4><ul><li><a href="#"><span data-en="PM Maturity Assessment" data-zh="PM 成熟度評估">PM Maturity Assessment</span></a></li><li><a href="#"><span data-en="ROI Calculator" data-zh="ROI 計算機">ROI Calculator</span></a></li></ul></div>
+        <div><h4><span data-en="Company" data-zh="公司">Company</span></h4><ul><li><a href="#"><span data-en="About" data-zh="關於我們">About</span></a></li><li><a href="#"><span data-en="Privacy" data-zh="隱私政策">Privacy</span></a></li><li><a href="#"><span data-en="Terms" data-zh="使用條款">Terms</span></a></li></ul></div>
       </div>
     </div>
     <div class="footer-copy">© 2026 Resiligen PM Academy · resiligen.pm</div>
@@ -446,5 +521,98 @@ function toggleDropdown(btn) {
   requestAnimationFrame(frame);
 })();
 </script>
+
+
+
+
+
+
+
+<script>
+// ── Resiligen PM · i18n engine ──────────────────────────────────────────────
+function setLang(lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+  localStorage.setItem('resi-lang', lang);
+  document.querySelectorAll('.lang-btn-en').forEach(b => b.classList.toggle('active', lang === 'en'));
+  document.querySelectorAll('.lang-btn-zh').forEach(b => b.classList.toggle('active', lang === 'zh'));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+  });
+}
+
+(function () {
+  // 1. If user has already manually chosen a language, honour it — no API call needed
+  const saved = localStorage.getItem('resi-lang');
+  if (saved) {
+    const init = () => setLang(saved);
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+    return;
+  }
+
+  // 2. Asian timezone codes → default Chinese
+  //    This is instant (no network) and covers 99% of cases correctly.
+  const ASIAN_TZ = [
+    'Asia/Taipei','Asia/Hong_Kong','Asia/Shanghai','Asia/Chongqing',
+    'Asia/Urumqi','Asia/Harbin','Asia/Macao','Asia/Singapore',
+    'Asia/Kuala_Lumpur','Asia/Bangkok','Asia/Jakarta','Asia/Ho_Chi_Minh',
+    'Asia/Seoul','Asia/Tokyo','Asia/Manila','Asia/Makassar',
+    'Asia/Brunei','Asia/Phnom_Penh','Asia/Vientiane','Asia/Rangoon',
+    'Asia/Yangon','Asia/Dhaka','Asia/Kolkata','Asia/Colombo',
+    'Asia/Kathmandu','Asia/Karachi','Asia/Tashkent','Asia/Almaty',
+    'Asia/Ulaanbaatar','Asia/Bishkek','Asia/Dushanbe','Asia/Ashgabat',
+    'Asia/Kabul','Asia/Tehran','Asia/Baghdad','Asia/Kuwait',
+    'Asia/Riyadh','Asia/Dubai','Asia/Muscat','Asia/Beirut',
+    'Asia/Amman','Asia/Jerusalem','Asia/Nicosia','Asia/Baku',
+    'Asia/Yerevan','Asia/Tbilisi','Asia/Novosibirsk','Asia/Krasnoyarsk',
+    'Asia/Irkutsk','Asia/Yakutsk','Asia/Vladivostok','Asia/Magadan',
+    'Asia/Sakhalin','Asia/Kamchatka','Asia/Anadyr',
+    'Pacific/Auckland','Pacific/Fiji','Pacific/Guam','Pacific/Honolulu',
+    'Australia/Sydney','Australia/Melbourne','Australia/Brisbane',
+    'Australia/Perth','Australia/Adelaide','Australia/Darwin',
+  ];
+
+  let detectedLang = 'zh';
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (ASIAN_TZ.some(z => tz.startsWith(z) || z === tz)) {
+      detectedLang = 'zh';
+    }
+  } catch (e) {}
+
+  // 3. Apply immediately (timezone is sync)
+  const init = () => setLang(detectedLang);
+  document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', init)
+    : init();
+
+  // 4. Also verify via IP geolocation in the background (silent, no flash)
+  //    Uses ip-api.com free tier — no key needed, rate limit 45 req/min
+  fetch('https://ip-api.com/json/?fields=continentCode,countryCode,timezone', {
+    cache: 'force-cache'  // browser caches response for subsequent pages
+  })
+  .then(r => r.json())
+  .then(data => {
+    const ASIAN_CONTINENTS = ['AS', 'OC'];  // Asia + Oceania
+    const ASIAN_COUNTRIES  = ['TW','HK','MO','CN','SG','MY','JP','KR',
+                               'VN','TH','PH','ID','MM','KH','LA','BN',
+                               'AU','NZ','IN','PK','BD','LK'];
+    const isAsian =
+      ASIAN_CONTINENTS.includes(data.continentCode) ||
+      ASIAN_COUNTRIES.includes(data.countryCode);
+
+    const ipLang = isAsian ? 'zh' : 'en'; // zh is global default; EN only for explicit non-Asia
+
+    // Only override if user hasn't manually chosen AND timezone guess was wrong
+    if (!localStorage.getItem('resi-lang') && ipLang !== detectedLang) {
+      setLang(ipLang);
+      // Still don't save to localStorage — only manual clicks get saved
+    }
+  })
+  .catch(() => { /* silent fail — timezone detection already applied */ });
+})();
+</script>
+
 </body>
 </html>
