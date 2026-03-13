@@ -3,30 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skill | Resiligen PM</title>
+<title>技能 | Resiligen PM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0810;--bg2:#0e0c18;--bg3:#131020;
-  --border:#1e1a30;--border2:#2a2545;
-  --text:#f0eeff;--text2:#a090cc;--text3:#6050a0;
-  --blue:#4887FE;--purple:#887DFD;--teal:#67E9E9;
+  --bg:#0a0810;--bg2:#0e0c18;--bg3:#131020;--bg4:#18152a;
+  --border:#1e1a30;--border2:#2a2545;--border3:#3a3460;
+  --text:#f0eeff;--text2:#a090cc;--text3:#6050a0;--text4:#40306a;
+  --blue:#4887FE;--purple:#887DFD;--teal:#67E9E9;--green:#7ee8a2;
   --gradient:linear-gradient(135deg,#887DFD 0%,#887DFD 30%,#4887FE 70%,#67E9E9 100%);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'Sora','Noto Sans TC',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 #aurora-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(10,8,16,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
 .nav-logo-icon{width:28px;height:28px;background:var(--gradient);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;font-family:'DM Serif Display',serif}
 .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
 .nav-links a{font-size:14px;color:var(--text2);transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--text)}
-.nav-dropdown-btn{font-size:14px;color:var(--text2);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;padding:0;transition:color .2s}
+.nav-dropdown-btn{font-size:14px;color:var(--text2);background:none;border:none;cursor:pointer;font-family:'Sora','Noto Sans TC',sans-serif;display:flex;align-items:center;gap:5px;padding:0;transition:color .2s}
 .nav-dropdown-btn:hover,.nav-dropdown-btn.open{color:var(--text)}
 .nav-dropdown-btn::after{content:'⌃';font-size:10px;transition:transform .2s;display:inline-block}
 .nav-dropdown-btn.open::after{transform:rotate(180deg)}
@@ -38,73 +40,108 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .nav-dropdown a .dd-title{font-size:14px;font-weight:600;color:var(--text);display:block;margin-bottom:2px}
 .nav-dropdown a .dd-desc{font-size:12px;color:var(--text3);display:block}
 .nav-cta{display:flex;align-items:center;gap:12px}
-.btn-outline{padding:8px 18px;border:1px solid var(--border2);border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text2);background:transparent;cursor:pointer;transition:all .2s}
+.btn-outline{padding:8px 18px;border:1px solid var(--border2);border-radius:6px;font-size:14px;font-family:'Sora','Noto Sans TC',sans-serif;color:var(--text2);background:transparent;cursor:pointer;transition:all .2s}
 .btn-outline:hover{border-color:var(--purple);color:var(--text)}
-.btn-primary{padding:8px 18px;border:none;border-radius:6px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;color:#fff;background:var(--blue);cursor:pointer;transition:all .2s}
+.btn-primary{padding:8px 18px;border:none;border-radius:6px;font-size:14px;font-family:'Sora','Noto Sans TC',sans-serif;font-weight:500;color:#fff;background:var(--blue);cursor:pointer;transition:all .2s}
 .btn-primary:hover{background:#5e97ff}
 .lang-switcher{display:flex;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:100px;padding:3px;gap:2px;flex-shrink:0}
-.lang-btn{padding:4px 12px;border-radius:100px;border:none;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .18s;color:var(--text3);background:transparent;letter-spacing:.04em}
+.lang-btn{padding:4px 12px;border-radius:100px;border:none;font-size:12px;font-weight:600;font-family:'Sora','Noto Sans TC',sans-serif;cursor:pointer;transition:all .18s;color:var(--text3);background:transparent;letter-spacing:.04em}
 .lang-btn.active{background:var(--gradient);color:#fff;box-shadow:0 2px 8px rgba(136,125,253,.35)}
 .lang-btn:hover:not(.active){color:var(--text2)}
-.page-wrap{max-width:1060px;margin:0 auto;padding:0 40px}
-.back-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:80px 0 0;font-size:13px;color:var(--text3);transition:color .2s}
+
+/* ── PAGE LAYOUT ── */
+.page-outer{max-width:800px;margin:0 auto;padding:0 40px 120px;position:relative;z-index:1}
+
+/* ── BACK ── */
+.back-link{display:inline-flex;align-items:center;gap:7px;padding-top:80px;font-size:13px;color:var(--text3);transition:color .2s}
 .back-link:hover{color:var(--text2)}
-.skill-cat-path{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 18px}
-.cat-dot{width:7px;height:7px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:6px}
-.skill-hero-title{font-family:'DM Serif Display',serif;font-size:clamp(36px,4.5vw,58px);font-weight:400;color:#fff;line-height:1.05;letter-spacing:-.025em;margin-bottom:18px;position:relative;z-index:1}
-.skill-hero-desc{font-size:18px;color:var(--text2);line-height:1.65;max-width:600px;position:relative;z-index:1}
-.skill-grid{display:grid;grid-template-columns:1fr 280px;gap:72px;margin-top:56px;position:relative;z-index:1;align-items:start}
-.content-section{margin-bottom:52px}
-.section-h{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:20px}
-.section-body{font-size:15px;color:var(--text2);line-height:1.75}
-.check-list{list-style:none;display:flex;flex-direction:column;gap:11px}
-.check-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5}
-.check-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(103,233,233,.1);border:1px solid rgba(103,233,233,.3);display:flex;align-items:center;justify-content:center;margin-top:1px}
-.check-icon svg{width:11px;height:11px;stroke:var(--teal);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.workflow-card{border:1px solid rgba(136,125,253,.3);border-radius:14px;padding:22px 24px;background:rgba(136,125,253,.06);display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;transition:all .2s;text-decoration:none;width:100%}
-.workflow-card:hover{background:rgba(136,125,253,.1);border-color:rgba(136,125,253,.5);transform:translateY(-2px)}
-.workflow-card-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
-.workflow-card-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
-.workflow-card-sub{font-size:13px;color:var(--text2)}
-.workflow-card-arrow{font-size:22px;color:var(--purple);flex-shrink:0}
-.steps-list{display:flex;flex-direction:column;gap:0}
-.step-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}
-.step-item:first-child{padding-top:0}
-.step-item:last-child{border-bottom:none}
-.step-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:rgba(72,135,254,.12);border:1px solid rgba(72,135,254,.25);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue)}
-.step-text{font-size:14px;color:var(--text2);line-height:1.65;padding-top:5px}
-.step-text code{font-family:'Courier New',monospace;font-size:12px;background:var(--bg3);border:1px solid var(--border2);padding:1px 7px;border-radius:4px;color:var(--teal)}
-.best-for-list{display:flex;flex-wrap:wrap;gap:8px}
-.best-for-tag{padding:7px 16px;border:1px solid var(--border2);border-radius:100px;font-size:13px;font-weight:500;color:var(--text2);background:var(--bg2)}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{display:flex;align-items:center;gap:8px;margin:16px 0 32px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.bc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.bc-stage{opacity:.9}
+.bc-sep{color:var(--text4);font-size:11px}
+.bc-sub{color:var(--text3)}
+
+/* ── TITLE BLOCK ── */
+.skill-title{font-family:'DM Serif Display',serif;font-size:clamp(40px,5.5vw,68px);font-weight:400;color:#fff;line-height:1.0;letter-spacing:-.025em;margin-bottom:20px}
+.skill-desc{font-size:19px;color:var(--text2);line-height:1.7;max-width:660px;margin-bottom:40px}
+
+/* ── PROPERTIES STRIP (Notion-style) ── */
+.props-strip{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4px 0;margin-bottom:52px}
+.prop-row{display:flex;align-items:center;width:100%;padding:10px 0;border-bottom:1px solid var(--border)}
+.prop-row:last-child{border-bottom:none}
+.prop-key{width:160px;flex-shrink:0;font-size:13px;font-weight:500;color:var(--text3);display:flex;align-items:center;gap:8px}
+.prop-key-icon{font-size:14px;opacity:.8}
+.prop-val{font-size:14px;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.prop-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:12px;font-weight:600;background:rgba(136,125,253,.12);border:1px solid rgba(136,125,253,.2);color:var(--text2)}
+.prop-tag-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.prop-cmd{font-family:'Courier New',monospace;font-size:13px;color:var(--teal);background:rgba(103,233,233,.08);border:1px solid rgba(103,233,233,.15);padding:3px 10px;border-radius:5px}
+.prop-time-val{font-size:14px;color:var(--teal);font-weight:600}
+.prop-time-arrow{color:var(--text3);margin:0 4px}
+
+/* ── SECTION HEADINGS ── */
+.section-block{margin-bottom:52px}
+.section-h{font-size:20px;font-weight:600;color:var(--text);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-h-icon{font-size:18px;opacity:.8}
+
+/* ── PROBLEM BLOCK ── */
+.problem-body{font-size:16px;color:var(--text2);line-height:1.8;background:rgba(136,125,253,.04);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:18px 22px}
+
+/* ── WHAT YOU GET ── */
+.get-list{display:flex;flex-direction:column;gap:0}
+.get-item{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid var(--border)}
+.get-item:first-child{padding-top:0}
+.get-item:last-child{border-bottom:none;padding-bottom:0}
+.get-check{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(126,232,162,.1);border:1px solid rgba(126,232,162,.25);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.get-check svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.get-text{font-size:15px;color:var(--text);line-height:1.5}
+
+/* ── VIDEO BLOCK ── */
+.video-wrap{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;overflow:hidden}
+.video-placeholder{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,rgba(136,125,253,.06) 0%,rgba(72,135,254,.06) 100%);cursor:pointer;transition:background .2s;position:relative}
+.video-placeholder:hover{background:linear-gradient(135deg,rgba(136,125,253,.1) 0%,rgba(72,135,254,.1) 100%)}
+.video-play-btn{width:60px;height:60px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(136,125,253,.4)}
+.video-play-btn svg{width:22px;height:22px;fill:#fff;margin-left:3px}
+.video-label{font-size:14px;color:var(--text2)}
+.video-label strong{color:var(--text);display:block;font-size:16px;margin-bottom:4px}
+.video-caption{padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.video-caption-text{font-size:13px;color:var(--text3)}
+.video-step-pills{display:flex;gap:6px;flex-wrap:wrap}
+.vpill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;background:var(--bg3);border:1px solid var(--border2);color:var(--text3)}
+
+/* ── FAQ ── */
 .faq-item{border-top:1px solid var(--border)}
 .faq-item:last-child{border-bottom:1px solid var(--border)}
-.faq-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 0;background:none;border:none;cursor:pointer;text-align:left;gap:16px}
-.faq-q{font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
-.faq-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text3);transition:transform .2s,color .2s}
+.faq-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 0;background:none;border:none;cursor:pointer;text-align:left;gap:16px}
+.faq-q{font-size:15px;font-weight:500;color:var(--text);line-height:1.4}
+.faq-icon{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text3);transition:transform .2s,color .2s;line-height:1}
 .faq-item.open .faq-icon{transform:rotate(45deg);color:var(--purple)}
-.faq-answer{display:none;padding:0 0 20px;font-size:14px;color:var(--text2);line-height:1.7}
+.faq-answer{display:none;padding:0 0 18px;font-size:14px;color:var(--text2);line-height:1.75}
 .faq-item.open .faq-answer{display:block}
-.skill-sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:14px}
-.sidebar-stat,.sidebar-cmd,.sidebar-cta{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:22px}
-.s-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
-.s-value-big{font-size:20px;font-weight:700;color:var(--teal);line-height:1.2}
-.s-value-after{font-size:15px;font-weight:600;color:var(--teal);margin-top:2px}
-.s-sub{font-size:12px;color:var(--text3);margin-top:5px}
-.s-cmd{font-family:'Courier New',monospace;font-size:18px;font-weight:700;color:var(--teal);margin-bottom:6px}
-.cta-title{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;color:#fff;margin-bottom:8px}
-.cta-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:18px}
-.cta-main{display:block;width:100%;text-align:center;padding:13px;border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .22s;border:none;background:var(--gradient);color:#fff;box-shadow:0 0 28px rgba(72,135,254,.2);margin-bottom:10px}
+
+/* ── CTA BLOCK ── */
+.cta-block{margin-top:60px;border-top:1px solid var(--border);padding-top:52px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cta-block-left{}
+.cta-block-title{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:#fff;margin-bottom:10px;line-height:1.15}
+.cta-block-sub{font-size:15px;color:var(--text2);line-height:1.6;max-width:420px}
+.cta-block-btns{display:flex;gap:12px;flex-wrap:wrap}
+.cta-main{padding:14px 28px;border-radius:8px;font-size:15px;font-family:'Sora','Noto Sans TC',sans-serif;font-weight:600;cursor:pointer;transition:all .22s;border:none;background:var(--gradient);color:#fff;box-shadow:0 0 28px rgba(72,135,254,.2);white-space:nowrap}
 .cta-main:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(72,135,254,.35)}
-.cta-sec{display:block;width:100%;text-align:center;padding:12px;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;border:1px solid var(--border2);color:var(--text2)}
+.cta-sec{padding:13px 24px;border-radius:8px;font-size:14px;font-family:'Sora','Noto Sans TC',sans-serif;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;border:1px solid var(--border2);color:var(--text2);white-space:nowrap}
 .cta-sec:hover{border-color:var(--purple);color:var(--text)}
-.more-section{padding:52px 0 80px;border-top:1px solid var(--border)}
-.more-h{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:#fff;margin-bottom:24px}
-.more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.more-card{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all .22s;text-decoration:none}
+
+/* ── MORE SKILLS ── */
+.more-section{padding:52px 0;border-top:1px solid var(--border)}
+.more-h{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:20px}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.more-card{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .22s;text-decoration:none}
 .more-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(136,125,253,.15);border-color:rgba(136,125,253,.3);background:var(--bg3)}
 .more-tag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:6px}
 .more-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
 .more-card p{font-size:11px;color:var(--teal)}
+
+/* ── FOOTER ── */
 .footer-wrapper{border-top:1px solid var(--border);padding:60px 40px;position:relative;z-index:1}
 .footer-inner{max-width:1060px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:200px 1fr;gap:80px;margin-bottom:48px}
@@ -119,16 +156,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .not-found-wrap{text-align:center;padding:160px 40px;position:relative;z-index:1}
 .not-found-wrap h1{font-family:'DM Serif Display',serif;font-size:40px;color:#fff;margin-bottom:16px}
 .not-found-wrap p{color:var(--text2);margin-bottom:32px}
-@media(max-width:900px){
+
+@media(max-width:800px){
   nav{padding:0 20px}
   .nav-links{display:none}
-  .page-wrap{padding:0 20px}
-  .skill-grid{grid-template-columns:1fr;gap:40px}
-  .skill-sidebar{position:static}
+  .page-outer{padding:0 20px 80px}
+  .props-strip{gap:0}
+  .prop-key{width:130px}
+  .cta-block{flex-direction:column;align-items:flex-start}
+  .footer-wrapper{padding:40px 20px}
   .footer-top{grid-template-columns:1fr;gap:40px}
   .footer-links{grid-template-columns:repeat(2,1fr)}
-  .footer-wrapper{padding:40px 20px}
-  .more-section{padding:40px 0 60px}
+  .more-section{padding:36px 0}
 }
 </style>
 </head>
@@ -417,8 +456,17 @@ function setLang(l){
 }
 function t(en,zh){ return LANG==='zh'?zh:en; }
 function getSlug(){
-  const h=location.hash.replace('#','');
-  return h||new URLSearchParams(location.search).get('skill')||'';
+  // Try hash first (works on web server)
+  let h = location.hash.replace('#','');
+  if(h) return h;
+  // Try search param fallback
+  const sp = new URLSearchParams(location.search).get('skill');
+  if(sp) return sp;
+  // Try reading from document.URL directly (for file:// edge cases)
+  const urlHash = document.URL.split('#')[1];
+  if(urlHash) return urlHash.split('?')[0];
+  // Default to first skill
+  return 'prd-writer';
 }
 function toggleFaq(id){
   document.getElementById(id).classList.toggle('open');
@@ -429,31 +477,62 @@ function render(){
   const sk=ALL_SKILLS[slug];
   const root=document.getElementById('skill-root');
   if(!sk){
-    root.innerHTML='<div class="not-found-wrap"><h1>Skill not found</h1><p>We couldn\'t find that skill. <a href="skills.html" style="color:var(--purple)">Browse all skills →</a></p></div>';
+    root.innerHTML='<div class="not-found-wrap"><h1>找不到技能</h1><p>請確認連結正確。 <a href="skills.html" style="color:var(--purple)">瀏覽工具庫 →</a></p></div>';
     return;
   }
   const stage=STAGES[sk.cat]||STAGES.research;
   const title=t(sk.title_en,sk.title_zh);
   document.title=title+' | Resiligen PM';
 
-  // bullets
+  // ── properties
+  const timeParts=sk.time.split('→');
+  const t1=timeParts[0]?timeParts[0].trim():sk.time;
+  const t2=timeParts[1]?timeParts[1].trim():'';
+  const cmd=sk.cmd||'/skill';
+
+  const propsHTML=`
+    <div class="prop-row">
+      <div class="prop-key"><span class="prop-key-icon">⏱</span>${t('Time Saved','節省時間')}</div>
+      <div class="prop-val">
+        <span class="prop-time-val">${t1}</span>
+        ${t2?`<span class="prop-time-arrow">→</span><span class="prop-time-val">${t2}</span>`:''}
+      </div>
+    </div>
+    <div class="prop-row">
+      <div class="prop-key"><span class="prop-key-icon">⌨</span>${t('Slash Command','指令')}</div>
+      <div class="prop-val"><span class="prop-cmd">${cmd}</span></div>
+    </div>
+    <div class="prop-row">
+      <div class="prop-key"><span class="prop-key-icon">📍</span>${t('Stage','階段')}</div>
+      <div class="prop-val">
+        <span class="prop-tag"><span class="prop-tag-dot" style="background:${stage.color}"></span>${t(stage.en,stage.zh)}</span>
+      </div>
+    </div>
+    ${sk.chains?`
+    <div class="prop-row">
+      <div class="prop-key"><span class="prop-key-icon">🔗</span>${t('Chains','串接技能')}</div>
+      <div class="prop-val" style="font-size:14px;color:var(--text2)">${sk.chains} ${t('skills automated','個技能自動串接')}</div>
+    </div>`:'' }
+    ${sk.is_agent?`
+    <div class="prop-row">
+      <div class="prop-key"><span class="prop-key-icon">⚡</span>${t('Type','類型')}</div>
+      <div class="prop-val"><span class="prop-tag" style="background:rgba(136,125,253,.15);border-color:rgba(136,125,253,.3);color:var(--purple)">Agent Workflow</span></div>
+    </div>`:''}
+  `;
+
+  // ── bullets
   const bulls=LANG==='zh'?sk.bullets_zh:sk.bullets_en;
   const bullsHTML=(bulls||[]).map(b=>`
-    <li><span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></span>${b}</li>`).join('');
+    <div class="get-item">
+      <div class="get-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 4.5,9 10.5,3"/></svg></div>
+      <div class="get-text">${b}</div>
+    </div>`).join('');
 
-  // best for
-  const bfList=LANG==='zh'?sk.best_for_zh:sk.best_for_en;
-  const bfHTML=(bfList&&bfList.length)?`
-    <div class="content-section">
-      <h2 class="section-h">${t('Best For','最適合')}</h2>
-      <div class="best-for-list">${(bfList||[]).map(b=>`<span class="best-for-tag">${b}</span>`).join('')}</div>
-    </div>`:' ';
-
-  // faq
+  // ── faq
   const faqs=LANG==='zh'?sk.faq_zh:sk.faq_en;
   const faqHTML=(faqs&&faqs.length)?`
-    <div class="content-section">
-      <h2 class="section-h">${t('Frequently Asked Questions','常見問題')}</h2>
+    <div class="section-block">
+      <div class="section-h"><span class="section-h-icon">💬</span>${t('Frequently Asked Questions','常見問題')}</div>
       <div>${(faqs||[]).map((f,i)=>`
         <div class="faq-item" id="fq${i}">
           <button class="faq-toggle" onclick="toggleFaq('fq${i}')">
@@ -463,42 +542,18 @@ function render(){
           <div class="faq-answer">${f[1]}</div>
         </div>`).join('')}
       </div>
-    </div>`:' ';
+    </div>`:'';
 
-  // workflow card for related skill
-  const relSk=sk.related?ALL_SKILLS[sk.related]:null;
-  const wfHTML=(sk.is_agent||relSk)?`
-    <div class="content-section">
-      <h2 class="section-h">${t('Want this automated?','想自動化這個流程？')}</h2>
-      <a class="workflow-card" href="skill-detail.html#${sk.is_agent?slug:(relSk?relSk.slug:'')}">
-        <div>
-          <div class="workflow-card-badge">⚡ Agent Workflow</div>
-          <div class="workflow-card-title">${sk.is_agent?title:(relSk?t(relSk.title_en,relSk.title_zh):'')}</div>
-          <div class="workflow-card-sub">${sk.chains||relSk&&relSk.chains||'Multiple'} ${t('skills automated','個技能自動串接')} · ${sk.is_agent?sk.time:(relSk?relSk.time:'')}</div>
-        </div>
-        <div class="workflow-card-arrow">→</div>
-      </a>
-    </div>`:' ';
+  // ── video steps
+  const vsteps = LANG==='zh'
+    ? ['打開 Claude','輸入指令','提供脈絡','取得輸出']
+    : ['Open Claude','Run command','Provide context','Get output'];
 
-  // steps
-  const cmd=sk.cmd||'/skill';
-  const steps=[
-    [t('Load context','載入脈絡'), t('Open Claude and make sure your PM OS context file is loaded in your project.','打開 Claude，確認你的 PM OS 脈絡檔案已載入專案。')],
-    [t('Run the command','執行指令'), `${t('Type','在 Claude 輸入')} <code>${cmd}</code> ${t('in Claude — or describe your need in plain language.','，或用自然語言描述你的需求。')}`],
-    [t('Provide input','提供輸入'), t('Give Claude your context: goals, raw notes, URLs, or relevant background.','給 Claude 你的脈絡：目標、原始筆記、網址或相關背景資料。')],
-    [t('Get your output','取得輸出'), t('Review the structured result. Ready to share, paste, or drop into your docs.','審閱結構化輸出，可直接分享、貼上或放入文件。')],
-  ];
-  const stepsHTML=steps.map((s,i)=>`
-    <div class="step-item">
-      <div class="step-num">${i+1}</div>
-      <div class="step-text"><strong style="color:var(--text);display:block;margin-bottom:3px">${s[0]}</strong>${s[1]}</div>
-    </div>`).join('');
-
-  // more skills
+  // ── more skills
   const same=Object.values(ALL_SKILLS).filter(s=>s.cat===sk.cat&&s.slug!==slug).slice(0,4);
   const moreHTML=same.length?`
     <div class="more-section">
-      <h2 class="more-h">${t('More skills in this stage','同階段的其他技能')}</h2>
+      <div class="more-h">${t('More skills in this stage','同階段的其他技能')}</div>
       <div class="more-grid">${same.map(s=>`
         <a class="more-card" href="skill-detail.html#${s.slug}">
           <span class="more-tag">${s.cat_tag}</span>
@@ -506,63 +561,88 @@ function render(){
           <p>${s.time}</p>
         </a>`).join('')}
       </div>
-    </div>`:' ';
-
-  // time split
-  const timeParts=sk.time.split('→');
-  const timeBefore=timeParts[0]?timeParts[0].trim():sk.time;
-  const timeAfter=timeParts[1]?timeParts[1].trim():'';
+    </div>`:'';
 
   root.innerHTML=`
-    <div class="page-wrap" style="position:relative;z-index:1">
+    <div class="page-outer">
+
+      <!-- BACK -->
       <a class="back-link" href="skills.html">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>
-        ${t('Back to Skills','返回技能庫')}
+        ${t('Back to Skills','返回工具庫')}
       </a>
-      <div class="skill-cat-path">
-        <span class="cat-dot" style="background:${stage.color}"></span>
-        <span style="color:${stage.color}">${t(stage.en,stage.zh)}</span>
-        <span style="opacity:.4;margin:0 6px">/</span>
-        <span style="color:var(--text3)">${sk.cat_tag}</span>
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+        <span class="bc-dot" style="background:${stage.color}"></span>
+        <span class="bc-stage" style="color:${stage.color}">${t(stage.en,stage.zh)}</span>
+        <span class="bc-sep">/</span>
+        <span class="bc-sub">${sk.cat_tag}</span>
       </div>
-      <h1 class="skill-hero-title">${title}</h1>
-      <p class="skill-hero-desc">${t(sk.desc_en,sk.desc_zh)}</p>
-      <div class="skill-grid">
-        <div class="skill-content">
-          ${sk.problem_en?`<div class="content-section"><h2 class="section-h">${t('The Problem','為什麼這很難')}</h2><p class="section-body">${t(sk.problem_en,sk.problem_zh)}</p></div>`:''}
-          ${bulls&&bulls.length?`<div class="content-section"><h2 class="section-h">${t('What You Get','你會得到什麼')}</h2><ul class="check-list">${bullsHTML}</ul></div>`:''}
-          ${wfHTML}
-          <div class="content-section">
-            <h2 class="section-h">${t('How to Use This Skill','怎麼使用這個技能')}</h2>
-            <div class="steps-list">${stepsHTML}</div>
+
+      <!-- TITLE -->
+      <h1 class="skill-title">${title}</h1>
+      <p class="skill-desc">${t(sk.desc_en,sk.desc_zh)}</p>
+
+      <!-- PROPERTIES (Notion-style) -->
+      <div class="props-strip">${propsHTML}</div>
+
+      <!-- THE PROBLEM -->
+      ${sk.problem_en?`
+      <div class="section-block">
+        <div class="section-h"><span class="section-h-icon">🎯</span>${t('The Problem','這個技能解決什麼問題')}</div>
+        <div class="problem-body">${t(sk.problem_en,sk.problem_zh)}</div>
+      </div>`:''}
+
+      <!-- WHAT YOU GET -->
+      ${bulls&&bulls.length?`
+      <div class="section-block">
+        <div class="section-h"><span class="section-h-icon">✨</span>${t('What You Get','你會獲得什麼')}</div>
+        <div class="get-list">${bullsHTML}</div>
+      </div>`:''}
+
+      <!-- HOW TO USE + VIDEO -->
+      <div class="section-block">
+        <div class="section-h"><span class="section-h-icon">▶</span>${t('How to Use','如何使用')}</div>
+        <div class="video-wrap">
+          <div class="video-placeholder" onclick="this.closest('.video-wrap').innerHTML='<div style=\'padding:16px\'><p style=\'color:var(--text2);font-size:14px\'>影片即將上線，敬請期待。</p></div>'">
+            <div class="video-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-label">
+              <strong>${t('Watch: How to Use','觀看教學影片')}: ${title}</strong>
+              ${t('Step-by-step walkthrough (3 min)','逐步操作示範（約 3 分鐘）')}
+            </div>
           </div>
-          ${bfHTML}
-          ${faqHTML}
+          <div class="video-caption">
+            <span class="video-caption-text">${t('Quick walkthrough','快速操作示範')} · <code style="font-family:monospace;font-size:12px;color:var(--teal)">${cmd}</code></span>
+            <div class="video-step-pills">${vsteps.map(s=>`<span class="vpill">${s}</span>`).join('')}</div>
+          </div>
         </div>
-        <aside class="skill-sidebar">
-          <div class="sidebar-stat">
-            <div class="s-label">${t('Time Saved','節省時間')}</div>
-            <div class="s-value-big">${timeBefore}</div>
-            ${timeAfter?`<div class="s-value-after">→ ${timeAfter}</div>`:''}
-            <div class="s-sub">${t('vs. doing it manually','vs. 手動作業')}</div>
-          </div>
-          <div class="sidebar-cmd">
-            <div class="s-label">${t('Slash Command','Claude 指令')}</div>
-            <div class="s-cmd">${cmd}</div>
-            <div class="s-sub">${t('Type this in Claude to activate','在 Claude 輸入此指令')}</div>
-          </div>
-          <div class="sidebar-cta">
-            <div class="cta-title">${t('Add to your kit','加入你的工具包')}</div>
-            <div class="cta-sub">${t('Get all 60+ skills with personalized context — ready in 5 minutes.','取得全部 60+ 個技能和個人化脈絡——5 分鐘就緒。')}</div>
-            <a href="pricing.html" class="cta-main">${t('Get PM OS · $249','取得 PM OS · $249')}</a>
-            <a href="skills.html" class="cta-sec">${t('Browse all skills','瀏覽所有技能')}</a>
-          </div>
-        </aside>
       </div>
+
+      <!-- FAQ -->
+      ${faqHTML}
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <div class="cta-block-left">
+          <div class="cta-block-title">${t('Add this skill to your kit','加入你的 PM 工具包')}</div>
+          <div class="cta-block-sub">${t('Get all 60+ skills with personalized context files — ready in 5 minutes.','取得全部 60+ 個技能和個人化脈絡檔案——5 分鐘內就緒。')}</div>
+        </div>
+        <div class="cta-block-btns">
+          <a href="pricing.html" class="cta-main">${t('Get PM OS · $249','取得 PM OS · $249')}</a>
+          <a href="skills.html" class="cta-sec">${t('Browse all skills','瀏覽工具庫')}</a>
+        </div>
+      </div>
+
+      <!-- MORE SKILLS -->
       ${moreHTML}
+
     </div>
   `;
 
+  // apply i18n attrs
   document.querySelectorAll('[data-en][data-zh]').forEach(el=>{
     el.textContent=LANG==='zh'?el.dataset.zh:el.dataset.en;
   });
@@ -573,7 +653,8 @@ function render(){
 window.addEventListener('hashchange',render);
 window.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
-  render();
+  // Small timeout ensures hash is available in file:// context
+  setTimeout(render, 0);
 });
 </script>
 </body>

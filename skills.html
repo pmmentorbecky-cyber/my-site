@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>技能庫 | Resiligen PM</title>
+<title>工具庫 | Resiligen PM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -18,7 +18,7 @@
     --white:#ffffff;
   }
   html { scroll-behavior: smooth; }
-  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
+  body { background:var(--bg); color:var(--text); font-family:'Sora','Noto Sans TC',sans-serif;
          font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
   a { color:inherit; text-decoration:none; }
   #aurora-canvas { position:fixed; top:0; left:0; width:100%; height:100%;
@@ -39,7 +39,7 @@
   .nav-links a { font-size:14px; color:var(--text2); transition:color .2s; }
   .nav-links a:hover, .nav-links a.active { color:var(--text); }
   .nav-dropdown-btn { font-size:14px; color:var(--text2); background:none; border:none;
-    cursor:pointer; font-family:'DM Sans',sans-serif; display:flex; align-items:center;
+    cursor:pointer; font-family:'Sora','Noto Sans TC',sans-serif; display:flex; align-items:center;
     gap:5px; padding:0; transition:color .2s; }
   .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color:var(--text); }
   .nav-dropdown-btn::after { content:'⌃'; font-size:10px; transition:transform .2s; display:inline-block; }
@@ -57,17 +57,17 @@
   .nav-dropdown a .dd-desc  { font-size:12px; color:var(--text3); display:block; }
   .nav-cta { display:flex; align-items:center; gap:12px; }
   .btn-outline { padding:8px 18px; border:1px solid var(--border2); border-radius:6px;
-    font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text2);
+    font-size:14px; font-family:'Sora','Noto Sans TC',sans-serif; color:var(--text2);
     background:transparent; cursor:pointer; transition:all .2s; }
   .btn-outline:hover { border-color:var(--purple); color:var(--text); }
   .btn-primary { padding:8px 18px; border:none; border-radius:6px; font-size:14px;
-    font-family:'DM Sans',sans-serif; font-weight:500; color:#fff;
+    font-family:'Sora','Noto Sans TC',sans-serif; font-weight:500; color:#fff;
     background:var(--blue); cursor:pointer; transition:all .2s; }
   .btn-primary:hover { background:#5e97ff; }
   .lang-switcher { display:flex; align-items:center; background:var(--bg3);
     border:1px solid var(--border2); border-radius:100px; padding:3px; gap:2px; flex-shrink:0; }
   .lang-btn { padding:4px 12px; border-radius:100px; border:none; font-size:12px;
-    font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer;
+    font-weight:600; font-family:'Sora','Noto Sans TC',sans-serif; cursor:pointer;
     transition:all .18s; color:var(--text3); background:transparent; letter-spacing:.04em; }
   .lang-btn.active { background:var(--gradient); color:#fff; box-shadow:0 2px 8px rgba(136,125,253,.35); }
   .lang-btn:hover:not(.active) { color:var(--text2); }
@@ -77,6 +77,7 @@
   .hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(28px,3.5vw,44px);
              font-weight:400; color:var(--white); margin-bottom:12px; letter-spacing:-.02em; }
   .hero-sub { font-size:16px; color:var(--text2); }
+  .hero-en-sub { font-size:14px; color:var(--text3); margin-top:10px; letter-spacing:.02em; font-weight:400; }
 
   /* PAGE BODY */
   .page-body { max-width:1200px; margin:0 auto; padding:0 40px 40px;
@@ -92,7 +93,7 @@
     text-transform:uppercase; color:var(--text3); margin-bottom:12px; }
   .filter-btn { display:flex; align-items:center; width:100%;
     padding:8px 12px; border:1px solid transparent; border-radius:6px;
-    font-size:14px; font-family:'DM Sans',sans-serif;
+    font-size:14px; font-family:'Sora','Noto Sans TC',sans-serif;
     color:var(--text2); background:transparent;
     cursor:pointer; text-align:left; transition:all .15s; margin-bottom:2px; }
   .filter-btn:hover { color:var(--text); background:var(--bg2); }
@@ -105,7 +106,7 @@
   /* SORT TABS */
   .sort-tabs { display:flex; gap:4px; margin-bottom:28px;
     border-bottom:1px solid var(--border); }
-  .sort-tab { padding:10px 16px; font-size:13px; font-family:'DM Sans',sans-serif;
+  .sort-tab { padding:10px 16px; font-size:13px; font-family:'Sora','Noto Sans TC',sans-serif;
     color:var(--text3); background:transparent; border:none;
     border-bottom:2px solid transparent; cursor:pointer; transition:all .15s;
     margin-bottom:-1px; }
@@ -207,7 +208,7 @@
     Resiligen PM
   </a>
   <ul class="nav-links">
-    <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+    <li><a href="skills.html"><span data-en="Skills" data-zh="工具庫">Skills</span></a></li>
     <li>
       <button class="nav-dropdown-btn" onclick="toggleDropdown(this)"><span data-en="Resources" data-zh="資源">Resources</span></button>
       <div class="nav-dropdown">
@@ -240,8 +241,8 @@
 
 <!-- HERO -->
 <div class="hero">
-  <h1 data-en="Your Second Product Manager Built into Claude" data-zh="60+ 個 PM 技能，直接內建在 Claude 裡">60+ 個 PM 技能，直接內建在 Claude 裡</h1>
-  <p class="hero-sub" data-en="Being a first PM is rough. Make life easier." data-zh="每個技能都已載入框架與脈絡，選一個階段，找到你現在需要的。">每個技能都已載入框架與脈絡，選一個階段，找到你現在需要的。</p>
+  <h1 data-en="Build Your AI PM Twin: 60+ Essential Skills Pre-integrated." data-zh="打造你的專屬 AI 助理，內建 70+ 項 PM 實戰技能">打造你的專屬 AI 助理，內建 70+ 項 PM 實戰技能</h1>
+  <p class="hero-en-sub">Build Your AI PM Twin: 60+ Essential Skills Pre-integrated.</p>
 </div>
 
 <!-- MAIN BODY -->
@@ -321,7 +322,7 @@
     <div class="skills-grid" id="skillsGrid">
 
       <!-- RESEARCH -->
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#competitive-profile-builder'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=competitive-profile-builder#competitive-profile-builder'">
         <div class="skill-card-tag">Competitive</div>
         <h3><span data-en="Competitive Profile Builder" data-zh="競品分析">Competitive Profile Builder</span></h3>
         <p><span data-en="Create comprehensive competitor analysis using Gibson Biddle's DHM framework." data-zh="用 Gibson Biddle 的 DHM 框架建立完整競品分析，找出策略定位。">Create comprehensive competitor analysis using Gibson Biddle's DHM framework.</span></p>
@@ -331,7 +332,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#jtbd-extractor'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=jtbd-extractor#jtbd-extractor'">
         <div class="skill-card-tag">Discovery / jtbd</div>
         <h3><span data-en="JTBD Extractor" data-zh="JTBD 洞察">JTBD Extractor</span></h3>
         <p><span data-en="Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities." data-zh="從研究資料萃取 JTBD 陳述句，找出真正的創新機會點。">Extract Jobs-to-be-Done statements from research data to uncover innovation opportunities.</span></p>
@@ -341,7 +342,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#user-interview-analyzer'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=user-interview-analyzer#user-interview-analyzer'">
         <div class="skill-card-tag">Discovery / interview</div>
         <h3><span data-en="User Interview Analyzer" data-zh="訪談分析">User Interview Analyzer</span></h3>
         <p><span data-en="Transform interview transcripts into structured insights with quotes, patterns, and recommendations." data-zh="把訪談逐字稿轉成結構化洞察，附引述、模式與建議。">Transform interview transcripts into structured insights with quotes, patterns, and recommendations.</span></p>
@@ -351,7 +352,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#research-synthesis-engine'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=research-synthesis-engine#research-synthesis-engine'">
         <div class="skill-card-tag">Discovery / research</div>
         <h3><span data-en="Research Synthesis Engine" data-zh="研究整合">Research Synthesis Engine</span></h3>
         <p><span data-en="Synthesize multiple research sources into coherent insights with clear evidence chains." data-zh="整合多份研究資料，產出有清楚論據脈絡的完整洞察報告。">Synthesize multiple research sources into coherent insights with clear evidence chains.</span></p>
@@ -361,7 +362,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#persona-generator'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=persona-generator#persona-generator'">
         <div class="skill-card-tag">Discovery / persona</div>
         <h3><span data-en="Persona Generator" data-zh="Persona 建立">Persona Generator</span></h3>
         <p><span data-en="Create data-backed user personas that go beyond demographics to capture behaviors and motivations." data-zh="建立有數據支撐的 Persona，超越人口統計、深入行為與動機。">Create data-backed user personas that go beyond demographics to capture behaviors and motivations.</span></p>
@@ -371,7 +372,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#feature-request-analyzer'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=feature-request-analyzer#feature-request-analyzer'">
         <div class="skill-card-tag">Discovery</div>
         <h3><span data-en="Feature Request Analyzer" data-zh="功能需求整理">Feature Request Analyzer</span></h3>
         <p><span data-en="Turn scattered feature requests into a prioritized list based on actual demand." data-zh="把散落各處的功能需求彙整成有優先順序的清單。">Turn scattered feature requests into a prioritized list based on actual demand.</span></p>
@@ -381,7 +382,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html#competitive-landscape-mapper'">
+      <div class="skill-card" data-cat="research" onclick="location.href='skill-detail.html?skill=competitive-landscape-mapper#competitive-landscape-mapper'">
         <div class="skill-card-tag">Competitive</div>
         <h3><span data-en="Competitive Landscape Mapper" data-zh="競品格局地圖">Competitive Landscape Mapper</span></h3>
         <p><span data-en="Map multiple competitors into a unified landscape with positioning matrices and feature comparisons." data-zh="將多家競品整合成一張格局地圖，含定位矩陣與功能比較。">Map multiple competitors into a unified landscape with positioning matrices and feature comparisons.</span></p>
@@ -392,7 +393,7 @@
       </div>
 
       <!-- AGENT: research -->
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#batch-interview-synthesis'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=batch-interview-synthesis#batch-interview-synthesis'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Discovery</div>
         <h3><span data-en="Batch Interview Synthesis" data-zh="批次訪談分析">Batch Interview Synthesis</span></h3>
@@ -405,7 +406,7 @@
       </div>
 
       <!-- KICKOFF -->
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#okr-coach'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=okr-coach#okr-coach'">
         <div class="skill-card-tag">Strategy / okr</div>
         <h3><span data-en="OKR Coach" data-zh="OKR 教練">OKR Coach</span></h3>
         <p><span data-en="Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls." data-zh="用《OKR 做最重要的事》方法論撰寫並優化 OKR，並指出常見陷阱。">Write and refine OKRs using Measure What Matters methodology with coaching on common pitfalls.</span></p>
@@ -415,7 +416,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#positioning-statement-generator'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=positioning-statement-generator#positioning-statement-generator'">
         <div class="skill-card-tag">Strategy / positioning</div>
         <h3><span data-en="Positioning Statement Generator" data-zh="產品定位">Positioning Statement Generator</span></h3>
         <p><span data-en="Creates positioning using April Dunford's Obviously Awesome framework." data-zh="使用 April Dunford《Obviously Awesome》框架產出精準的產品定位陳述。">Creates positioning using April Dunford's Obviously Awesome framework.</span></p>
@@ -425,7 +426,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#go-to-market-strategy'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=go-to-market-strategy#go-to-market-strategy'">
         <div class="skill-card-tag">Strategy / gtm</div>
         <h3><span data-en="Go-to-Market Strategy" data-zh="GTM 策略">Go-to-Market Strategy</span></h3>
         <p><span data-en="Creates a complete GTM plan with channels, messaging, timeline, and success metrics." data-zh="產出完整 GTM 計畫，涵蓋通路、訊息、時程與成功指標。">Creates a complete GTM plan with channels, messaging, timeline, and success metrics.</span></p>
@@ -435,7 +436,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#quarterly-planning-template'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=quarterly-planning-template#quarterly-planning-template'">
         <div class="skill-card-tag">Planning / quarterly</div>
         <h3><span data-en="Quarterly Planning Template" data-zh="季度規劃">Quarterly Planning Template</span></h3>
         <p><span data-en="Creates a quarterly plan with themes, bets, and resource allocation." data-zh="產出季度計畫，含主題、賭注與資源分配。">Creates a quarterly plan with themes, bets, and resource allocation.</span></p>
@@ -445,7 +446,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#prioritization-engine'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=prioritization-engine#prioritization-engine'">
         <div class="skill-card-tag">Strategy / prioritize</div>
         <h3><span data-en="Prioritization Engine" data-zh="功能優先排序">Prioritization Engine</span></h3>
         <p><span data-en="Score and rank features using RICE, ICE, or weighted scoring with clear documentation." data-zh="用 RICE、ICE 或加權評分排列功能優先順序，並產出清楚文件。">Score and rank features using RICE, ICE, or weighted scoring with clear documentation.</span></p>
@@ -455,7 +456,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#swot-analysis-generator'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=swot-analysis-generator#swot-analysis-generator'">
         <div class="skill-card-tag">Strategy / swot</div>
         <h3><span data-en="SWOT Analysis Generator" data-zh="SWOT 分析">SWOT Analysis Generator</span></h3>
         <p><span data-en="Creates a structured SWOT analysis with strategic implications." data-zh="產出結構化 SWOT 分析，含策略意涵。">Creates a structured SWOT analysis with strategic implications.</span></p>
@@ -465,7 +466,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#pricing-strategy-analyzer'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=pricing-strategy-analyzer#pricing-strategy-analyzer'">
         <div class="skill-card-tag">Strategy / pricing</div>
         <h3><span data-en="Pricing Strategy Analyzer" data-zh="定價策略">Pricing Strategy Analyzer</span></h3>
         <p><span data-en="Analyze pricing strategy with competitive positioning, packaging, and revenue modeling." data-zh="分析定價策略，含競品定位、套裝組合與收益模型。">Analyze pricing strategy with competitive positioning, packaging, and revenue modeling.</span></p>
@@ -475,7 +476,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#north-star-finder'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=north-star-finder#north-star-finder'">
         <div class="skill-card-tag">Strategy / north-star</div>
         <h3><span data-en="North Star Finder" data-zh="North Star 指標">North Star Finder</span></h3>
         <p><span data-en="Identify and validate your product's North Star metric with supporting input metrics." data-zh="找出並驗證你的 North Star 指標，搭配輸入指標體系。">Identify and validate your product's North Star metric with supporting input metrics.</span></p>
@@ -485,7 +486,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#ai-product-strategy'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=ai-product-strategy#ai-product-strategy'">
         <div class="skill-card-tag">Strategy / ai</div>
         <h3><span data-en="AI Product Strategy" data-zh="AI 產品策略">AI Product Strategy</span></h3>
         <p><span data-en="Develop AI product strategy and identify AI opportunities. Build, buy, or partner?" data-zh="制定 AI 產品策略，找出 AI 應用機會。自建、購買還是合作？">Develop AI product strategy and identify AI opportunities. Build, buy, or partner?</span></p>
@@ -495,7 +496,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#sprint-planning-assistant'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=sprint-planning-assistant#sprint-planning-assistant'">
         <div class="skill-card-tag">Planning / sprint</div>
         <h3><span data-en="Sprint Planning Assistant" data-zh="Sprint 規劃">Sprint Planning Assistant</span></h3>
         <p><span data-en="Creates a sprint plan with goals, capacity, and committed work." data-zh="產出 Sprint 計畫，含目標、產能與承諾工作項。">Creates a sprint plan with goals, capacity, and committed work.</span></p>
@@ -505,7 +506,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#feature-decomposition-tool'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=feature-decomposition-tool#feature-decomposition-tool'">
         <div class="skill-card-tag">Planning</div>
         <h3><span data-en="Feature Decomposition Tool" data-zh="功能拆解">Feature Decomposition Tool</span></h3>
         <p><span data-en="Breaks down a feature into shippable chunks with dependencies mapped." data-zh="把一個功能拆解成可交付的小塊，並標出依賴關係。">Breaks down a feature into shippable chunks with dependencies mapped.</span></p>
@@ -515,7 +516,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#devil-s-advocate'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=devil-s-advocate#devil-s-advocate'">
         <div class="skill-card-tag">Strategy</div>
         <h3><span data-en="Devil's Advocate" data-zh="魔鬼辯護人">Devil's Advocate</span></h3>
         <p><span data-en="Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios." data-zh="挑戰你的 PRD 與規格，找出盲點、隱藏假設與潛在失敗情境。">Challenge your PRDs and specs to find blind spots, hidden assumptions, and potential failure scenarios.</span></p>
@@ -525,7 +526,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#daily-plan'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=daily-plan#daily-plan'">
         <div class="skill-card-tag">Planning</div>
         <h3><span data-en="Daily Plan" data-zh="每日計畫">Daily Plan</span></h3>
         <p><span data-en="Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on." data-zh="產出與目標對齊的每日計畫，每天清楚知道最重要的事。">Generate your daily plan aligned to goals and priorities. Start every day knowing exactly what to focus on.</span></p>
@@ -535,7 +536,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html#weekly-plan'">
+      <div class="skill-card" data-cat="kickoff" onclick="location.href='skill-detail.html?skill=weekly-plan#weekly-plan'">
         <div class="skill-card-tag">Planning</div>
         <h3><span data-en="Weekly Plan" data-zh="每週計畫">Weekly Plan</span></h3>
         <p><span data-en="Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait." data-zh="產出與季度目標對齊的本週優先事項，清楚分辨輕重緩急。">Generate your weekly priorities aligned to quarterly goals. Know what matters this week and what can wait.</span></p>
@@ -546,7 +547,7 @@
       </div>
 
       <!-- DESIGN -->
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#prd-writer'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=prd-writer#prd-writer'">
         <div class="skill-card-tag">Specs / prd</div>
         <h3><span data-en="PRD Writer" data-zh="PRD 撰寫">PRD Writer</span></h3>
         <p><span data-en="Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building." data-zh="將混亂的想法轉化為結構化的 PRD，在工程團隊開始建置前取得利害關係人共識。">Transform messy ideas into structured PRDs that get stakeholder alignment before engineering starts building.</span></p>
@@ -556,7 +557,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#user-story-writer'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=user-story-writer#user-story-writer'">
         <div class="skill-card-tag">Specs / user-stories</div>
         <h3><span data-en="User Story Writer" data-zh="User Story">User Story Writer</span></h3>
         <p><span data-en="Write clear user stories with acceptance criteria following the INVEST principles." data-zh="依照 INVEST 原則撰寫清楚的 User Story，含驗收條件。">Write clear user stories with acceptance criteria following the INVEST principles.</span></p>
@@ -566,7 +567,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#product-brief-writer'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=product-brief-writer#product-brief-writer'">
         <div class="skill-card-tag">Specs / brief</div>
         <h3><span data-en="Product Brief Writer" data-zh="Product Brief">Product Brief Writer</span></h3>
         <p><span data-en="Write one-page product briefs to get buy-in before investing in full specs." data-zh="撰寫一頁式 Product Brief，在投入完整規格前取得支持。">Write one-page product briefs to get buy-in before investing in full specs.</span></p>
@@ -576,7 +577,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#one-pager-creator'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=one-pager-creator#one-pager-creator'">
         <div class="skill-card-tag">Specs / one-pager</div>
         <h3><span data-en="One-Pager Creator" data-zh="One-Pager">One-Pager Creator</span></h3>
         <p><span data-en="Create compelling one-page feature briefs that align stakeholders quickly." data-zh="製作吸引人的一頁式功能簡報，快速讓利害關係人達成共識。">Create compelling one-page feature briefs that align stakeholders quickly.</span></p>
@@ -586,7 +587,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#technical-spec-writer'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=technical-spec-writer#technical-spec-writer'">
         <div class="skill-card-tag">Specs / tech-spec</div>
         <h3><span data-en="Technical Spec Writer" data-zh="技術規格">Technical Spec Writer</span></h3>
         <p><span data-en="Write technical specifications with architecture, data models, and API designs." data-zh="撰寫技術規格，含架構、資料模型與 API 設計。">Write technical specifications with architecture, data models, and API designs.</span></p>
@@ -596,7 +597,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html#journey-map-creator'">
+      <div class="skill-card" data-cat="design" onclick="location.href='skill-detail.html?skill=journey-map-creator#journey-map-creator'">
         <div class="skill-card-tag">Discovery</div>
         <h3><span data-en="Journey Map Creator" data-zh="使用者旅程地圖">Journey Map Creator</span></h3>
         <p><span data-en="Build detailed customer journey maps that identify pain points and opportunities across touchpoints." data-zh="建立詳細的顧客旅程地圖，找出各觸點的痛點與機會。">Build detailed customer journey maps that identify pain points and opportunities across touchpoints.</span></p>
@@ -607,7 +608,7 @@
       </div>
 
       <!-- AGENT: design -->
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#problem-to-prd'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=problem-to-prd#problem-to-prd'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Specs</div>
         <h3><span data-en="Problem to PRD" data-zh="問題→PRD">Problem to PRD</span></h3>
@@ -620,7 +621,7 @@
       </div>
 
       <!-- DEVELOP -->
-      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#roadmap-builder'">
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html?skill=roadmap-builder#roadmap-builder'">
         <div class="skill-card-tag">Roadmap / planning</div>
         <h3><span data-en="Roadmap Builder" data-zh="Roadmap 規劃">Roadmap Builder</span></h3>
         <p><span data-en="Creates a structured product roadmap from your goals, constraints, and priorities." data-zh="從目標、限制與優先順序產出結構化產品 Roadmap。">Creates a structured product roadmap from your goals, constraints, and priorities.</span></p>
@@ -630,7 +631,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#sprint-retro-facilitator'">
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html?skill=sprint-retro-facilitator#sprint-retro-facilitator'">
         <div class="skill-card-tag">Operations / retro</div>
         <h3><span data-en="Sprint Retro Facilitator" data-zh="Sprint Retro">Sprint Retro Facilitator</span></h3>
         <p><span data-en="Structures sprint retrospectives with prompts, synthesis, and action items." data-zh="以提示、綜合整理與行動項目規劃 Sprint 回顧。">Structures sprint retrospectives with prompts, synthesis, and action items.</span></p>
@@ -640,7 +641,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#team-health-check'">
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html?skill=team-health-check#team-health-check'">
         <div class="skill-card-tag">Operations</div>
         <h3><span data-en="Team Health Check" data-zh="團隊健康檢測">Team Health Check</span></h3>
         <p><span data-en="Run structured team health checks to surface what is working and what is not." data-zh="執行結構化的團隊健康檢查，找出運作良好與需要改善的地方。">Run structured team health checks to surface what is working and what is not.</span></p>
@@ -650,7 +651,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html#incident-post-mortem'">
+      <div class="skill-card" data-cat="develop" onclick="location.href='skill-detail.html?skill=incident-post-mortem#incident-post-mortem'">
         <div class="skill-card-tag">Operations</div>
         <h3><span data-en="Incident Post-Mortem" data-zh="事故 Post-Mortem">Incident Post-Mortem</span></h3>
         <p><span data-en="Writes a blameless incident post-mortem with root cause analysis." data-zh="撰寫無指責的事故 Post-Mortem，含根本原因分析。">Writes a blameless incident post-mortem with root cause analysis.</span></p>
@@ -661,7 +662,7 @@
       </div>
 
       <!-- TEST -->
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#metric-framework-builder'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=metric-framework-builder#metric-framework-builder'">
         <div class="skill-card-tag">Data / metrics</div>
         <h3><span data-en="Metric Framework Builder" data-zh="指標框架">Metric Framework Builder</span></h3>
         <p><span data-en="Build comprehensive metrics frameworks using AARRR pirate metrics or input/output methodology." data-zh="用 AARRR 或輸入/輸出方法論建立完整指標框架。">Build comprehensive metrics frameworks using AARRR pirate metrics or input/output methodology.</span></p>
@@ -671,7 +672,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#a-b-test-designer'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=a-b-test-designer#a-b-test-designer'">
         <div class="skill-card-tag">Data</div>
         <h3><span data-en="A/B Test Designer" data-zh="A/B 測試設計">A/B Test Designer</span></h3>
         <p><span data-en="Design statistically sound experiments with clear hypotheses and sample size calculations." data-zh="設計統計嚴謹的實驗，含清楚的假設與樣本數計算。">Design statistically sound experiments with clear hypotheses and sample size calculations.</span></p>
@@ -681,7 +682,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#funnel-analyzer'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=funnel-analyzer#funnel-analyzer'">
         <div class="skill-card-tag">Data / funnel</div>
         <h3><span data-en="Funnel Analyzer" data-zh="轉換漏斗診斷">Funnel Analyzer</span></h3>
         <p><span data-en="Diagnose conversion funnel problems and generate data-backed improvement hypotheses." data-zh="診斷轉換漏斗問題，產出有數據支撐的改善假設。">Diagnose conversion funnel problems and generate data-backed improvement hypotheses.</span></p>
@@ -691,7 +692,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#experiment-designer'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=experiment-designer#experiment-designer'">
         <div class="skill-card-tag">Data</div>
         <h3><span data-en="Experiment Designer" data-zh="實驗設計">Experiment Designer</span></h3>
         <p><span data-en="Design A/B tests with proper methodology, sample sizes, and statistical significance thresholds." data-zh="設計 A/B 測試，含正確方法論、樣本數與統計顯著門檻。">Design A/B tests with proper methodology, sample sizes, and statistical significance thresholds.</span></p>
@@ -701,7 +702,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#a-b-test-analyzer'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=a-b-test-analyzer#a-b-test-analyzer'">
         <div class="skill-card-tag">Data</div>
         <h3><span data-en="A/B Test Analyzer" data-zh="A/B 結果解讀">A/B Test Analyzer</span></h3>
         <p><span data-en="Interpret experiment results with statistical rigor and clear ship/no-ship recommendations." data-zh="以統計嚴謹度解讀實驗結果，給出明確的上線/不上線建議。">Interpret experiment results with statistical rigor and clear ship/no-ship recommendations.</span></p>
@@ -711,7 +712,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html#hypothesis-validator'">
+      <div class="skill-card" data-cat="test" onclick="location.href='skill-detail.html?skill=hypothesis-validator#hypothesis-validator'">
         <div class="skill-card-tag">Strategy</div>
         <h3><span data-en="Hypothesis Validator" data-zh="假設驗證">Hypothesis Validator</span></h3>
         <p><span data-en="Structure and validate product hypotheses before committing engineering resources." data-zh="在投入工程資源前，結構化地驗證產品假設。">Structure and validate product hypotheses before committing engineering resources.</span></p>
@@ -722,7 +723,7 @@
       </div>
 
       <!-- AGENT: test -->
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#hypothesis-tester'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=hypothesis-tester#hypothesis-tester'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Data</div>
         <h3><span data-en="Hypothesis Tester" data-zh="假設驗證">Hypothesis Tester</span></h3>
@@ -735,7 +736,7 @@
       </div>
 
       <!-- RELEASE -->
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#release-notes-pro'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=release-notes-pro#release-notes-pro'">
         <div class="skill-card-tag">Communication / release-notes</div>
         <h3><span data-en="Release Notes Pro" data-zh="Release Notes">Release Notes Pro</span></h3>
         <p><span data-en="Write customer-facing release notes that highlight value, not just features." data-zh="撰寫以顧客為導向的 Release Notes，強調價值而非只列功能。">Write customer-facing release notes that highlight value, not just features.</span></p>
@@ -745,7 +746,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#executive-update-generator'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=executive-update-generator#executive-update-generator'">
         <div class="skill-card-tag">Communication / status</div>
         <h3><span data-en="Executive Update Generator" data-zh="主管進度更新">Executive Update Generator</span></h3>
         <p><span data-en="Create crisp executive updates using the SCQA (Situation, Complication, Question, Answer) framework." data-zh="用 SCQA 框架（情境、複雜性、問題、答案）撰寫簡潔的主管更新。">Create crisp executive updates using the SCQA framework.</span></p>
@@ -755,7 +756,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#stakeholder-simulator'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=stakeholder-simulator#stakeholder-simulator'">
         <div class="skill-card-tag">Communication</div>
         <h3><span data-en="Stakeholder Simulator" data-zh="關係人反應模擬">Stakeholder Simulator</span></h3>
         <p><span data-en="Simulate how different stakeholders will react to your proposal and prepare responses." data-zh="模擬不同利害關係人對你的提案的反應，並預先準備回應。">Simulate how different stakeholders will react to your proposal and prepare responses.</span></p>
@@ -765,7 +766,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#customer-announcement-writer'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=customer-announcement-writer#customer-announcement-writer'">
         <div class="skill-card-tag">Launch / announcement</div>
         <h3><span data-en="Customer Announcement Writer" data-zh="客戶公告">Customer Announcement Writer</span></h3>
         <p><span data-en="Writes customer announcements in multiple formats (email, in-app, social)." data-zh="以多種格式（Email、App 內、社群）撰寫顧客公告。">Writes customer announcements in multiple formats (email, in-app, social).</span></p>
@@ -775,7 +776,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#launch-checklist-generator'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=launch-checklist-generator#launch-checklist-generator'">
         <div class="skill-card-tag">Launch</div>
         <h3><span data-en="Launch Checklist Generator" data-zh="上線 Checklist">Launch Checklist Generator</span></h3>
         <p><span data-en="Generate comprehensive launch checklists customized to your release type and team structure." data-zh="依上線類型與團隊結構產出客製化的完整上線清單。">Generate comprehensive launch checklists customized to your release type and team structure.</span></p>
@@ -785,7 +786,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#meeting-notes-processor'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=meeting-notes-processor#meeting-notes-processor'">
         <div class="skill-card-tag">Communication</div>
         <h3><span data-en="Meeting Notes Processor" data-zh="會議記錄整理">Meeting Notes Processor</span></h3>
         <p><span data-en="Transform raw meeting notes into structured decisions, action items, and follow-ups." data-zh="將原始會議記錄轉化為結構化的決議、行動項目與後續追蹤。">Transform raw meeting notes into structured decisions, action items, and follow-ups.</span></p>
@@ -795,7 +796,7 @@
         </div>
       </div>
 
-      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html#board-deck-generator'">
+      <div class="skill-card" data-cat="release" onclick="location.href='skill-detail.html?skill=board-deck-generator#board-deck-generator'">
         <div class="skill-card-tag">Communication</div>
         <h3><span data-en="Board Deck Generator" data-zh="董事會簡報">Board Deck Generator</span></h3>
         <p><span data-en="Creates board meeting presentation with narrative arc and key metrics." data-zh="建立具有敘事弧線與關鍵指標的董事會報告簡報。">Creates board meeting presentation with narrative arc and key metrics.</span></p>
@@ -806,7 +807,7 @@
       </div>
 
       <!-- AGENT: release -->
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#competitive-intel-pack'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=competitive-intel-pack#competitive-intel-pack'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Competitive</div>
         <h3><span data-en="Competitive Intel Pack" data-zh="競品搜集">Competitive Intel Pack</span></h3>
@@ -818,7 +819,7 @@
         </div>
       </div>
 
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#market-sizing-analyzer'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=market-sizing-analyzer#market-sizing-analyzer'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Strategy</div>
         <h3><span data-en="Market Sizing Analyzer" data-zh="市場規模估算">Market Sizing Analyzer</span></h3>
@@ -830,7 +831,7 @@
         </div>
       </div>
 
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#voc-analysis'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=voc-analysis#voc-analysis'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Discovery</div>
         <h3><span data-en="VoC Analysis" data-zh="客戶回饋分析">VoC Analysis</span></h3>
@@ -842,7 +843,7 @@
         </div>
       </div>
 
-      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html#multi-perspective-review'">
+      <div class="skill-card agent" data-cat="agent" onclick="location.href='skill-detail.html?skill=multi-perspective-review#multi-perspective-review'">
         <div class="agent-badge">⚡ Agent workflow</div>
         <div class="skill-card-tag">Communication</div>
         <h3><span data-en="Multi-Perspective Review" data-zh="多方視角審查">Multi-Perspective Review</span></h3>
@@ -906,7 +907,7 @@
           <h4><span data-en="Product" data-zh="產品">Product</span></h4>
           <ul>
             <li><a href="services.html"><span data-en="Services" data-zh="服務">Services</span></a></li>
-            <li><a href="skills.html"><span data-en="Skills" data-zh="技能庫">Skills</span></a></li>
+            <li><a href="skills.html"><span data-en="Skills" data-zh="工具庫">Skills</span></a></li>
             <li><a href="pricing.html"><span data-en="Pricing" data-zh="定價">Pricing</span></a></li>
           </ul>
         </div>

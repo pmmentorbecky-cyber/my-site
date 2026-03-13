@@ -6,7 +6,7 @@
 <title>Pricing | Resiligen PM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:       #0a0810;
@@ -27,14 +27,14 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--text); font-family: 'Sora', 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; display: inline-block; }
   .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px,3.5vw,44px); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; color: var(--white); max-width: 720px; margin-bottom: 16px; }
   .section-sub { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.7; }
-  .btn-gradient { display: inline-block; padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--gradient); cursor: pointer; box-shadow: 0 0 28px rgba(72,135,254,0.3); transition: all 0.2s; text-decoration: none; }
+  .btn-gradient { display: inline-block; padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; color: #fff; background: var(--gradient); cursor: pointer; box-shadow: 0 0 28px rgba(72,135,254,0.3); transition: all 0.2s; text-decoration: none; }
   .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(72,135,254,0.5); }
-  .btn-ghost-lg { display: inline-block; padding: 13px 28px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .btn-ghost-lg { display: inline-block; padding: 13px 28px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'Sora', 'Noto Sans TC', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; text-decoration: none; }
   .btn-ghost-lg:hover { color: var(--text); border-color: var(--purple); }
   .footer-wrapper { border-top: 1px solid var(--border); padding: 60px 40px; }
   .footer-inner { max-width: 1100px; margin: 0 auto; }
@@ -57,7 +57,7 @@
   .nav-links li { position: relative; }
   .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--text); }
-  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'Sora', 'Noto Sans TC', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
   .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
   .nav-dropdown-btn::after { content: '⌃'; font-size: 10px; transition: transform 0.2s; display: inline-block; }
   .nav-dropdown-btn.open::after { transform: rotate(180deg); }
@@ -69,9 +69,9 @@
   .nav-dropdown a .dd-title { font-size: 14px; font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
   .nav-dropdown a .dd-desc { font-size: 12px; color: var(--text3); display: block; }
   .nav-cta { display: flex; align-items: center; gap: 12px; }
-  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'Sora', 'Noto Sans TC', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
   .btn-outline:hover { border-color: var(--purple); color: var(--text); }
-  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
+  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
   .btn-primary:hover { background: #5e97ff; }
 
 
@@ -103,7 +103,7 @@
   .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); padding: 8px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
   .plan-features li:last-child { border-bottom: none; }
   .check { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; margin-top: 1px; }
-  .plan-cta { display: block; width: 100%; text-align: center; padding: 13px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .plan-cta { display: block; width: 100%; text-align: center; padding: 13px; border: 1px solid var(--border2); border-radius: 8px; font-size: 15px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
   .plan-cta:hover { border-color: var(--purple); color: var(--text); }
   .plan-cta.primary { background: var(--gradient); color: #fff; border: none; box-shadow: 0 0 24px rgba(72,135,254,0.3); }
   .plan-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 36px rgba(72,135,254,0.45); }
@@ -127,7 +127,7 @@
   .faq-section { border-top: 1px solid var(--border); padding: 80px 40px 100px; max-width: 1100px; margin: 0 auto; }
   .faq-list { margin-top: 48px; }
   .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; font-size: 16px; font-weight: 600; color: var(--text); font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; font-size: 16px; font-weight: 600; color: var(--text); font-family: 'Sora', 'Noto Sans TC', sans-serif; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; }
   .faq-q:hover { color: var(--purple); }
   .faq-q::after { content: '+'; font-size: 20px; color: var(--text3); transition: transform 0.2s; flex-shrink: 0; }
   .faq-q.open::after { transform: rotate(45deg); }
@@ -195,7 +195,7 @@
   }
   .lang-btn {
     padding: 4px 12px; border-radius: 100px; border: none;
-    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600; font-family: 'Sora', 'Noto Sans TC', sans-serif;
     cursor: pointer; transition: all 0.18s;
     color: var(--text3); background: transparent;
     letter-spacing: 0.04em; line-height: 1.4;

@@ -6,7 +6,7 @@
 <title>Resiligen PM — The PM Operating System for Product Teams</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,7 +27,7 @@
   }
 
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--text); font-family: 'Sora', 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
 
   /* AURORA */
@@ -41,7 +41,7 @@
   .nav-links li { position: relative; }
   .nav-links a { font-size: 14px; color: var(--text2); transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
-  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-dropdown-btn { font-size: 14px; color: var(--text2); background: none; border: none; cursor: pointer; font-family: 'Sora', 'Noto Sans TC', sans-serif; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
   .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color: var(--text); }
   .nav-dropdown-btn::after { content: '⌃'; font-size: 10px; transition: transform 0.2s; display: inline-block; }
   .nav-dropdown-btn.open::after { transform: rotate(180deg); }
@@ -53,9 +53,9 @@
   .nav-dropdown a .dd-title { font-size: 14px; font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
   .nav-dropdown a .dd-desc { font-size: 12px; color: var(--text3); display: block; }
   .nav-cta { display: flex; align-items: center; gap: 12px; }
-  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
+  .btn-outline { padding: 8px 18px; border: 1px solid var(--border2); border-radius: 6px; font-size: 14px; font-family: 'Sora', 'Noto Sans TC', sans-serif; color: var(--text2); background: transparent; cursor: pointer; transition: all 0.2s; }
   .btn-outline:hover { border-color: var(--purple); color: var(--text); }
-  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
+  .btn-primary { padding: 8px 18px; border: none; border-radius: 6px; font-size: 14px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; color: #fff; background: var(--blue); cursor: pointer; transition: all 0.2s; }
   .btn-primary:hover { background: #5e97ff; }
 
   /* HERO */
@@ -65,8 +65,9 @@
   .hero h1 em { font-style: italic; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .tw-cursor { display: inline-block; font-style: normal; color: var(--purple); font-weight: 300; margin-left: 1px; }
   .hero-sub { font-size: 17px; color: var(--text2); max-width: 520px; line-height: 1.7; margin-bottom: 40px; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-en-sub-idx { font-size: 13px; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; font-weight: 500; margin-bottom: 18px; margin-top: -10px; animation: fadeUp 0.6s 0.15s ease both; }
   .hero-actions { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.6s 0.3s ease both; }
-  .btn-lg { padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-lg { padding: 13px 28px; border: none; border-radius: 8px; font-size: 15px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
   .btn-gradient { background: var(--gradient); color: #fff; box-shadow: 0 0 28px rgba(72,135,254,0.3); }
   .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(72,135,254,0.5); }
   .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
@@ -122,7 +123,7 @@
   .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text2); padding: 9px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
   .pricing-features li:last-child { border-bottom: none; }
   .check { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0; }
-  .pricing-cta { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 8px; font-size: 15px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .pricing-cta { display: block; width: 100%; text-align: center; padding: 13px; border-radius: 8px; font-size: 15px; font-family: 'Sora', 'Noto Sans TC', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
   .pricing-cta.outline { border: 1px solid var(--border2); color: var(--text2); background: transparent; }
   .pricing-cta.outline:hover { border-color: var(--purple); color: var(--text); }
   .pricing-cta.gradient { background: var(--gradient); color: #fff; border: none; box-shadow: 0 0 24px rgba(72,135,254,0.3); }
@@ -227,7 +228,7 @@
   }
   .lang-btn {
     padding: 4px 12px; border-radius: 100px; border: none;
-    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600; font-family: 'Sora', 'Noto Sans TC', sans-serif;
     cursor: pointer; transition: all 0.18s;
     color: var(--text3); background: transparent;
     letter-spacing: 0.04em; line-height: 1.4;
@@ -265,18 +266,17 @@
       <button class="lang-btn lang-btn-zh active" onclick="setLang('zh')" aria-label="中文">中文</button>
     </div>
     <button class="btn-outline"><span data-en="Log in" data-zh="登入">Log in</span></button>
-    <button class="btn-primary"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+    <button class="btn-primary"><span data-en="Book a Call" data-zh="預約諮詢">預約諮詢</span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow"><span data-en="Your second." data-zh="你的第二大腦">Your second.</span></div>
   <h1 id="typewriter-title">&nbsp;</h1>
-  <p class="hero-sub"><span data-en="We map your product management workflows and build the system that fixes them. One PM team, performing like five." data-zh="我們梳理你的產品管理流程，打造修復它的系統。一個 PM 團隊，發揮五倍效能。">We map your product management workflows and build the system that fixes them. One PM team, performing like five.</span></p>
+  <p class="hero-sub"><span data-en="We map your product management workflows and build the system that fixes them. One PM team, performing like five." data-zh="把混亂的 PM 流程變系統，交給AI執行，打造你的AI助理。">We map your product management workflows and build the system that fixes them. One PM team, performing like five.</span></p>
   <div class="hero-actions">
-    <button class="btn-lg btn-gradient"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
-    <a href="services.html" class="btn-lg btn-ghost"><span data-en="See How It Works →" data-zh="了解運作方式 →">See How It Works →</span></a>
+    <a href="pricing.html" class="btn-lg btn-gradient"><span data-en="Get PM OS →" data-zh="取得 PM OS →">取得 PM OS →</span></a>
+    <a href="skills.html" class="btn-lg btn-ghost"><span data-en="Browse Skill Library →" data-zh="查看工具庫 →">查看工具庫 →</span></a>
   </div>
   <div class="hero-footnote">
     <a href="skills.html"><span data-en="60+ product management skills free to browse" data-zh="免費瀏覽 60+ 個產品管理技能">60+ product management skills free to browse</span></a>
@@ -340,7 +340,7 @@
         <li><span class="check">✓</span><span data-en="Optional managed services after the build" data-zh="建置後的選配管理服務">Optional managed services after the build</span></li>
         <li><span class="check">✓</span><span data-en="You own everything we build" data-zh="你擁有我們打造的一切">You own everything we build</span></li>
       </ul>
-      <button class="pricing-cta gradient"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+      <a href="pricing.html" class="pricing-cta gradient"><span data-en="Get Started" data-zh="立即開始">立即開始</span></a>
       <p class="pricing-note"><a href="#"><span data-en="Or take our free PM maturity assessment →" data-zh="或參加我們的免費 PM 成熟度評估 →">Or take our free PM maturity assessment →</span></a></p>
     </div>
     <div class="pricing-card featured">
@@ -368,7 +368,7 @@
 <div class="cta-band">
   <h2><span data-en="Find out what product management chaos is costing you." data-zh="了解產品管理混亂正在讓你付出多少代價。">Find out what product management chaos is costing you.</span></h2>
   <p><span data-en="Tell us about your team — we&#39;ll come back with a clear picture of where AI saves you the most time." data-zh="告訴我們你的團隊狀況——我們會告訴你 AI 最能為你節省時間的地方。"><span data-en="Tell us about your team — we'll come back with a clear picture of where AI saves you the most time." data-zh="告訴我們你的團隊狀況——我們會告訴你 AI 最能為你節省時間的地方。">Tell us about your team — we'll come back with a clear picture of where AI saves you the most time.</span></span></p>
-  <button class="btn-lg btn-gradient"><span data-en="Talk to Us" data-zh="聯絡我們">Talk to Us</span></button>
+  <a href="pricing.html" class="btn-lg btn-gradient"><span data-en="Get PM OS →" data-zh="取得 PM OS →">取得 PM OS →</span></a>
   <div class="cta-band-note">Not ready to talk? <a href="#">See what your team could save</a></div>
 </div>
 
@@ -409,8 +409,8 @@ function toggleDropdown(btn) {
 (function() {
   const el = document.getElementById('typewriter-title');
   const parts = [
-    { text: 'We build AI-powered product management ', em: false },
-    { text: 'operating systems.', em: true },
+    { text: 'Your PM workflow, ', em: false },
+    { text: 'systematized and run by AI.', em: true },
   ];
   const chars = [];
   parts.forEach(p => { for (const ch of p.text) chars.push({ ch, em: p.em }); });
